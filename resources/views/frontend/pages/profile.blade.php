@@ -94,7 +94,7 @@
                         <div class="card_personal_content">
                             <h1 class="">
                                 {{ getFullNameById($profile->id) }}
-                            </h1>
+                            </h1> 
                             <h4 class="">
                                 {{ $profile->designation }}
                             </h4>
