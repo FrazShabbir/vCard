@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    <meta name="google-site-verification" content="WBSd4LpQFX9YmRxiWHxCQb1BxEhO2qzVENpG_eZCQs4" />
     @include('frontend.partial._header')
 </head>
 
