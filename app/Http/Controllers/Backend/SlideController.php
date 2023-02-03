@@ -75,7 +75,7 @@ class SlideController extends Controller
      */
     public function show($id)
     {
-        //
+       
     }
 
     /**
