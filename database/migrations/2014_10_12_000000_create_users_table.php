@@ -19,30 +19,23 @@ return new class extends Migration
             $table->string('last_name');
             $table->string('username')->unique(); 
             $table->string('email')->unique();
-
-            $table->string('bio')->nullable();
-            $table->string('organization')->nullable();
-            $table->string('designation')->nullable();
-
             $table->string('phone')->nullable();
-            $table->text('avatar')->nullable();
-            $table->text('cover_image')->nullable();
-            
-            $table->text('address')->nullable();
-
-            $table->string('instagram')->nullable();
-            $table->string('twitter')->nullable();
-            $table->string('facebook')->nullable();
-            $table->string('google')->nullable();
-            $table->string('linkedin')->nullable();
-            $table->string('youtube')->nullable();
-            $table->string('tiktok')->nullable();
-            $table->string('pinterest')->nullable();
-
-            $table->string('url')->nullable();
-            $table->timestamp('email_verified_at')->nullable();
+            $table->string('type')->default('personal');
             $table->boolean('status')->nullable()->default(1);
             $table->boolean('terms')->nullable()->default(1);
+
+            $table->date('expiry')->nullable();
+
+            // $table->string('instagram')->nullable();
+            // $table->string('twitter')->nullable();
+            // $table->string('facebook')->nullable();
+            // $table->string('google')->nullable();
+            // $table->string('linkedin')->nullable();
+            // $table->string('youtube')->nullable();
+            // $table->string('tiktok')->nullable();
+            // $table->string('pinterest')->nullable();
+
+            $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();

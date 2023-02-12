@@ -23,124 +23,22 @@ class HomeController extends Controller
         return view('frontend.pages.contact');
     }
 
-    public function store(Request $request)
+    public function about()
     {
-        // dd($request->all());
-
-        $request->validate([
-            'first_name' => 'required|string|max:255',
-            'last_name' => 'required|string|max:255',
-            'slug' => 'required|string|max:255',
-            'avatar' => 'required|mimes:jpeg,png,jpg|max:2048',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|confirmed', Rules\Password::defaults(),
-            'address' => 'required',
-            'phone' => 'required',
-
-            'instagram' => 'nullable|string|max:255',
-            'twitter' => 'nullable|string|max:255',
-            'facebook' => 'nullable|string|max:255',
-            'google' => 'nullable|string|max:255',
-            'linkedin' => 'nullable|string|max:255',
-            'youtube' => 'nullable|string|max:255',
-            'tikTok' => 'nullable|string|max:255',
-            'pinterest' => 'nullable|string|max:255',
-            'terms' => 'required',
-
-        ]);
-
-        $username = str_replace(' ', '-', $request->slug);
-
-        $usernamefind = User::where('username', $username)->first();
-        if ($usernamefind) {
-            $username = $username . '-' . str_random(2);
-        }
-
-        if ($request->avatar) {
-            $request->validate([
-                'avatar' => 'mimes:jpeg,png,jpg|max:2048',
-            ]);
-            $image = $request->file('avatar');
-            $imageName = getRandomString() . '-' . time() . '.' . $image->extension();
-            $destinationPath = public_path('/uploads/avatars');
-            $img = Image::make($image->path());
-            // $img->encode('png', 75)->save($destinationPath.'/'.$imageName);
-
-            $img->resize(200, 200, function ($constraint) {
-                $constraint->aspectRatio();
-            })->save($destinationPath . '/' . $imageName);
-
-            $destinationPath = public_path('/uploads/avatars/original');
-            $image->move($destinationPath, $imageName);
-
-            // $file = $request->file('avatar');
-            // $extension = $file->getClientOriginalExtension();
-            // $filename = getRandomString().'-'.time() . '.' . $extension;
-            // $file->move('uploads/avatars', $filename);
-            // $path = 'uploads/avatars/'.$filename;
-        }
-
-        if ($request->cover_image) {
-            $request->validate([
-                'cover_image' => 'mimes:jpeg,png,jpg|max:2048',
-            ]);
-            $image = $request->file('cover_image');
-            $imageName_background = getRandomString() . '-' . time() . '.' . $image->extension();
-            $destinationPath = public_path('/uploads/cover_images');
-            $img = Image::make($image->path());
-            // $img->encode('png', 75)->save($destinationPath.'/'.$imageName_background);
-
-            $img->resize(200, 200, function ($constraint) {
-                $constraint->aspectRatio();
-            })->save($destinationPath . '/' . $imageName_background);
-
-            $destinationPath = public_path('/uploads/cover_images/original');
-            $image->move($destinationPath, $imageName_background);
-
-            // $file = $request->file('cover_image');
-            // $extension = $file->getClientOriginalExtension();
-            // $filename = getRandomString().'-'.time() . '.' . $extension;
-            // $file->move('uploads/cover_images', $filename);
-            $background = 'uploads/cover_images/' . $imageName_background;
-
-        }
-
-        $user = User::create([
-            'first_name' => $request->first_name,
-            'last_name' => $request->last_name,
-            'username' => $username,
-            'address' => $request->address,
-            'bio' => $request->bio,
-            'phone' => $request->phone,
-            'organization' => $request->organization,
-            'designation' => $request->designation,
-            'status' => $request->status ?? 1,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-            'avatar' => 'uploads/avatars/' . $imageName,
-            'cover_image' => $background ?? null,
-            'instagram' => $request->instagram,
-            'twitter' => $request->twitter,
-            'facebook' => $request->facebook,
-            'google' => $request->google,
-            'linkedin' => $request->linkedin,
-            'youtube' => $request->youtube,
-            'tiktok' => $request->tiktok,
-            'pinterest' => $request->pinterest,
-            'terms' => $request->terms,
-
-        ]);
-        $user->assignRole('Member');
-        event(new Registered($user));
-
-        return redirect()->route('slug', $user->username);
+        return view('frontend.pages.about');
     }
+
+    public function privacy()
+    {
+        return view('frontend.pages.privacy');
+    }
+
 
     public function slug(Request $request, $slug)
     {
         $profile = User::where('username', $slug)->first();
         if ($profile) {
-            return view('frontend.pages.profile')
+            return view('frontend.pages.cards.index')
                 ->with('profile', $profile)
                 ->with('extra_class', 'd-none');
         } else {
@@ -148,9 +46,9 @@ class HomeController extends Controller
                 Auth::guard('web')->logout();
                 $request->session()->invalidate();
             }
-            return view('frontend.pages.wizard')
+            return view('frontend.pages.auth.register')
                 ->with('slug', $slug)
-                ->with('extra_class', 'd-none');
+                ->with('extra_class', '');
         }
     }
 
@@ -170,6 +68,8 @@ class HomeController extends Controller
             return redirect()->route('slug', $slug);
         }
     }
+
+
     public function profileUpdate(Request $request, $slug)
     {
         $user = User::where('username', $slug)->first();
@@ -243,11 +143,14 @@ class HomeController extends Controller
             return redirect()->route('slug', $slug);
         }
     }
+
+
     public function userLogin()
     {
         return view('frontend.pages.auth.login');
     }
 
+    
     public function downloadVCard($id)
     {
 
@@ -255,17 +158,17 @@ class HomeController extends Controller
 
             $user = User::where('username', $id)->firstOrFail();
             $vcard = new VCard();
-    
+
             // define variables
             $lastname = $user->last_name;
             $firstname = $user->first_name;
             $additional = '';
             $prefix = '';
             $suffix = '';
-    
+
             // add personal data
             $vcard->addName($lastname, $firstname, $additional, $prefix, $suffix);
-    
+
             // add work data
             $vcard->addCompany($user->organization);
             $vcard->addJobtitle($user->designation);
@@ -303,20 +206,20 @@ class HomeController extends Controller
             if (isset($user->pinterest)) {
                 $vcard->addURL('https://www.pinterest.com/' . $user->pinterest, 'TYPE=Pinterest');
             }
-    
+
             if ($user->avatar) {
                 $vcard->addPhoto(env('APP_URL') . $user->avatar);
-    
+
             } else {
                 $vcard->addPhoto('https://ui-avatars.com/api/?name=' . $user->first_name . '+' . $user->last_name . '&background=0D8ABC&color=fff');
             }
-    
+
             return $vcard->download();
         } catch (\Throwable$th) {
 
             alert()->error('Error', 'Something went wrong!');
             return redirect()->back();
-            
+
         }
 
     }

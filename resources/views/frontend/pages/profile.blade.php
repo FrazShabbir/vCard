@@ -200,18 +200,11 @@
                             </div>
                             <div class="contact_links">
                                 <div class="row">
-
-
                                     <div class="col-lg-12 col-md-12 col-sm-4 col-12">
                                         <a class="btn btn-success"
                                             href="{{ route('downloadVCard', $profile->username) }}"><i
                                                 class="text-white fa fa-download"></i></a>
                                     </div>
-
-
-
-
-
                                 </div>
                             </div>
                         </div>

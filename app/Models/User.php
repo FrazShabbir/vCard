@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Enums\UserEnum;
 
 class User extends Authenticatable
 {   
@@ -28,22 +29,8 @@ class User extends Authenticatable
         'username',
         'status',
         'email',
-        'password',
-        'address',
         'phone',
-        'avatar',
-        'cover_image',
-        'instagram',
-        'twitter',
-        'facebook',
-        'google',
-        'linkedin',
-        'youtube',
-        'tiktok',
-        'pinterest',
-        'organization',
-        'designation',
-        'bio',
+       
 
     ];
 
@@ -64,6 +51,7 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'type' => UserEnum::class,
     ];
 
     

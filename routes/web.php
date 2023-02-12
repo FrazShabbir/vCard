@@ -14,14 +14,17 @@ use App\Http\Controllers\Home\HomeController;
 |
 */
 
-// Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/', function(){
-    if(Auth::check()){
-        return redirect()->route('dashboard');
-    }else{
-        return redirect()->route('login');
-    }
-})->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('about', [HomeController::class, 'about'])->name('about');
+Route::get('contact', [HomeController::class, 'contact'])->name('contact');
+Route::get('privacy', [HomeController::class, 'privacy'])->name('privacy');
+// Route::get('/', function(){
+//     if(Auth::check()){
+//         return redirect()->route('dashboard');
+//     }else{
+//         return redirect()->route('login');
+//     }
+// })->name('home');
 
 Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
 Route::get('/user/login', [HomeController::class, 'userLogin'])->name('login.user')->middleware('guest');
@@ -34,6 +37,8 @@ Route::put('/update/contact/{slug}', [HomeController::class, 'profileUpdate'])->
 Route::get('downloadVCard/{id}', [HomeController::class, 'downloadVCard'])->name('downloadVCard');
 
 Route::get('/{slug}/edit', [HomeController::class, 'profileEdit'])->middleware('auth')->name('editProfile');
+
 Route::get('/{slug}', [HomeController::class, 'slug'])->name('slug');
 
 require __DIR__.'/auth.php';
+
