@@ -14,6 +14,8 @@ use App\Http\Controllers\Home\HomeController;
 |
 */
 
+// Route::group(['middleware' => ['CheckBrowser']], function () {
+
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('about', [HomeController::class, 'about'])->name('about');
 Route::get('contact', [HomeController::class, 'contact'])->name('contact');
@@ -39,6 +41,8 @@ Route::get('downloadVCard/{id}', [HomeController::class, 'downloadVCard'])->name
 Route::get('/{slug}/edit', [HomeController::class, 'profileEdit'])->middleware('auth')->name('editProfile');
 
 Route::get('/{slug}', [HomeController::class, 'slug'])->name('slug');
+
+// });
 
 require __DIR__.'/auth.php';
 

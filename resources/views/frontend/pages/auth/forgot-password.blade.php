@@ -14,7 +14,7 @@
     <title>FSF - Forget Password</title>
 
     <!-- Favicon Icon -->
-    <link rel="shortcut icon" href="{{ asset('frontend/assets/images/favicon.ico') }}" />
+    <link rel="shortcut icon" href="{{ asset('frontend/assets/images/favicon.png') }}" />
 
     <!-- inject css start -->
 

@@ -11,11 +11,13 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
 use Image;
 use JeroenDesloovere\VCard\VCard;
+use Jenssegers\Agent\Facades\Agent;
 
 class HomeController extends Controller
 {
     public function index()
     {
+       
         return view('frontend.pages.index');
     }
     public function contact()

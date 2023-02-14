@@ -22,6 +22,7 @@ class RegisteredUserController extends Controller
      */
     public function create()
     {
+        abort(404);
         return view('frontend.pages.auth.register');
     }
 
@@ -157,12 +158,13 @@ class RegisteredUserController extends Controller
             'type' => UserEnum::Active,
             'expiry' => Carbon::now()->addDays(14)->format('Y-m-d'),
         ]);
+        
         $profile = Profile::create([
             'user_id' => $user->id,
             'bio' => $request->bio,
             'organization' => $request->organization,
             'designation' => $request->designation,
-            'avatar' => 'uploads/avatars/' . $imageName,
+            'avatar' => 'uploads/avatars/' . $imageName??'placeholder.png',
             'cover_image' => $background ?? null,
             'website' => $request->website,
             'address' => $request->address,

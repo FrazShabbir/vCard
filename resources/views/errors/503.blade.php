@@ -7,7 +7,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
       <title>"Cybertag" | {{fromSettings('site_title')}}</title>
       <!-- Favicon -->
-      <link rel="shortcut icon" href="images/favicon.ico" />
+      <link rel="shortcut icon" href="images/favicon.png" />
       <!-- Bootstrap CSS -->
       <link rel="stylesheet" href="{{asset('backend/css/bootstrap.min.css')}}">
       <!-- Typography CSS -->

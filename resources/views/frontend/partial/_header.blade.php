@@ -10,7 +10,7 @@
 <title>@yield('title','vCards - Funeral Services and Funds') | {{fromSettings('site_title')}}</title>
 
 <!-- Favicon Icon -->
-<link rel="shortcut icon" href="{{asset('frontend/assets/favicon.ico')}}" />
+<link rel="shortcut icon" href="{{asset('frontend/assets/favicon.png')}}" />
 
 <!-- inject css start -->
 <!--== bootstrap -->

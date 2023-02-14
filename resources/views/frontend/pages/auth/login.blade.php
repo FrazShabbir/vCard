@@ -14,7 +14,7 @@
     <title>FSF - Sign in</title>
 
     <!-- Favicon Icon -->
-    <link rel="shortcut icon" href="{{asset('frontend/assets/favicon.ico')}}" />
+    <link rel="shortcut icon" href="{{asset('frontend/assets/favicon.png')}}" />
 
     <!-- inject css start -->
 

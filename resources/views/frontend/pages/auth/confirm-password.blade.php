@@ -8,7 +8,7 @@
       <title>FSF |{{fromSettings('site_title')}}</title>
       <link rel="shortcut icon" href="{{asset(fromSettings('favicon')??'backend/images/fdd_logo.png')}}" />
       <!-- Favicon -->
-      <link rel="shortcut icon" href="images/favicon.ico" />
+      <link rel="shortcut icon" href="images/favicon.png" />
       <!-- Bootstrap CSS -->
       <link rel="stylesheet" href="{{asset('backend/css/bootstrap.min.css')}}">
       <!-- Typography CSS -->
