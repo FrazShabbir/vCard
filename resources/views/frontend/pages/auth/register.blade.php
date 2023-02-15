@@ -121,14 +121,14 @@
                         @endif
                         <div class="col-lg-8 col-md-10 ms-auto me-auto">
                             <div class="register-form text-center">
-                                <form id="" method="post" action="{{ route('register') }}" enctype="multipart/form-data">
+                                <form id="" method="post" action="{{ route('contact.store') }}" enctype="multipart/form-data">
                                     @csrf
                                     <input type="hidden" name="slug" value="{{$slug}}">
                                     <div class="messages"></div>
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <input id="form_name" type="text" name="first_name"
+                                                <input id="form_name_fname" type="text" name="first_name"
                                                     class="form-control" placeholder="First name" required="required"
                                                     data-error="First Name is required.">
                                                 <div class="help-block with-errors"></div>
@@ -136,7 +136,7 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <input id="form_name" type="text" name="last_name"
+                                                <input id="form_name_lname" type="text" name="last_name"
                                                     class="form-control" placeholder="Last name" required="required"
                                                     data-error="Last Name is required.">
                                                 <div class="help-block with-errors"></div>
@@ -147,7 +147,7 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <input id="form_name" type="text" name="phone"
+                                                <input id="form_name_number" type="text" name="phone"
                                                     class="form-control" placeholder="+92-------" required="required"
                                                     data-error="Phone is required.">
                                                 <div class="help-block with-errors"></div>
@@ -171,7 +171,7 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <input id="form_name" type="text" name="email" class="form-control"
+                                                <input id="form_name_email" type="text" name="email" class="form-control"
                                                     placeholder="email@mail.com" required="required"
                                                     data-error="Email is required.">
                                                 <div class="help-block with-errors"></div>
@@ -188,7 +188,7 @@
                                             </div>
                                         </div>
                                         <div class="col-md-6">
-                                            <div class="form-group">
+                                            <div class="form-group_password">
                                                 <input id="form_password1" type="password"
                                                     name="password_confirmation" class="form-control"
                                                     placeholder="Confirm Password" required="required"

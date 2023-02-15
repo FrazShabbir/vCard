@@ -47,6 +47,8 @@
 <!-- page wrapper end -->
 
 @include('frontend.partial._scripts')
+@include('sweetalert::alert')
+
 </body>
 
 

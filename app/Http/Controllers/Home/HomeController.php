@@ -3,15 +3,19 @@
 namespace App\Http\Controllers\Home;
 
 use App\Http\Controllers\Controller;
+use App\Models\Profile;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Password;
 use Image;
 use JeroenDesloovere\VCard\VCard;
 use Jenssegers\Agent\Facades\Agent;
+use Illuminate\Validation\Rules;
+use Carbon\Carbon;
 
 class HomeController extends Controller
 {
@@ -225,4 +229,110 @@ class HomeController extends Controller
         }
 
     }
+
+
+
+
+    public function store(Request $request)
+    {
+        // dd($request->all());
+        $request->validate([
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'slug' => 'required|string|max:255',
+            'phone' => 'required',
+            'avatar' => 'nullable|mimes:jpeg,png,jpg|max:2048',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|confirmed', Rules\Password::defaults(),
+            'address' => 'nullable',
+            'terms' => 'required',
+
+        ]);
+
+        try {
+            DB::beginTransaction();
+
+            $username = str_replace(' ', '-', $request->slug);
+
+            $usernamefind = User::where('username', $username)->first();
+            if ($usernamefind) {
+                $username = $username . '-' . str_random(2);
+            }
+            $imageName = 'placeholder.png';
+            if ($request->avatar) {
+                $request->validate([
+                    'avatar' => 'mimes:jpeg,png,jpg|max:2048',
+                ]);
+                $image = $request->file('avatar');
+                $imageName = getRandomString() . '-' . time() . '.' . $image->extension();
+                $destinationPath = public_path('/uploads/avatars');
+                $img = Image::make($image->path());
+                // $img->encode('png', 75)->save($destinationPath.'/'.$imageName);
+
+                $img->resize(200, 200, function ($constraint) {
+                    $constraint->aspectRatio();
+                })->save($destinationPath . '/' . $imageName);
+
+                $destinationPath = public_path('/uploads/avatars/original');
+                $image->move($destinationPath, $imageName);
+
+            }
+            $background = 'placeholder.png';
+
+            if ($request->cover_image) {
+                $request->validate([
+                    'cover_image' => 'mimes:jpeg,png,jpg|max:2048',
+                ]);
+                $image = $request->file('cover_image');
+                $imageName_background = getRandomString() . '-' . time() . '.' . $image->extension();
+                $destinationPath = public_path('/uploads/cover_images');
+                $img = Image::make($image->path());
+                // $img->encode('png', 75)->save($destinationPath.'/'.$imageName_background);
+                $img->resize(200, 200, function ($constraint) {
+                    $constraint->aspectRatio();
+                })->save($destinationPath . '/' . $imageName_background);
+
+                $destinationPath = public_path('/uploads/cover_images/original');
+                $image->move($destinationPath, $imageName_background);
+                $background = 'uploads/cover_images/' . $imageName_background;
+            }
+
+            $user = User::create([
+                'first_name' => $request->first_name,
+                'last_name' => $request->last_name,
+                'username' => $username,
+                'phone' => $request->phone,
+                'email' => $request->email,
+                'terms' => $request->terms,
+                'password' => Hash::make('admin'),
+                'status' => 1,
+                'type' => 'personal',
+                'expiry' => Carbon::now()->addDays(14)->format('Y-m-d'),
+            ]);
+
+            $profile = Profile::create([
+                'user_id' => $user->id,
+                'bio' => $request->bio,
+                'organization' => $request->organization,
+                'designation' => $request->designation,
+              
+                'cover_image' => $background,
+                'website' => $request->website,
+                'address' => $request->address,
+            ]);
+
+            $user->assignRole('Member');
+            event(new Registered($user));
+            DB::commit();
+           
+            return redirect()->route('slug', $user->username);
+
+        } catch (\Throwable$th) {
+            DB::rollback();
+            dd($th);
+            alert()->error('Error', $th->getMessage());
+            return redirect()->back();
+        }
+    }
+
 }
