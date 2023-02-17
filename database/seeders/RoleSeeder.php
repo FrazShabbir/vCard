@@ -18,7 +18,7 @@ class RoleSeeder extends Seeder
     {
         $roles = [
             [
-                'name' => 'Super Admin',
+                'name' => 'SuperAdmin',
                 'guard_name' => 'web',
                 'role_for' => 'Admin',
             ],

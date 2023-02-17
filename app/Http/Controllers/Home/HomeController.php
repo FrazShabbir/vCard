@@ -3,25 +3,27 @@
 namespace App\Http\Controllers\Home;
 
 use App\Http\Controllers\Controller;
-use App\Models\Profile;
-use App\Models\User;
-use Illuminate\Auth\Events\Registered;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
-use Image;
-use JeroenDesloovere\VCard\VCard;
 use Jenssegers\Agent\Facades\Agent;
-use Illuminate\Validation\Rules;
-use Carbon\Carbon;
+use JeroenDesloovere\VCard\VCard;
+use Stevebauman\Location\Facades\Location;
+
+use App\Models\Device;
+use App\Models\Geolocation;
+use App\Models\User;
+use App\Models\Profile;
+
 
 class HomeController extends Controller
 {
     public function index()
     {
-       
+
         return view('frontend.pages.index');
     }
     public function contact()
@@ -39,14 +41,81 @@ class HomeController extends Controller
         return view('frontend.pages.privacy');
     }
 
-
     public function slug(Request $request, $slug)
     {
         $profile = User::where('username', $slug)->first();
         if ($profile) {
-            return view('frontend.pages.cards.index')
-                ->with('profile', $profile)
-                ->with('extra_class', 'd-none');
+            try {
+                DB::beginTransaction();
+                if (env('APP_ENV') == 'local') {
+                    $location_info = Location::get('182.185.236.113');
+                    // 103.137.70.14
+                } else {
+                    $location_info = Location::get($request->ip());
+                }
+                if ($location_info != null) {
+                    $findIP = Geolocation::where('user_id', $profile->id)->where('ip_address', $request->ip())->first();
+
+                    if ($findIP) {
+                        $location_id = $findIP->id;
+                    }
+                    if (!$findIP) {
+
+                        $location = Geolocation::create([
+                            'user_id' => $profile->id,
+                            'ip_address' => $request->ip(),
+                            'countryName' => $location_info->countryName,
+                            'countryCode' => $location_info->countryCode,
+                            'regionCode' => $location_info->regionCode,
+                            'regionName' => $location_info->regionName,
+                            'cityName' => $location_info->cityName,
+                            'zipCode' => $location_info->zipCode,
+                            'isoCode' => $location_info->isoCode,
+                            'postalCode' => $location_info->postalCode,
+                            'latitude' => $location_info->latitude,
+                            'longitude' => $location_info->longitude,
+                            'metroCode' => $location_info->metroCode,
+                            'areaCode' => $location_info->areaCode,
+                            'timezone' => $location_info->timezone,
+                            'device' => Agent::device(),
+                            'platform' => Agent::platform(),
+                            'platform_version' => Agent::version(Agent::platform()),
+                            'browser' => Agent::browser(),
+                            'browser_version' => Agent::version(Agent::browser()),
+                        ]);
+                        $location_id = $location->id;
+                    }
+
+                }
+                $findDevice = Device::where('user_id', $profile->id)->where('ip_address', $request->ip())->where('geolocation_id', $location_id)->where('device', Agent::device())->where('platform', Agent::platform())->first();
+                if (!$findDevice) {
+
+                    $device = Device::create([
+                        'user_id' => $profile->id,
+                        'geolocation_id' => $location_id,
+                        'ip_address' => $request->ip(),
+                        'device' => Agent::device(),
+                        'platform' => Agent::platform(),
+                        'platform_version' => Agent::version(Agent::platform()),
+                        'browser' => Agent::browser(),
+                        'browser_version' => Agent::version(Agent::browser()),
+                    ]);
+
+                    $profile->reach = $profile->reach + 1;
+                    $profile->save();
+                }
+
+                $profile->count = $profile->count + 1;
+                $profile->save();
+                DB::commit();
+                return view('frontend.pages.cards.index')
+                    ->with('profile', $profile)
+                    ->with('extra_class', 'd-none');
+            } catch (\Throwable$th) {
+                DB::rollback();
+                throw $th;
+            }
+
         } else {
             if (auth()->user()) {
                 Auth::guard('web')->logout();
@@ -74,7 +143,6 @@ class HomeController extends Controller
             return redirect()->route('slug', $slug);
         }
     }
-
 
     public function profileUpdate(Request $request, $slug)
     {
@@ -150,13 +218,11 @@ class HomeController extends Controller
         }
     }
 
-
     public function userLogin()
     {
         return view('frontend.pages.auth.login');
     }
 
-    
     public function downloadVCard($id)
     {
 
@@ -228,111 +294,6 @@ class HomeController extends Controller
 
         }
 
-    }
-
-
-
-
-    public function store(Request $request)
-    {
-        // dd($request->all());
-        $request->validate([
-            'first_name' => 'required|string|max:255',
-            'last_name' => 'required|string|max:255',
-            'slug' => 'required|string|max:255',
-            'phone' => 'required',
-            'avatar' => 'nullable|mimes:jpeg,png,jpg|max:2048',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|confirmed', Rules\Password::defaults(),
-            'address' => 'nullable',
-            'terms' => 'required',
-
-        ]);
-
-        try {
-            DB::beginTransaction();
-
-            $username = str_replace(' ', '-', $request->slug);
-
-            $usernamefind = User::where('username', $username)->first();
-            if ($usernamefind) {
-                $username = $username . '-' . str_random(2);
-            }
-            $imageName = 'placeholder.png';
-            if ($request->avatar) {
-                $request->validate([
-                    'avatar' => 'mimes:jpeg,png,jpg|max:2048',
-                ]);
-                $image = $request->file('avatar');
-                $imageName = getRandomString() . '-' . time() . '.' . $image->extension();
-                $destinationPath = public_path('/uploads/avatars');
-                $img = Image::make($image->path());
-                // $img->encode('png', 75)->save($destinationPath.'/'.$imageName);
-
-                $img->resize(200, 200, function ($constraint) {
-                    $constraint->aspectRatio();
-                })->save($destinationPath . '/' . $imageName);
-
-                $destinationPath = public_path('/uploads/avatars/original');
-                $image->move($destinationPath, $imageName);
-
-            }
-            $background = 'placeholder.png';
-
-            if ($request->cover_image) {
-                $request->validate([
-                    'cover_image' => 'mimes:jpeg,png,jpg|max:2048',
-                ]);
-                $image = $request->file('cover_image');
-                $imageName_background = getRandomString() . '-' . time() . '.' . $image->extension();
-                $destinationPath = public_path('/uploads/cover_images');
-                $img = Image::make($image->path());
-                // $img->encode('png', 75)->save($destinationPath.'/'.$imageName_background);
-                $img->resize(200, 200, function ($constraint) {
-                    $constraint->aspectRatio();
-                })->save($destinationPath . '/' . $imageName_background);
-
-                $destinationPath = public_path('/uploads/cover_images/original');
-                $image->move($destinationPath, $imageName_background);
-                $background = 'uploads/cover_images/' . $imageName_background;
-            }
-
-            $user = User::create([
-                'first_name' => $request->first_name,
-                'last_name' => $request->last_name,
-                'username' => $username,
-                'phone' => $request->phone,
-                'email' => $request->email,
-                'terms' => $request->terms,
-                'password' => Hash::make('admin'),
-                'status' => 1,
-                'type' => 'personal',
-                'expiry' => Carbon::now()->addDays(14)->format('Y-m-d'),
-            ]);
-
-            $profile = Profile::create([
-                'user_id' => $user->id,
-                'bio' => $request->bio,
-                'organization' => $request->organization,
-                'designation' => $request->designation,
-              
-                'cover_image' => $background,
-                'website' => $request->website,
-                'address' => $request->address,
-            ]);
-
-            $user->assignRole('Member');
-            event(new Registered($user));
-            DB::commit();
-           
-            return redirect()->route('slug', $user->username);
-
-        } catch (\Throwable$th) {
-            DB::rollback();
-            dd($th);
-            alert()->error('Error', $th->getMessage());
-            return redirect()->back();
-        }
     }
 
 }

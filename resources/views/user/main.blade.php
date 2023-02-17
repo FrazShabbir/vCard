@@ -3,7 +3,7 @@
 
 <head>
     <meta name="google-site-verification" content="WBSd4LpQFX9YmRxiWHxCQb1BxEhO2qzVENpG_eZCQs4" />
-    @include('backend.partials._header')
+    @include('user.partials._header')
 
 </head>
 
@@ -20,7 +20,7 @@
         <div class="iq-sidebar">
             <div class="iq-navbar-logo d-flex justify-content-between">
 
-               @include('backend.partials._logo')
+               @include('user.partials._logo')
 
                 
                 <div class="iq-menu-bt align-self-center">
@@ -31,11 +31,11 @@
                 </div>
             </div>
             <div id="sidebar-scrollbar">
-                @include('backend.partials._sidebar')
+                @include('user.partials._sidebar')
             </div>
         </div>
         <!-- TOP Nav Bar -->
-        @include('backend.partials._top_navbar')
+        @include('user.partials._top_navbar')
         <!-- TOP Nav Bar END -->
 
         <!-- Page Content  -->
@@ -45,12 +45,12 @@
     <!-- Page Content END  -->
 
 
-@include('backend.partials._colorizor')
+@include('user.partials._colorizor')
     <!-- Wrapper END -->
     <!-- Footer -->
-    @include('backend.partials._footer')
+    @include('user.partials._footer')
     <!-- Footer END -->
-    @include('backend.partials._scripts')
+    @include('user.partials._scripts')
     @include('sweetalert::alert')
 </body>
 

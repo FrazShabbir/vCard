@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Home\HomeController;
+use App\Http\Controllers\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,17 +17,15 @@ use App\Http\Controllers\Home\HomeController;
 
 // Route::group(['middleware' => ['CheckBrowser']], function () {
 
+    Route::group(['middleware' => ['auth']],function () {
+        Route::get('check/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
+    });
+
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('about', [HomeController::class, 'about'])->name('about');
 Route::get('contact', [HomeController::class, 'contact'])->name('contact');
 Route::get('privacy', [HomeController::class, 'privacy'])->name('privacy');
-// Route::get('/', function(){
-//     if(Auth::check()){
-//         return redirect()->route('dashboard');
-//     }else{
-//         return redirect()->route('login');
-//     }
-// })->name('home');
+
 
 Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
 Route::get('/user/login', [HomeController::class, 'userLogin'])->name('login.user')->middleware('guest');
@@ -40,9 +39,44 @@ Route::get('downloadVCard/{id}', [HomeController::class, 'downloadVCard'])->name
 
 Route::get('/{slug}/edit', [HomeController::class, 'profileEdit'])->middleware('auth')->name('editProfile');
 
+
+Route::get('/auth', function(){
+    if(Auth::check()){
+        return redirect()->route('dashboard');
+    }else{
+        return redirect()->route('login');
+    }
+})->name('check.auth');
+
+
+Route::get('/dashboard', function(){
+    if(Auth::check()){
+        return redirect()->route('dashboard');
+    }else{
+        return redirect()->route('login');
+    }
+})->name('check.dashboard');
+
+Route::get('auth/register', function(){
+    if(Auth::check()){
+        return redirect()->route('dashboard');
+    }else{
+        return redirect()->route('login');
+    }
+})->name('check.register');
+Route::get('register', function(){
+    if(Auth::check()){
+        return redirect()->route('dashboard');
+    }else{
+        return redirect()->route('login');
+    }
+})->name('check.register');
+
+
 Route::get('/{slug}', [HomeController::class, 'slug'])->name('slug');
 
 // });
+
 
 require __DIR__.'/auth.php';
 

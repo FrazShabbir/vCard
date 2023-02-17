@@ -8,9 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Geolocation extends Model
 {
     use HasFactory;
-    
+    protected $guarded = [];
+
     public function devices()
     {
-        return $this->hasMany(Device::class,'location_id');
+        return $this->hasMany(Device::class,'geolocation_id');
     }
 }

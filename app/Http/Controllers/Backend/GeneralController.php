@@ -7,10 +7,10 @@ use Illuminate\Http\Request;
 
 class GeneralController extends Controller
 {
-    public function dashboard()
-    {
-        return view('backend.dashboard.dashboard');
-    }
+    // public function dashboard()
+    // {
+    //     return view('backend.dashboard.dashboard');
+    // }
 
     public function siteSettings()
     {

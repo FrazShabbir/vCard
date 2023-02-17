@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Device extends Model
 {
     use HasFactory;
+    protected $guarded = [];
     public function location()
     {
         return $this->belongsTo(Geolocation::class,'geolocation_id');

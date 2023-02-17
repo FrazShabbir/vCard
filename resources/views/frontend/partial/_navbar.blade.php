@@ -32,7 +32,7 @@
                         </div>
                         @auth
                             <div class="d-sm-flex align-items-center justify-content-end ms-auto"> <a
-                                    class="btn btn-light btn-sm" href="{{ route('dashboard') }}">{{auth()->user()->full_name}}</a> 
+                                    class="btn btn-light btn-sm" href="{{ route('dashboard') }}">{{auth()->user()->first_name}} {{auth()->user()->last_name}}</a> 
                             </div>
                         @else
                             <div class="d-sm-flex align-items-center justify-content-end ms-auto"> <a

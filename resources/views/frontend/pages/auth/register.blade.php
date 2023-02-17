@@ -121,7 +121,7 @@
                         @endif
                         <div class="col-lg-8 col-md-10 ms-auto me-auto">
                             <div class="register-form text-center">
-                                <form id="" method="post" action="{{ route('contact.store') }}" enctype="multipart/form-data">
+                                <form id="" method="post" action="{{ route('register') }}" enctype="multipart/form-data">
                                     @csrf
                                     <input type="hidden" name="slug" value="{{$slug}}">
                                     <div class="messages"></div>
@@ -155,7 +155,7 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <select name="type" id="" class="form-control">
+                                                <select name="account_type" id="" class="form-control">
                                                     <option value="">Select Account Type</option>
                                                     <option value="personal">Personal</option>
                                                     <option value="business">Business</option>
