@@ -20,15 +20,18 @@ class RedirectIfAuthenticated
     public function handle(Request $request, Closure $next, ...$guards)
     {
         $guards = empty($guards) ? [null] : $guards;
-
        
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
+              
 
                 if(Auth::user()->hasRole('Member')){
-                  
+
+                   
+
                     $request->session()->regenerate();
                     return redirect()->route('editProfile',Auth::user()->username);
+
                 }else{
 
                     $request->session()->regenerate();

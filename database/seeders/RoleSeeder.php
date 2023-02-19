@@ -36,7 +36,7 @@ class RoleSeeder extends Seeder
         ];
         foreach($roles as $role){
             $role =  Role::create($role);
-            if($role->name == 'Super Admin'){
+            if($role->name == 'SuperAdmin'){
                 $role->syncPermissions(Permission::all());
             }
         }

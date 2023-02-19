@@ -1,6 +1,6 @@
 <nav class="iq-sidebar-menu">
     <ul id="iq-sidebar-toggle" class="iq-menu">
-        <li class="active">
+        <li class="{{ request()->route()->getName() == 'member.dashboard'? 'active': '' }}">
             <a href="{{ route('dashboard') }}" class="iq-waves-effect"><i
                     class="las la-home iq-arrow-left"></i><span>Dashboard</span></a>
         </li>
@@ -14,13 +14,18 @@
 
 
 
+        <li class="{{ request()->route()->getName() == 'user.card'? 'active': '' }}">
+            <a href="{{ route('user.card') }}" class="iq-waves-effect"><i
+                    class="las la-id-card iq-arrow-left"></i><span>My vCard</span></a>
+        </li>
 
   
        
             <li class="{{ request()->route()->getName() == 'member.stats'? 'active': '' }}">
                 <a href="{{ route('member.stats') }}" class="iq-waves-effect"><i
-                        class="las la-tools iq-arrow-left"></i><span>Stats</span></a>
+                        class="las la-chart-bar iq-arrow-left"></i><span>Stats</span></a>
             </li>
+
 
   
         

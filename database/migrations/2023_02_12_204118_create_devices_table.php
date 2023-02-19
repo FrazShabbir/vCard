@@ -19,6 +19,7 @@ return new class extends Migration
             $table->integer('geolocation_id')->unsigned();
             $table->string('ip_address')->nullable();
             $table->string('device')->nullable();
+            $table->string('device_type')->nullable();
             $table->string('platform')->nullable();
             $table->string('platform_version')->nullable();
             $table->string('browser')->nullable();

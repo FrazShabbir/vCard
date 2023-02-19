@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Home;
 
 use App\Http\Controllers\Controller;
-
+use App\Models\Device;
+use App\Models\Geolocation;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -12,12 +14,6 @@ use Illuminate\Support\Facades\Password;
 use Jenssegers\Agent\Facades\Agent;
 use JeroenDesloovere\VCard\VCard;
 use Stevebauman\Location\Facades\Location;
-
-use App\Models\Device;
-use App\Models\Geolocation;
-use App\Models\User;
-use App\Models\Profile;
-
 
 class HomeController extends Controller
 {
@@ -90,11 +86,27 @@ class HomeController extends Controller
                 $findDevice = Device::where('user_id', $profile->id)->where('ip_address', $request->ip())->where('geolocation_id', $location_id)->where('device', Agent::device())->where('platform', Agent::platform())->first();
                 if (!$findDevice) {
 
+                    $deviceType = 'other';
+                    if (Agent::isDesktop()) {
+                        $deviceType = 'Desktop';
+                    } elseif (Agent::isTablet()) {
+                        $deviceType = 'Tablet';
+                    } elseif (Agent::isPhone()) {
+                        $deviceType = 'Phone';
+                    } else {
+                        $deviceType = 'Other';
+                    }
+
+                    // $is_desktop =Agent::isDesktop();
+                    // $is_tablet =Agent::isTablet();
+                    // $is_phone =Agent::isPhone();
+
                     $device = Device::create([
                         'user_id' => $profile->id,
                         'geolocation_id' => $location_id,
                         'ip_address' => $request->ip(),
                         'device' => Agent::device(),
+                        'device_type' => $deviceType,
                         'platform' => Agent::platform(),
                         'platform_version' => Agent::version(Agent::platform()),
                         'browser' => Agent::browser(),
@@ -118,6 +130,7 @@ class HomeController extends Controller
 
         } else {
             if (auth()->user()) {
+                // dd('hello');
                 Auth::guard('web')->logout();
                 $request->session()->invalidate();
             }

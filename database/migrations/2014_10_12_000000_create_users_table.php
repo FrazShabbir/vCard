@@ -28,6 +28,7 @@ return new class extends Migration
             $table->boolean('status')->nullable()->default(1);
             $table->boolean('terms')->nullable()->default(1);
             $table->date('expiry')->nullable();
+            $table->boolean('card')->nullable()->default(0);
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

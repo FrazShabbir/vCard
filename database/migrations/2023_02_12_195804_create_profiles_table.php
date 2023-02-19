@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('bio')->nullable();
             $table->string('organization')->nullable();
             $table->string('designation')->nullable();
-            $table->string('cover_image')->default('uploads/covers/default.png');
+            $table->string('cover_image')->default('uploads/cover_images/placeholder.png');
 
             $table->string('website')->nullable();
             $table->text('address')->nullable();

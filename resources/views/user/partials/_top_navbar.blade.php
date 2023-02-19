@@ -9,7 +9,7 @@
              <div class="iq-navbar-logo d-flex justify-content-between ml-3">
                 {{-- <a href="index.html" class="header-logo">
                 <img src="{{asset(fromSettings('logo') ??'backend/images/logo.png')}}" class="img-fluid rounded" alt="">
-                <span>FDD</span>
+                <span>vCards.pk</span>
                 </a> --}}
                 @include('backend.partials._logo')
 
@@ -51,7 +51,7 @@
                             <h5 class="mb-0 text-white line-height">Settings</h5>
                             {{-- <span class="text-white font-size-12">{{getuser()->designation->name ?? 'NEW' }}</span> --}}
                          </div>
-                         <a href="{{route('site.myProfile')}}" class="iq-sub-card iq-bg-primary-hover">
+                         <a href="{{route('user.profile')}}" class="iq-sub-card iq-bg-primary-hover">
                             <div class="media align-items-center">
                                <div class="rounded iq-card-icon iq-bg-primary">
                                   <i class="ri-file-user-line"></i>

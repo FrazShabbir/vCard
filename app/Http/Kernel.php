@@ -66,6 +66,7 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'role' => \Spatie\Permission\Middlewares\RoleMiddleware::class,
         'CheckBrowser' => \App\Http\Middleware\CheckBrowser::class,
+        'CheckProfile' => \App\Http\Middleware\CheckProfile::class,
 
     ];
 }
