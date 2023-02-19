@@ -15,7 +15,24 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
+            $table->integer('user_id')->unsigned()->nullable()->default(12);
+            $table->string('first_name');
+            $table->string('last_name');
+            $table->string('phone');
+            $table->string('email');
+            $table->string('delivery_address');
+            $table->string('status');
+
+            $table->string('coupon')->nullable();
+            $table->string('discount')->nullable();
+            $table->string('shipping')->nullable();
+            $table->string('price')->nullable();
+            $table->string('sale_price')->nullable();
+            $table->string('total')->nullable();
+            
+            $table->string('type')->default('default');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

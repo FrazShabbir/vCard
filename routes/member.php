@@ -32,6 +32,7 @@ Route::group(['middleware' => ['role:Member','auth'], 'prefix' => 'auth/member',
     
     Route::get('my-card', [CardController::class, 'index'])->name('user.card');
     Route::put('my-card/save', [CardController::class, 'update'])->name('user.card.save');
+    Route::post('place-order', [CardController::class, 'placeOrder'])->name('order.place');
 
 });
 // });

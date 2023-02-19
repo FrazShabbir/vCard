@@ -15,7 +15,12 @@ return new class extends Migration
     {
         Schema::create('order_statuses', function (Blueprint $table) {
             $table->id();
+            $table->integer('order_id')->unsigned()->nullable();
+            $table->integer('updated_by')->unsigned()->nullable();
+            $table->string('status');
+            $table->string('comment')->nullable();            
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
