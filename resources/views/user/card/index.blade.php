@@ -23,14 +23,7 @@
                         </div>
                         <div class="iq-card-body px-4">
 
-                            <div class="row">
-                                <div class="col-md-6 col-sm-12 mb-3">
-                                    <label for="first_name">Card Status</label>
-                                    <input type="text" class="form-control" name="first_name" placeholder="e.g. Ali"
-                                        value="{{ Auth::user()->card==1?'Applied':'Not Applied' }}" disabled>
-                                </div>
-                               
-                            </div>
+                         
 
                             <div class="table-responsive">
                             
@@ -47,7 +40,7 @@
                             
                                         <tr>
                                             <td>Card</td>
-                                            <td>{{ Auth::user()->card==1?'Applied':'Not Applied' }}</td>
+                                            <td>{{ auth()->user()->order?'Applied':'Not Applied' }}</td>
                                           
                                         </tr>
                                        
@@ -61,10 +54,13 @@
                              
                            
                                 <div class="row text-right">
+                                    @if(!auth()->user()->order)
                                     <div class="col-12">
                                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">Apply Now</button>
                                    
                                     </div>
+                                    @endif
+
                                 </div>
                            
                         </div>
@@ -91,21 +87,24 @@
                                     aria-describedby="user-list-page-info">
                                     <thead>
                                         <tr>
-                                            <th>#</th>
+                                            <th>Comment</th>
                                             <th>Status</th>
                                             <th>Date</th>
                                         
                                         </tr>
                                     </thead>
                                     <tbody>
-                            
-                                        <tr>
-                                            <td>Card</td>
-                                            <td>{{ Auth::user()->card==1?'Applied':'Not Applied' }}</td>
-                                            <td>{{ date('Y-m-d H:i:s')}}</td>
-                                          
-                                        </tr>
-                                       
+                            @if (auth()->user()->order)
+                            @foreach(auth()->user()->order->comments as $comment)
+                            <tr>
+                                <td>{{$comment->comment}}</td>
+                                <td>{{ $comment->status}}</td>
+                                <td>{{ date('Y-m-d H:i:s',strtotime($comment->created_at))}} </td>
+                              
+                            </tr>
+                           @endforeach
+                            @endif
+                                        
                                     
                                       
                                     </tbody>

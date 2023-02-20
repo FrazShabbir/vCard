@@ -21,7 +21,6 @@ return new class extends Migration
             $table->string('phone');
             $table->string('email');
             $table->string('delivery_address');
-            $table->string('status');
 
             $table->string('coupon')->nullable();
             $table->string('discount')->nullable();
@@ -31,6 +30,8 @@ return new class extends Migration
             $table->string('total')->nullable();
             
             $table->string('type')->default('default');
+            $table->string('status')->default('Pending');
+
             $table->timestamps();
             $table->softDeletes();
         });

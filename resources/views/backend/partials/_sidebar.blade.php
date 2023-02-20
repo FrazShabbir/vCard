@@ -84,6 +84,25 @@
         </li>
 
 
+        <li @if (in_array(request()->route()->getName(),
+            ['roles.create', 'roles.edit', 'roles.index', 'roles.show'])) class="active" @endif>
+            <a href="#userOrders" class="iq-waves-effect" data-toggle="collapse"
+                @if (in_array(request()->route()->getName(),
+                    ['roles.create', 'roles.edit', 'roles.index', 'roles.show'])) aria-expanded="true" @else aria-expanded="false" @endif><i
+                    class="ri-menu-3-line iq-arrow-left"></i><span>Orders</span><i
+                    class="ri-arrow-right-s-line iq-arrow-right"></i></a>
+            <ul id="userOrders" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
+               
+                    <li class="{{ request()->route()->getName() == 'order.index'? 'active': '' }}"><a
+                            href="{{ route('order.index') }}"><i class="las la-plus-circle"></i>New Orders</a></li>
+           
+                    <li class="{{ request()->route()->getName() == 'roles.create'? 'active': '' }}"><a
+                            href="{{ route('roles.index') }}"><i class="las la-th-list"></i>All Orders</a></li>
+       
+            </ul>
+        </li>
+
+
         {{-- SETTINGS ONLY FOR ADMIN AND SUPERADMIN --}}
         @can('Update Settings')
             <li class="{{ request()->route()->getName() == 'site.siteSettings'? 'active': '' }}">

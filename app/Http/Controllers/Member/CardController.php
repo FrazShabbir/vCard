@@ -43,7 +43,7 @@ class CardController extends Controller
                 'email' => $request->email,
                 'phone' => $request->phone,
                 'delivery_address' => $request->delivery_address,
-                'status' => 'pending',
+                'status' => 'Pending',
                 'price' => '1100',
                 'sale_price' => '1000',
                 'shipping' => '100',

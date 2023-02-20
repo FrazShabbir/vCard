@@ -66,5 +66,7 @@ class User extends Authenticatable
     public function profile(){
         return $this->hasOne(Profile::class);
     }
-    
+    public function order(){
+        return $this->hasOne(Order::class);
+    }
 }

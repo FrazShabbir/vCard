@@ -6,6 +6,7 @@ use App\Http\Controllers\Backend\RoleController;
 use App\Http\Controllers\Backend\GeneralController;
 use App\Http\Controllers\Backend\SlideController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\Backend\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,6 +46,9 @@ Route::group(['middleware' => ['role:SuperAdmin','auth'], 'prefix' => 'admin/das
 
     Route::resource('slider', SlideController::class);
 
+
+
+    Route::get('orders', [OrderController::class, 'index'])->name('order.index');
 
 
     Route::get('reset-password/{user}', [UserController::class, 'reset_password'])->name('users.reset_password');
