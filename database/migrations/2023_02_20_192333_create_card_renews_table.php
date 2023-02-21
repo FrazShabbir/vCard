@@ -17,7 +17,11 @@ return new class extends Migration
             $table->id();
             $table->integer('user_id')->unsigned()->nullable();
             $table->integer('card_id')->unsigned()->nullable();
+            $table->string('comment')->nullable();
+            $table->string('expiry')->nullable();
+            $table->string('status')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

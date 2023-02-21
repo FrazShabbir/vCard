@@ -69,4 +69,7 @@ class User extends Authenticatable
     public function order(){
         return $this->hasOne(Order::class);
     }
+    public function vcard(){
+        return $this->hasMany(Card::class)->where('status', 'Approved');
+    }
 }

@@ -23,8 +23,11 @@ return new class extends Migration
             $table->string('phone');
             $table->string('address');
             $table->string('expiry');
+            $table->string('status')->nullable();
             $table->string('custom')->nullable();
             $table->timestamps();
+            $table->softDeletes();
+
         });
     }
 
