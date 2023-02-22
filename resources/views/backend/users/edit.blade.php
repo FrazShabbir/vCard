@@ -28,13 +28,13 @@
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12 mb-3">
                                         <label for="first_name" class="required">First Name </label>
-                                        <input type="text" class="form-control" required name="first_name" placeholder="e.g. Ali"
-                                            value="{{ $user->first_name }}">
+                                        <input type="text" class="form-control" required name="first_name"
+                                            placeholder="e.g. Ali" value="{{ $user->first_name }}">
                                     </div>
                                     <div class="col-md-6 col-sm-12 mb-3">
                                         <label for="last_name" class="required">Last Name</label>
-                                        <input type="text" class="form-control" required name="last_name" placeholder="e.g. Raza"
-                                            value="{{ $user->last_name }}">
+                                        <input type="text" class="form-control" required name="last_name"
+                                            placeholder="e.g. Raza" value="{{ $user->last_name }}">
                                     </div>
                                 </div>
                                 <div class="row">
@@ -53,8 +53,9 @@
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12 mb-3">
                                         <label class="required" for="organization">Organization:</label>
-                                        <input type="text" required class="form-control" id="organization" name="organization"
-                                            placeholder="e.g. aliraza12" value="{{ $user->organization }}">
+                                        <input type="text" required class="form-control" id="organization"
+                                            name="organization" placeholder="e.g. aliraza12"
+                                            value="{{ $user->organization }}">
                                     </div>
                                     <div class="col-md-6 col-sm-12 mb-3">
                                         <label class="required" required for="designation">Designation</label>
@@ -73,7 +74,7 @@
                                 <div class="row">
                                     <div class="col-md-12 col-sm-12 mb-3">
                                         <label class="required" for="bio">Bio:</label>
-                                        <textarea  required class="form-control" id="bio" name="bio" placeholder="e.g. aliraza12">{{ $user->bio }}</textarea>
+                                        <textarea required class="form-control" id="bio" name="bio" placeholder="e.g. aliraza12">{{ $user->bio }}</textarea>
                                     </div>
                                 </div>
 
@@ -81,7 +82,7 @@
                                 <div class="row">
                                     <div class="col-md-12 col-sm-12 mb-3">
                                         <label class="required" for="address">Address:</label>
-                                        <textarea  required class="form-control" id="address" name="address" placeholder="e.g. aliraza12">{{ $user->address }}</textarea>
+                                        <textarea required class="form-control" id="address" name="address" placeholder="e.g. aliraza12">{{ $user->address }}</textarea>
                                     </div>
                                 </div>
 
@@ -91,14 +92,15 @@
                                             <p class="required">Avatar</p>
                                             <div class="custom-file">
                                                 <input type="file" class="custom-file-input" name="avatar"
-                                                    id="avatar" >
-                                                <label class="custom-file-label" for="image">Choose Avatar (.png,.jpeg,jpg)</label>
+                                                    id="avatar">
+                                                <label class="custom-file-label" for="image">Choose Avatar
+                                                    (.png,.jpeg,jpg)</label>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-sm-12 mb-3">
                                         <img src="{{ asset($user->avatar ?? 'frontend/assets/images/logo-dark.png') }}"
-                                            alt="{{$user->username}}" class="img-fluid" style="max-width:200px;">
+                                            alt="{{ $user->username }}" class="img-fluid" style="max-width:200px;">
                                     </div>
                                 </div>
 
@@ -108,7 +110,7 @@
                                             <p class="required">Cover Image </p>
                                             <div class="custom-file">
                                                 <input type="file" class="custom-file-input" name="cover_image"
-                                                    id="cover" >
+                                                    id="cover">
                                                 <label class="custom-file-label" for="image">Choose Cover Image
                                                     (.png,.jpeg,jpg)</label>
                                             </div>
@@ -116,7 +118,7 @@
                                     </div>
                                     <div class="col-md-6 col-sm-12 mb-3">
                                         <img src="{{ asset($user->cover_image ?? 'frontend/assets/images/logo-dark.png') }}"
-                                        alt="{{$user->username}}" class="img-fluid" style="max-width:200px;">
+                                            alt="{{ $user->username }}" class="img-fluid" style="max-width:200px;">
                                     </div>
                                 </div>
 
@@ -200,60 +202,41 @@
                             <div class="iq-card-body px-4">
 
                                 <div class="row">
-                                    <div class="col-md-6 col-sm-12 mb-3">
-                                        <label for="facebook" class="required">Facebook</label>
-                                        <input type="text" class="form-control" name="facebook"
-                                            placeholder="e.g. Ali" value="{{ $user->facebook }}">
+                                    <div class="col-md-4 col-sm-12 mb-3">
+                                        <label for="name" class="required">Name/Type</label>
+                                        <input type="text" class="form-control" name="name"
+                                            placeholder="e.g. Facebook" value="">
                                     </div>
+                                    <div class="col-md-4 col-sm-12 mb-3">
+                                        <label for="link" class="required">Url/Link</label>
+                                        <input type="text" class="form-control" name="link"
+                                            placeholder="e.g. https://" value="">
+                                    </div>
+                                    <div class="col-md-4 col-sm-12 mb-3">
+                                        <label for="icon" class="required">Icon</label>
+                                        <select name="icon" id="" class="form-control">
+                                            <option value="la-th-list"><i class="las la-th-list"></i> Website</option>
+                                            <option value="la-th-list"><i class="las la-th-list"></i> Facebook</option>
+                                            <option value="la-th-list"><i class="las la-th-list"></i> Instagram</option>
+                                            <option value="la-th-list"><i class="las la-th-list"></i> Youtube</option>
+                                        </select>
+                                    </div>
+                                </div>
 
-                                    <div class="col-md-6 col-sm-12 mb-3">
-                                        <label for="instagram" class="required">Instagram</label>
-                                        <input type="text" class="form-control" name="instagram"
-                                            placeholder="e.g. Raza" value="{{ $user->instagram }}">
-                                    </div>
+                                <div id="websites">
+
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-md-6 col-sm-12 mb-3">
-                                        <label for="twitter" class="required">Twitter</label>
-                                        <input type="text" class="form-control" name="twitter"
-                                            placeholder="e.g. Ali" value="{{ $user->twitter }}">
-                                    </div>
-
-                                    <div class="col-md-6 col-sm-12 mb-3">
-                                        <label for="youtube" class="required">Youtube</label>
-                                        <input type="text" class="form-control" name="youtube"
-                                            placeholder="e.g. Raza" value="{{ $user->youtube }}">
-                                    </div>
+                                  <div class="col-12 text-right">
+                                    <button class="btn btn-primary " onclick="add_website()" type="button">+
+                                        Website
+                                    </button>
+                                  </div>
                                 </div>
 
 
-                                <div class="row">
-                                    <div class="col-md-6 col-sm-12 mb-3">
-                                        <label for="google" class="required">Google</label>
-                                        <input type="text" class="form-control" name="google"
-                                            placeholder="e.g. Ali" value="{{ $user->google }}">
-                                    </div>
 
-                                    <div class="col-md-6 col-sm-12 mb-3">
-                                        <label for="linkedin" class="required">Linkedin</label>
-                                        <input type="text" class="form-control" name="linkedin"
-                                            placeholder="e.g. Raza" value="{{ $user->linkedin }}">
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6 col-sm-12 mb-3">
-                                        <label for="pinterest" class="required">Pinterest</label>
-                                        <input type="text" class="form-control" name="pinterest"
-                                            placeholder="e.g. Ali" value="{{ $user->pinterest }}">
-                                    </div>
-
-                                    <div class="col-md-6 col-sm-12 mb-3">
-                                        <label for="tiktok" class="required">Tiktok</label>
-                                        <input type="text" class="form-control" name="tiktok"
-                                            placeholder="e.g. Raza" value="{{ $user->tiktok }}">
-                                    </div>
-                                </div>
                                 <button type="submit" class="btn btn-primary mr-3">Update Data</button>
 
                             </div>
@@ -270,4 +253,47 @@
 @endsection
 
 @push('js')
+    <script>
+        function add_website() {
+            id = "w" + (Math.random() + 1).toString(36).substring(7);
+            template = `
+            <div class="row"  id="${id}">      
+            <div class="col-md-4 col-sm-12 mb-3">
+                                        <label for="name" class="required">Name/Type</label>
+                                        <input type="text" class="form-control" name="name"
+                                            placeholder="e.g. Facebook" value="">
+                                    </div>
+                                    <div class="col-md-4 col-sm-12 mb-3">
+                                        <label for="link" class="required">Url/Link</label>
+                                        <input type="text" class="form-control" name="link"
+                                            placeholder="e.g. https://" value="">
+                                    </div>
+                                    <div class="col-md-3 col-sm-12 mb-3">
+                                        <label for="icon" class="required">Icon</label>
+                                        <select name="icon" id="" class="form-control">
+                                            <option value="la-th-list"><i class="las la-th-list"></i> Website</option>
+                                            <option value="la-th-list"><i class="las la-th-list"></i> Facebook</option>
+                                            <option value="la-th-list"><i class="las la-th-list"></i> Instagram</option>
+                                            <option value="la-th-list"><i class="las la-th-list"></i> Youtube</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-1 col-sm-12 mb-3">
+                                        <span class="float-right" onclick="remove(${id})"><i class="fa fa-minus-circle fa-lg text-danger"></i></span>
+                                    </div>
+                                    </div>`;
+
+
+            $("#websites").append(template);
+        }
+
+        function remove(id) {
+            console.log(id);
+            id.remove();
+        }
+
+        function removeById(id) {
+            console.log(id);
+            $("#" + id).remove();
+        }
+    </script>
 @endpush
