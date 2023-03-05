@@ -130,7 +130,7 @@
 
                                             <tr>
                                                 <td>Name</td>
-                                                <td>{{ $order->user->id }}</td>
+                                                <td>{{ getFullname(auth()->user()->order->user->id) }}</td>
 
                                             </tr>
 

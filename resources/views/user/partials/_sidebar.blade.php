@@ -27,6 +27,11 @@
             </li>
 
 
+            <li class="{{ request()->route()->getName() == 'user.profile'? 'active': '' }}">
+                <a href="{{route('user.profile')}}" class="iq-waves-effect"><i
+                        class="las la-user iq-arrow-left"></i><span>My Profile</span></a>
+            </li>
+            
   
         
 

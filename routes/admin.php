@@ -49,6 +49,7 @@ Route::group(['middleware' => ['role:SuperAdmin','auth'], 'prefix' => 'admin/das
 
 
     Route::get('orders', [OrderController::class, 'index'])->name('order.index');
+  
     Route::get('order/{id}/show', [OrderController::class, 'show'])->name('order.show');
     Route::get('order/{id}/edit', [OrderController::class, 'edit'])->name('order.edit');
     Route::put('order/{id}/update', [OrderController::class, 'update'])->name('order.update');

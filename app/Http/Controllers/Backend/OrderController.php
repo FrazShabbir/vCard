@@ -14,9 +14,12 @@ use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $orders = Order::with('user')->get();
+        $orders = Order::with('user')
+        ->when(!empty(request()->input('status')), function ($q) {
+            return $q->where('status', request()->status);
+        })->get();
         return view('backend.orders.index')
             ->with('orders', $orders);
     }

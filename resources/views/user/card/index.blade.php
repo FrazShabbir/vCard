@@ -17,74 +17,108 @@
                     <div class="iq-card">
                         <div class="iq-card-header d-flex justify-content-between">
                             <div class="iq-header-title">
-                                <h4 class="card-title">My Card  @if (auth()->user()->card) <span class="badge badge-primary">#{{ auth()->user()->vcard[0]->card_number  }} </span> @endif</h4>
+                                <h4 class="card-title">My Card @if (auth()->user()->card)
+                                        <span class="badge badge-primary">#{{ auth()->user()->vcard[0]->card_number }}
+                                        </span>
+                                    @endif
+                                </h4>
                             </div>
                         </div>
                         <div class="iq-card-body px-4">
 
 
 
-                          
-                                <div class="table-responsive">
 
-                                    <table id="user-list-table" class="table table-striped table-bordered mt-4"
-                                        role="grid" aria-describedby="user-list-page-info">
-                                        <thead>
+                            <div class="table-responsive">
+
+                                <table id="user-list-table" class="table table-striped table-bordered mt-4" role="grid"
+                                    aria-describedby="user-list-page-info">
+                                    <thead>
+                                        <tr>
+                                            <th>Key</th>
+                                            <th>Status</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        @if (auth()->user()->card)
                                             <tr>
-                                                <th>Key</th>
-                                                <th>Status</th>
+                                                <td>Card Number</td>
+                                                <td>{{ auth()->user()->vcard[0]->card_number }}</td>
 
                                             </tr>
-                                        </thead>
-                                        <tbody>
-
-                                            @if (auth()->user()->card)
                                             <tr>
-                                            <td>Card Number</td>
-                                            <td>{{ auth()->user()->vcard[0]->card_number  }}</td>
+                                                <td>Card Name</td>
+                                                <td>{{ auth()->user()->vcard[0]->card_name }}</td>
 
-                                        </tr>
-                                        <tr>
-                                            <td>Card Name</td>
-                                            <td>{{ auth()->user()->vcard[0]->card_name  }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Card Email</td>
+                                                <td>{{ auth()->user()->vcard[0]->email }}</td>
 
-                                        </tr>
-                                        <tr>
-                                            <td>Card Email</td>
-                                            <td>{{ auth()->user()->vcard[0]->email  }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Card Phone</td>
+                                                <td>{{ auth()->user()->vcard[0]->phone }}</td>
 
-                                        </tr>
-                                        <tr>
-                                            <td>Card Phone</td>
-                                            <td>{{ auth()->user()->vcard[0]->phone  }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Card Expiry</td>
+                                                <td>{{ auth()->user()->vcard[0]->expiry }}</td>
 
-                                        </tr>
-                                        <tr>
-                                            <td>Card Expiry</td>
-                                            <td>{{ auth()->user()->vcard[0]->expiry  }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Card Status</td>
+                                                <td><span
+                                                        class="badge badge-{{ auth()->user()->vcard[0]->status }}">{{ auth()->user()->vcard[0]->status }}</span>
+                                                </td>
 
-                                        </tr>
-                                        <tr>
-                                            <td>Card Status</td>
-                                            <td><span class="badge badge-{{ auth()->user()->vcard[0]->status  }}">{{ auth()->user()->vcard[0]->status  }}</span></td>
-
-                                        </tr>
-
-                                            @else
-
-                                           
+                                            </tr>
+                                        @else
                                             <tr>
                                                 <td>Card</td>
-                                                <td>{{ auth()->user()->order ? 'Applied' : 'Not Applied' }}</td>
+                                                <td><span class="badge badge-{{ auth()->user()->order ? 'Applied' : 'Not Applied' }}">{{ auth()->user()->order ? 'Applied' : 'Not Applied' }}</span></td>
 
                                             </tr>
-                                            @endif
+                                            
+                                            <tr>
+                                                <td>type</td>
+                                                <td><span class="badge badge-{{ auth()->user()->order->user->type }}">{{ ucfirst(auth()->user()->order->user->type) }}</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Name</td>
+                                                <td>{{ getFullname(auth()->user()->order->user->id) }}</td>
+
+                                            </tr>
+
+                                            <tr>
+                                                <td>Username</td>
+                                                <td>{{ auth()->user()->order->user->username }}</td>
+
+                                            </tr>
 
 
-                                        </tbody>
-                                    </table>
-                                </div>
-                          
+                                            <tr>
+                                                <td>Email</td>
+                                                <td>{{ auth()->user()->order->user->email }}</td>
+
+                                            </tr>
+
+                                            <tr>
+                                                <td>Phone</td>
+                                                <td>{{ auth()->user()->order->user->phone }}</td>
+
+                                            </tr>
+
+
+                                        @endif
+
+
+                                    </tbody>
+                                </table>
+                            </div>
+
 
 
 
@@ -134,7 +168,9 @@
                                             @foreach (auth()->user()->order->comments as $comment)
                                                 <tr>
                                                     <td>{{ $comment->comment }}</td>
-                                                    <td><span class="badge badge-{{ $comment->status }}">{{ $comment->status }}</span></td>
+                                                    <td><span
+                                                            class="badge badge-{{ $comment->status }}">{{ $comment->status }}</span>
+                                                    </td>
                                                     <td>{{ date('Y-m-d H:i:s', strtotime($comment->created_at)) }} </td>
 
                                                 </tr>

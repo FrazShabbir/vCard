@@ -94,10 +94,10 @@
             <ul id="userOrders" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
                
                     <li class="{{ request()->route()->getName() == 'order.index'? 'active': '' }}"><a
-                            href="{{ route('order.index') }}"><i class="las la-plus-circle"></i>New Orders</a></li>
+                            href="{{ route('order.index') }}"><i class="las la-plus-circle"></i>All Orders</a></li>
            
                     <li class="{{ request()->route()->getName() == 'roles.create'? 'active': '' }}"><a
-                            href="{{ route('roles.index') }}"><i class="las la-th-list"></i>All Orders</a></li>
+                            href="{{ route('order.index') }}?status=Pending"><i class="las la-th-list"></i>New Orders</a></li>
        
             </ul>
         </li>

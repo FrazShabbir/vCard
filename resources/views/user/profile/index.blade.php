@@ -125,7 +125,7 @@
                                 <div class="row">
                                     <div class="col-md-12 col-sm-12 mb-3">
                                         <label for="bio">BIO</label>
-                                        <textarea  class="form-control" name="bio" placeholder="e.g. Tell about yourself.">{{ Auth::user()->profile->address }}</textarea>
+                                        <textarea  class="form-control" name="bio" placeholder="e.g. Tell about yourself.">{{ Auth::user()->profile->bio }}</textarea>
                                     </div>
                                   
                                 </div>
@@ -163,9 +163,9 @@
                            </div>
                         </div>
                         <div class="iq-card-body px-4">
-                           <form action="" method="POST" enctype="multipart/form-data">
+                           <form action="{{route('user.profile.save')}}" method="POST" enctype="multipart/form-data">
                             @csrf
-                            {{@method_field('post')}}
+                            {{@method_field('put')}}
                            
         
                              <div class="row">
@@ -173,15 +173,20 @@
                                     <div class="form-group">
                                         <p class="required">Profile Picture</p>
                                         <div class="custom-file">
-                                            <input type="file" class="custom-file-input" name="image"
-                                                id="logo" required>
+                                            <input type="file" class="custom-file-input" name="avatar"
+                                                id="data_image_1" required>
                                             <label class="custom-file-label" for="image">Choose Profile Picture
                                                 (.png,.jpeg,jpg)</label>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-6 col-sm-12 mb-3">
-                                    <img src="{{asset(auth()->user()->avatar)}}" alt="Avatar" class="img-fluid" style="max-width: 200px">
+                                    {{-- <img src="{{asset(auth()->user()->avatar)}}" alt="Avatar" class="img-fluid" style="max-width: 200px"> --}}
+                                
+                                    <img id="uploadedImage_data_image_1" class="img-preview img_modal width_400 img-fluid"
+                                    src="{{asset(auth()->user()->avatar)}}"
+                                    alt="" accept="image/png, image/jpeg" >
+
                                 </div>
                             
                             </div>
@@ -193,8 +198,8 @@
                                     <div class="form-group">
                                         <p class="required">Profile Banner</p>
                                         <div class="custom-file">
-                                            <input type="file" class="custom-file-input" name="image"
-                                                id="data_image" required >
+                                            <input type="file" class="custom-file-input" name="cover_image"
+                                                id="data_image" >
                                             <label class="custom-file-label" for="image">Choose Profile Banner
                                                 (.png,.jpeg,jpg)</label>
                                         </div>
@@ -246,6 +251,21 @@
             });
         }
     });
+
+
+    document.getElementById('data_image_1').addEventListener('change', function() {
+        if (this.files[0]) {
+            var picture = new FileReader();
+            picture.readAsDataURL(this.files[0]);
+            picture.addEventListener('load', function(event) {
+                document.getElementById('uploadedImage_data_image_1').setAttribute('src',
+                    event.target.result);
+                document.getElementById('uploadedImage_data_image_1').style.display =
+                    'block';
+            });
+        }
+    });
+
 </script>
 
 @endpush
