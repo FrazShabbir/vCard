@@ -32,11 +32,10 @@ justify-content-start
                 </div>
                 <div class="col-12 col-lg-7 col-xl-6 order-lg-1">
                     <h1 class="display-4 mb-3">
-                        vCards Your App <span class="font-w-7">Better & Faster</span>
+                        vCard <span class="font-w-7">Better & Faster</span>
                     </h1>
                     <!-- Text -->
-                    <p class="lead text-muted mb-4">We use the latest technologies it voluptatem accusantium doloremque
-                        laudantium. Build a Beautiful, Clean & Modern Design website with flexible Bootstrap components.</p>
+                    <p class="lead text-muted mb-4">In today's digital age, it's essential to have a professional online presence that stands out. A vCard is a convenient and effective way to showcase your contact information, work experience, and professional achievements to potential clients or employers.</p>
                     <!-- Buttons -->
                     <a href="#" class="btn btn-sm btn-primary text-start me-1"> <i
                             class="la la-apple me-2 ic-2x d-inline-block"></i>
@@ -71,17 +70,17 @@ justify-content-start
                     <div class="row align-items-center">
                         <div class="col-12 col-sm-4">
                             <div class="counter">
-                                <div class="counter-desc"> <span class="count-number h2 text-primary" data-to="50"
-                                        data-speed="2000">50</span>
+                                <div class="counter-desc"> <span class="count-number h2 text-primary" data-to="500"
+                                        data-speed="2000">500</span>
                                     <span class="h2 text-primary">+</span>
-                                    <h6 class="text-muted mb-0">Support Member</h6>
+                                    <h6 class="text-muted mb-0">Members</h6>
                                 </div>
                             </div>
                         </div>
                         <div class="col-12 col-sm-4 mt-2 mt-sm-0">
                             <div class="counter">
-                                <div class="counter-desc"> <span class="count-number h2 text-primary" data-to="99"
-                                        data-speed="2000">99</span>
+                                <div class="counter-desc"> <span class="count-number h2 text-primary" data-to="900"
+                                        data-speed="2000">900</span>
                                     <span class="h2 text-primary">+</span>
                                     <h6 class="text-muted mb-0">People Love Us</h6>
                                 </div>
@@ -89,8 +88,8 @@ justify-content-start
                         </div>
                         <div class="col-12 col-sm-4 mt-2 mt-sm-0">
                             <div class="counter">
-                                <div class="counter-desc"> <span class="count-number h2 text-primary" data-to="120"
-                                        data-speed="2000">120</span>
+                                <div class="counter-desc"> <span class="count-number h2 text-primary" data-to="500"
+                                        data-speed="2000">500</span>
                                     <span class="h2 text-primary">+</span>
                                     <h6 class="text-muted mb-0">Happy Customers</h6>
                                 </div>
@@ -154,15 +153,23 @@ justify-content-start
                                 <div class="me-3"> <span class="list-dot" data-bg-color="#7550E5"
                                         style="background-color: rgb(1, 164, 121);"></span>
                                 </div>
-                                <p class="mb-0">Fast Performance technologies it voluptatem</p>
+                                <p class="mb-0"><span class="text-primary">NFC-powered:</span> <small>With an NFC-enabled vCard, you can instantly share your contact information with others simply by tapping your smartphone or device against theirs.</small></p>
                             </div>
                         </div>
                         <div class="mb-3">
                             <div class="d-flex align-items-start">
-                                <div class="me-3"> <span class="list-dot" data-bg-color="#2f2f41"
-                                        style="background-color: rgb(47, 47, 65);"></span>
+                                <div class="me-3"> <span class="list-dot" data-bg-color="#7550E5"
+                                        style="background-color: rgb(1, 164, 121);"></span>
                                 </div>
-                                <p class="mb-0">Quick Access For Build With Static Bootstarp Code</p>
+                                <p class="mb-0"> <span class="text-primary">Customizable:</span> <small>You can personalize your vCard by adding your photo, job title, social media links, and other relevant information.</small></p>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="d-flex align-items-start">
+                                <div class="me-3"> <span class="list-dot" data-bg-color="#7550E5"
+                                        style="background-color: rgb(1, 164, 121);"></span>
+                                </div>
+                                <p class="mb-0"> <span class="text-primary">Easy to update:</span> <small>If your contact information changes, you can quickly update your vCard without having to reprint physical business cards.</small></p>
                             </div>
                         </div>
                         <div>
@@ -170,7 +177,7 @@ justify-content-start
                                 <div class="me-3"> <span class="list-dot" data-bg-color="#7550E5"
                                         style="background-color: rgb(1, 164, 121);"></span>
                                 </div>
-                                <p class="mb-0">Easy to Manage Your All Data access to development</p>
+                                <p class="mb-0"><span class="text-primary">Eco-friendly:</span> <small>By using a digital vCard with NFC, you're reducing waste and helping the environment.</small></p>
                             </div>
                         </div>
                     </div>
@@ -196,16 +203,15 @@ justify-content-start
                     <div class="card border-0 bg-transparent">
                         <div class="card-body p-0"> <i
                                 class="las la-quote-left ic-2x text-white bg-primary rounded-circle p-1"></i>
-                            <p class="font-w-5 lead my-3 text-light">vCards Amazing Landing Page All-in-one, clean code,
-                                Crative &amp; Modern design Professional Recommended crofessional and great experience.</p>
+                            <p class="font-w-5 lead my-3 text-light">I was blown away by vCards's NFC-enabled vCard. Not only was it incredibly easy to share my contact information with others, but it also made me stand out in a sea of traditional business cards. Highly recommend!</p>
                             <div class="d-flex align-items-center">
                                 <div>
                                     <img alt="Image" src="{{ asset('frontend/assets/images/testimonial/01.jpg') }}"
                                         class="img-fluid rounded-circle">
                                 </div>
                                 <div class="ms-3">
-                                    <h5 class="text-primary mb-0">Raymond Lee</h5>
-                                    <small class="text-muted fst-italic">- Founder</small>
+                                    <h5 class="text-primary mb-0">Sara</h5>
+                                    <small class="text-muted fst-italic">- Member</small>
                                 </div>
                             </div>
                         </div>
@@ -215,8 +221,7 @@ justify-content-start
                     <div class="card border-0 bg-transparent">
                         <div class="card-body p-0"> <i
                                 class="las la-quote-left ic-2x text-white bg-primary rounded-circle p-1"></i>
-                            <p class="font-w-5 lead my-3 text-light">vCards Amazing Landing Page All-in-one, clean code,
-                                Crative &amp; Modern design Professional Recommended crofessional and great experience.</p>
+                            <p class="font-w-5 lead my-3 text-light">As someone who attends a lot of networking events, I've seen my fair share of business cards. But vCards's NFC-enabled vCard is truly next-level. It's convenient, eco-friendly, and professional. I won't be going back to traditional business cards anytime soon!</p>
                             <div class="d-flex align-items-center">
                                 <div>
                                     <img alt="Image" src="{{ asset('frontend/assets/images/testimonial/02.jpg') }}"
@@ -224,7 +229,7 @@ justify-content-start
                                 </div>
                                 <div class="ms-3">
                                     <h5 class="text-primary mb-0">Dani Karie</h5>
-                                    <small class="text-muted fst-italic">- Supervisor</small>
+                                    <small class="text-muted fst-italic">- Member</small>
                                 </div>
                             </div>
                         </div>
@@ -232,8 +237,7 @@ justify-content-start
                     <div class="card border-0 bg-transparent mt-5">
                         <div class="card-body p-0"> <i
                                 class="las la-quote-left ic-2x text-white bg-primary rounded-circle p-1"></i>
-                            <p class="font-w-5 lead my-3 text-light">vCards Amazing Landing Page All-in-one, clean code,
-                                Crative &amp; Modern design Professional Recommended crofessional and great experience.</p>
+                            <p class="font-w-5 lead my-3 text-light">I'm so glad I decided to go with vCard's NFC-enabled vCard. It's not only a convenient way to share my contact information, but it also aligns with my values of sustainability and reducing waste. The fact that it's customizable is just icing on the cake. Highly recommend!</p>
                             <div class="d-flex align-items-center">
                                 <div>
                                     <img alt="Image" src="{{ asset('frontend/assets/images/testimonial/03.jpg') }}"
@@ -241,7 +245,7 @@ justify-content-start
                                 </div>
                                 <div class="ms-3">
                                     <h5 class="text-primary mb-0">Karlo Bond</h5>
-                                    <small class="text-muted fst-italic">- Manager</small>
+                                    <small class="text-muted fst-italic">- Member</small>
                                 </div>
                             </div>
                         </div>
