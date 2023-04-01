@@ -33,7 +33,7 @@
                 </div>
              </div>
           </div>
-          @if (auth()->user()->vcard)
+          @if (isset(auth()->user()->vcard[0]->card_number))
              
          
           <div class="col-sm-6 col-md-6 col-lg-3">
