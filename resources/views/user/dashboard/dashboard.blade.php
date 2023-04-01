@@ -78,7 +78,7 @@
              
                   <p class="text-secondary">My QR</p>
                   <div class="d-flex align-items-center justify-content-between text-center">
-                     {!! QrCode::eye('circle')->size(200)->generate(env('APP_URL').auth()->user()->username); !!}
+                     {!! QrCode::eye('circle')->size(200)->generate(route('home').auth()->user()->username); !!}
                   </div>
                </div>
             </div>
