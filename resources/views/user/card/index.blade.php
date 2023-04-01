@@ -84,7 +84,7 @@
                                             
                                             <tr>
                                                 <td>type</td>
-                                                <td><span class="badge badge-{{ auth()->user()->type }}">{{ ucfirst(auth()->user()->order->user->type) }}</span></td>
+                                                <td><span class="badge badge-{{ auth()->user()->type }}">{{ ucfirst(auth()->user()->type) }}</span></td>
                                             </tr>
                                             <tr>
                                                 <td>Name</td>
