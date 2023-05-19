@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use DB;
 use App\Models\OrderStatus;
 use App\Models\Card;
+use App\Models\User;
 use App\Models\CardRenew;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -27,8 +28,10 @@ class OrderController extends Controller
     public function show($id)
     {
         $order = Order::with('user')->find($id);
+        $user = User::find($order->user_id);
         return view('backend.orders.show')
-            ->with('order', $order);
+            ->with('order', $order)
+            ->with('user', $user);
     }
 
     public function edit($id)
