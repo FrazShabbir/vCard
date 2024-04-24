@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Device;
 use App\Models\Geolocation;
 use App\Models\User;
+use App\Models\Profile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -39,18 +40,18 @@ class HomeController extends Controller
 
     public function slug(Request $request, $slug)
     {
-        $profile = User::where('username', $slug)->first();
-        if ($profile) {
+        $user = User::where('username', $slug)->first();
+        $profile = Profile::where('user_id', $user->id)->first();
+        if ($user) {
             try {
                 DB::beginTransaction();
                 if (env('APP_ENV') == 'local') {
                     $location_info = Location::get('182.185.236.113');
-                    // 103.137.70.14
                 } else {
                     $location_info = Location::get($request->ip());
                 }
                 if ($location_info != null) {
-                    $findIP = Geolocation::where('user_id', $profile->id)->where('ip_address', $request->ip())->first();
+                    $findIP = Geolocation::where('user_id', $user->id)->where('ip_address', $request->ip())->first();
 
                     if ($findIP) {
                         $location_id = $findIP->id;
@@ -58,7 +59,7 @@ class HomeController extends Controller
                     if (!$findIP) {
 
                         $location = Geolocation::create([
-                            'user_id' => $profile->id,
+                            'user_id' => $user->id,
                             'ip_address' => $request->ip(),
                             'countryName' => $location_info->countryName,
                             'countryCode' => $location_info->countryCode,
@@ -83,7 +84,7 @@ class HomeController extends Controller
                     }
 
                 }
-                $findDevice = Device::where('user_id', $profile->id)->where('ip_address', $request->ip())->where('geolocation_id', $location_id)->where('device', Agent::device())->where('platform', Agent::platform())->first();
+                $findDevice = Device::where('user_id', $user->id)->where('ip_address', $request->ip())->where('geolocation_id', $location_id)->where('device', Agent::device())->where('platform', Agent::platform())->first();
                 if (!$findDevice) {
 
                     $deviceType = 'other';
@@ -97,12 +98,9 @@ class HomeController extends Controller
                         $deviceType = 'Other';
                     }
 
-                    // $is_desktop =Agent::isDesktop();
-                    // $is_tablet =Agent::isTablet();
-                    // $is_phone =Agent::isPhone();
 
                     $device = Device::create([
-                        'user_id' => $profile->id,
+                        'user_id' => $user->id,
                         'geolocation_id' => $location_id,
                         'ip_address' => $request->ip(),
                         'device' => Agent::device(),
@@ -113,16 +111,17 @@ class HomeController extends Controller
                         'browser_version' => Agent::version(Agent::browser()),
                     ]);
 
-                    $profile->reach = $profile->reach + 1;
-                    $profile->save();
+                    $user->reach = $user->reach + 1;
+                    $user->save();
                 }
 
-                $profile->count = $profile->count + 1;
-                $profile->save();
+                $user->count = $user->count + 1;
+                $user->save();
                 DB::commit();
                 return view('frontend.pages.cards.index')
-                    ->with('profile', $profile)
-                    ->with('extra_class', 'd-none');
+                ->with('user', $user)
+                ->with('profile', $profile)
+                ->with('extra_class', 'd-none');
             } catch (\Throwable$th) {
                 DB::rollback();
                 throw $th;
@@ -142,13 +141,14 @@ class HomeController extends Controller
 
     public function profileEdit($slug)
     {
-        $profile = User::where('username', $slug)->first();
-
-        if ($profile) {
+        $user = User::where('username', $slug)->first();
+        $profile = Profile::where('user_id', $user->id)->first();
+        if ($user) {
             if ($profile->username == auth()->user()->username) {
                 return view('frontend.pages.edit_info')
-                    ->with('profile', $profile)
-                    ->with('extra_class', 'd-none');
+                ->with('user', $user)
+                ->with('profile', $profile)
+                ->with('extra_class', 'd-none');
             } else {
                 return abort(403);
             }

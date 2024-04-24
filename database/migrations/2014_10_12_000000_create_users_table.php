@@ -17,14 +17,12 @@ return new class extends Migration
             $table->id();
             $table->string('first_name');
             $table->string('last_name');
-            $table->string('username')->unique(); 
+            $table->string('username')->unique();
             $table->string('email')->unique();
             $table->string('phone')->nullable();
             $table->integer('reach')->unsigned()->default(0);
             $table->integer('count')->unsigned()->default(0);
-
             $table->enum('type',['personal','business'])->default('personal');
-            $table->string('avatar')->default('uploads/avatars/default.png');
             $table->boolean('status')->nullable()->default(1);
             $table->boolean('terms')->nullable()->default(1);
             $table->date('expiry')->nullable();

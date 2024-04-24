@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="{{asset('asset/css/style.css')}}">
     <link rel="stylesheet" href="{{asset('asset/css/responsive.css')}}">
 </head>
-
+{{-- @dd($user) --}}
 <body>
     <div class="body-wrapper">
         <header class="py-3">
@@ -57,40 +57,43 @@
         <div class="user-detail-main-div">
             <div class="text-center">
                 <h1 class="pb-2">
-                    {{ getFullNameById($profile->id) }}
+                    {{ getFullNameById($user->id) }}
                 </h1>
-                <div class="mb-3">
+                {{-- <div class="mb-3">
                     <span class="badge me-2 mb-2">
-                        Owner
+                        {{ $user->organization }}
                     </span>
                     <span class="badge me-2 mb-2">
                         Creator
                     </span>
-                </div>
+                </div> --}}
+                @if ($profile->organization || $profile->designation)
                 <p>
-                  {{ $profile->organization }} | {{ $profile->designation }}
-                </p>
+                    {{ $profile->organization }}  @if ($profile->designation) | {{ $profile->designation }} @endif
+                  </p>
+                @endif
+
             </div>
             <div class="address-div text-center">
                 <address class="px-2">
-                    2502 N. Clark St, Suite #240, Chicago, IL 60614
+                    {{ $profile->address ??'-'}}
                 </address>
                 <p>
                     {{ $profile->bio }}
                 </p>
             </div>
             <div class="px-5 mb-4 pt-5 pb-5">
-                <a href="{{ route('downloadVCard', $profile->username) }}" class="btn btn-primary w-100">
+                <a href="{{ route('downloadVCard', $user->username) }}" class="btn btn-primary w-100">
                     <i class="far fa-cloud-download me-2"></i> Save Contact
                 </a>
             </div>
             <div class="container-fluid">
                 <div class="row">
-                    @if ($profile->phone)
+                    @if ($user->phone)
                     <div class="col-6">
                         <div class="">
                             <div class="text-center mb-5">
-                                <a class="action-buttons mb-4" href="tel:{{$profile->phone}}">
+                                <a class="action-buttons mb-4" href="tel:{{$user->phone}}">
                                     <i class="far fa-phone-alt"></i>
                                 </a>
                             </div>
@@ -106,11 +109,11 @@
                             </div>
                         </div>
                     </div> --}}
-                    @if ($profile->email)
+                    @if ($user->email)
                     <div class="col-6">
                         <div class="">
                             <div class="text-center mb-5">
-                                <a class="action-buttons mb-4" href="mailto:{{$profile->email}}">
+                                <a class="action-buttons mb-4" href="mailto:{{$user->email}}" title="Email">
                                     <i class="far fa-envelope"></i>
                                 </a>
                             </div>
@@ -145,39 +148,39 @@
             </h2>
             <div>
                 <ul>
-                    @if ($profile->facebook)
+                    @if ($user->facebook)
                     <li>
-                        <a href="{{ $profile->facebook }}">
+                        <a href="{{ $user->facebook }}">
                             <i class="fab fa-facebook-f"></i>
                         </a>
                     </li>
                     @endif
-                    @if ($profile->instagram)
+                    @if ($user->instagram)
 
                     <li>
-                        <a href="{{ $profile->instagram }}">
+                        <a href="{{ $user->instagram }}">
                             <i class="fab fa-instagram"></i>
                         </a>
                     </li>
                     @endif
-                    @if ($profile->linkedin)
+                    @if ($user->linkedin)
 
                     <li>
-                        <a href="{{ $profile->linkedin }}">
+                        <a href="{{ $user->linkedin }}">
                             <i class="fab fa-linkedin-in"></i>
                         </a>
                     </li>
                     @endif
-                    @if ($profile->twitter)
+                    @if ($user->twitter)
                     <li>
-                        <a href="{{ $profile->twitter }}">
+                        <a href="{{ $user->twitter }}">
                             <i class="fab fa-twitter"></i>
                         </a>
                     </li>
                     @endif
-                    @if ($profile->phone)
+                    @if ($user->phone)
                     <li>
-                        <a href="{{$profile->phone}}">
+                        <a href="{{$user->phone}}">
                             <i class="fab fa-whatsapp"></i>
                         </a>
                     </li>

@@ -63,7 +63,7 @@ class ProfileController extends Controller
                 $filename = getRandomString() . '-' . time() . '.' . $extension;
                 $file->move('uploads/avatars', $filename);
                 $path = 'uploads/avatars/' . $filename;
-                $user->avatar = $path;
+                $profile->avatar = $path;
             }
 
             if ($request->cover_image) {
