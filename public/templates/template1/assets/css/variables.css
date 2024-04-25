@@ -1,0 +1,17 @@
+:root{
+    --white: #fff;
+    --black: #000;
+    --primary: #F7941D;
+    --green: #00A651;
+    --blue: #61ABFC;
+    --heading-text: #152f2e;
+    --purple: #B068AA;
+    /* --primary: #B3C182; */
+    --primary-green: #2D7C53;
+    --secondary: #65B741;
+    --light-secondary: #C1F2B0;
+    /* --palate-gray: #FBF6EE; */
+    --palate-gray: #fff;
+    --text: #3C3C3C;
+    --light-text: #485450;
+}

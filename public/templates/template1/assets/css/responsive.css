@@ -1,0 +1,421 @@
+@media only screen and (max-width: 1200px){
+    
+}
+@media only screen and (min-width: 992px){
+    #plan-detail-modal .modal-dialog{
+        max-width: 1000px;
+    }
+    #google-rating-modal .modal-dialog{
+        max-width: 1000px;
+    }
+}
+@media only screen and (max-width: 992px){
+    .main-nav .navbar{
+        padding: 10px 0;
+    }
+    #plan-detail-modal .modal-dialog{
+        max-width: 768px;
+    }
+    #google-rating-modal .modal-dialog{
+        max-width: 768px;
+    }
+}
+@media only screen and (max-width: 768px){
+    .meal-plan-card{
+        display: block;
+        padding: 10px;
+        text-align: center;
+    }
+    .meal-plan-card .img-box{
+        width: 100%;
+        border-radius: 10px;
+    }
+    .meal-plan-card .img-box img{
+        border-radius: 10px;
+        height: 100px;
+    }
+    .meal-plan-card .content-box{
+        width: 100%;
+        padding: 10px 0 0 0;
+    }
+    .meal-plan-card .content-box .title{
+        font-size: 20px;
+        height: auto;
+        margin-bottom: 3px;
+    }
+    .meal-plan-card .content-box .title br{
+        display: none;
+    }
+    .meal-plan-card .content-box .price-box{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 5px;
+    }
+    .meal-plan-card .content-box .price-box .price{
+        font-size: 16px;
+        margin-bottom: 0;
+        margin-right: 3px;
+    }
+    .meal-plan-card .content-box .price-box .price-day{
+        font-size: 12px;
+        margin-bottom: 0;
+        margin-left: 3px;
+    }
+    .meal-plan-card.orange .content-box .btn{
+        font-size: 12px;
+        text-align: center;
+        display: block;
+    }
+    .meal-plan-card.green .content-box .btn{
+        font-size: 12px;
+        text-align: center;
+        display: block;
+    }
+    .not-sure-banner-box .img-box img{
+        /* display: none; */
+        position: absolute;
+        bottom: unset;
+        top: -120px;
+        left: 30px;
+    }
+    .not-sure-banner-box{
+        border-radius: 10px 150px 10px 10px;
+        padding-left: 20px;
+        padding-top: 200px;
+        margin-top: 100px;
+    }
+    .section-heading h2{
+        font-size: 20px;
+    }
+    .section-heading p{
+        font-size: 12px;
+        margin-top: 15px;
+    }
+    .not-sure-banner-box .content-box h2{
+        font-size: 25px;
+    }
+    .not-sure-banner-box .content-box a{
+        font-size: 16px;
+    }
+    .not-sure-sec{
+        padding-top: 70px;
+    }
+    .meal-of-day-item {
+        padding: 10px 15px;
+    }
+    .meal-of-day-item img{
+        width: 100%!important;
+    }
+    .meal-of-the-day{
+        padding: 50px 0;
+    }
+    .meal-plan-section{
+        padding: 10px 0 40px 0;
+    }
+    .how-it-works-heading-box{
+        background-color: transparent;
+        padding: 0;
+    }
+    .how-it-works-heading-box h2{
+        text-align: center;
+        font-size: 20px;
+        margin-bottom: 10px;
+    }
+    .how-it-works-heading-box p{
+        text-align: center;
+        font-size: 12px;
+        width: 80%;
+        margin: 0 auto;
+        margin-bottom: 30px;
+    }
+    .how-it-works-heading-box .green-btn{
+        display: none;
+    }
+    .how-it-works-item .title{
+        font-size: 16px;
+    }
+    .how-it-works-item .desc{
+        font-size: 12px;
+        height: 95px;
+    }
+    .how-it-works-item{
+        border-radius: 10px;
+        padding: 20px 10px;
+        text-align: center;
+    }
+    .main-banner-slide.one{
+        /* background-image: linear-gradient(rgba(0, 166, 80, 0.6), rgba(0, 166, 80, 0.6)), url('../images/banner-1.jpg'); */
+        background-image: linear-gradient(rgba(0, 84, 41, 0.6), rgba(0, 84, 41, 0.6)), url('../images/banner-1.jpg');
+        background-size: cover;
+        background-position: center center;
+        background-repeat: no-repeat;
+        border-radius: 20px;
+    }
+    .main-banner-slide.two{
+        /* background-image: linear-gradient(rgba(0, 166, 80, 0.6), rgba(0, 166, 80, 0.6)), url('../images/banner-1.jpg'); */
+        background-image: linear-gradient(rgba(0, 84, 41, 0.6), rgba(0, 84, 41, 0.6)), url('../images/banner-0.jpg');
+        background-size: cover;
+        background-position: center center;
+        background-repeat: no-repeat;
+        border-radius: 20px;
+    }
+    .banner-content-box{
+        text-align: center;
+        padding: 20px 15px;
+        position: relative;
+        top: 50px;
+    }
+    .banner-content-box h1{
+        font-size: 30px;
+        color: var(--white);
+    }
+    .banner-content-box .desc{
+        font-size: 12px;
+        color: var(--white);
+        font-weight: 400;
+    }
+    .banner-content-box .desc .text-green{
+        color: var(--white)!important;
+    }
+    .main-banner-slide .img-box{
+        display: none;
+    }
+    #main-banner-carousel .owl-dots{
+        position: relative;
+        bottom: unset;
+        margin-bottom: 30px;
+    }
+    .meal-plan-card .content-box .btn{
+        width: 100%;
+    }
+    .faq-sec{
+        padding-top: 0;
+    }
+    .faq-category-box{
+        margin-bottom: 30px;
+        display: none;
+    }
+    .faq-accodain-box .accordion-button{
+        font-size: 13px;
+    }
+    .faq-accodain-box .accordion-body p{
+        font-size: 12px;
+    }
+    /* Subscription */
+    .step-heading{
+        font-size: 20px;
+    }
+    .prefrence-card{
+        height: 130px;
+        margin-bottom: 20px;
+    }
+    .check-box{
+        margin-bottom: 20px;
+    }
+    .personalize-side .step{
+        padding-bottom: 30px;
+    }
+    .side-detail{
+        margin-bottom: 40px;
+    }
+    .prefrence-card-box.desktop{
+        display: none;
+    }
+    .prefrence-card-box.mobile{
+        display: block;
+    }
+    .side-detail .content-box .green-outline-btn{
+        display: block;
+        text-align: center;
+        font-size: 16px;
+    }
+    .faq-sec.personalize{
+        padding-top: 50px;
+    }
+    .main-personalize-sec .side-detail .content-box h2{
+        font-size: 20px;
+    }
+    .main-personalize-sec .side-detail .content-box p{
+        font-size: 14px;
+    }
+    .check-box .check-item .title{
+        font-size: 15px;
+    }
+    .check-box .check-item .desc{
+        font-size: 12px;
+    }
+    .paln-detail-modal-box{
+        padding: 0 0 20px 0;
+    }
+    .label-box p{
+        font-size: 12px;
+    }
+    .paln-detail-modal-box .content-box h2{
+        font-size: 20px;
+        margin-bottom: 10px;
+    }
+    .paln-detail-modal-box .content-box .desc{
+        font-size: 12px;
+    }
+    .included-meal-item .content-box .title{
+        transform: translateY(0);
+        margin-top: 5px;
+    }
+    .included-meal-item .content-box .title{
+        font-size: 0px;
+    }
+    .wizard-steps .title{
+        font-size: 16px;
+    }
+    .wizard-steps .line span{
+        width: 20px;
+        margin-top: 0;
+    }
+    .wizard-steps .title .number{
+        width: 30px;
+        height: 30px;
+        border-radius: 5px;
+        margin: 0;
+        font-size: 16px;
+    }
+    .wizard-steps .title .text{
+        display: none;
+    }
+    .wizard-steps .line{
+        margin-left: 10px;
+    }
+    .wizard-steps.active .title .number{
+        background-color: var(--green);
+    }
+    .input-group.margin{
+        margin-bottom: 20px;
+    }
+    .input-group .input{
+        padding: 10px 10px;
+    }
+    .input-group .user-label{
+        top: -5px;
+        font-size: 14px;
+    }
+    .input-group input:focus + .user-label{
+        top: 0px;
+    }
+    .contact-info{
+        margin-bottom: 20px;
+    }
+    .checkout-left-side{
+        margin-bottom: 20px;
+    }
+    .end-btn-desktop{
+        display: none;
+    }
+    .end-btn-mobile{
+        margin-top: 30px;
+        display: block;
+    }
+    .checkout-box .heading{
+        font-size: 25px;
+    }
+    /* End Subscription */
+
+    .easy-sec .img-box img{
+        margin-bottom: 30px;
+    }
+    .easy-accordian-box .accordion-body .text{
+        font-size: 12px;
+    }
+    .trainer-banner-box .content-box{
+        text-align: end;
+    }
+    .trainer-banner-box .content-box h2{
+        font-size: 25px;
+    }
+    .trainer-banner-box{
+        padding-top: 200px;
+    }
+    .trainer-banner-box .img-box img{
+        top: -120px;
+        right: 30px;
+        left: unset;
+    }
+    .trainer-banner-box .content-box a{
+        font-size: 16px;
+        padding: 6px 15px;
+    }
+    .competitive-sec .img-box img{
+        width: 70%;
+        height: auto;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 30px;
+    }
+    .competitive-slider-item .img-box img{
+        width: 100%;
+        height: auto;
+        margin-bottom: 0;
+    }
+    .competitive-slider-item .content-box .title{
+        font-size: 16px;
+    }
+    .competitive-slider-item .content-box .desc{
+        font-size: 12px;
+    }
+    #competitive-carsoule .owl-dots{
+        margin-top: 20px;
+    }
+    .blog-card .content-box .title{
+        font-size: 16px;
+    }
+    .blog-card .content-box{
+        min-height: auto;
+    }
+    .footer-top .title{
+        margin-bottom: 30px;
+        font-size: 18px;
+        text-align: center;
+    }
+    .footer-top .button-box{
+        text-align: center;
+        margin-bottom: 10px;
+    }
+    .footer-top .button-box .light-green-btn{
+        font-size: 16px;
+    }
+    .footer-main .logo-box{
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    .footer-main .social-box ul{
+        justify-content: center;
+        margin-bottom: 20px;
+    }
+    .footer-main .link-box ul{
+        justify-content: center;
+        margin-bottom: 20px;
+    }
+    .footer-main .contact-box ul{
+        justify-content: center;
+        margin-bottom: 0px;
+    }
+    .footer-bottom .we-accept img{
+        width: 100px;
+    }
+    .footer-main{
+        padding-bottom: 50px;
+    }
+    .google-rating-card{
+        margin-top: 75px;
+    }
+    .google-rating-modal-box{
+        padding: 20px 10px;
+    }
+}
+@media only screen and (max-width: 576px){
+   
+}
+@media only screen and (max-width: 400px){
+    
+}

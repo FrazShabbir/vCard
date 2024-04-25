@@ -118,6 +118,11 @@ class HomeController extends Controller
                 $user->count = $user->count + 1;
                 $user->save();
                 DB::commit();
+                return view('frontend.pages.cards.templates.template1')
+                ->with('user', $user)
+                ->with('profile', $profile)
+                ->with('extra_class', 'd-none');
+
                 return view('frontend.pages.cards.index')
                 ->with('user', $user)
                 ->with('profile', $profile)
