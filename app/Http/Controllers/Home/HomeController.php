@@ -41,9 +41,10 @@ class HomeController extends Controller
     public function slug(Request $request, $slug)
     {
         $user = User::where('username', $slug)->first();
-        $profile = Profile::where('user_id', $user->id)->first();
+
         if ($user) {
             try {
+                $profile = Profile::where('user_id', $user->id)->first();
                 DB::beginTransaction();
                 if (env('APP_ENV') == 'local') {
                     $location_info = Location::get('182.185.236.113');
