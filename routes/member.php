@@ -32,10 +32,14 @@ Route::group(['middleware' => ['role:Member', 'auth'], 'prefix' => 'auth/member'
     Route::put('my-card/save', [CardController::class, 'update'])->name('user.card.save');
     Route::post('place-order', [CardController::class, 'placeOrder'])->name('order.place');
 
-    Route::group(['prefix' => 'auth/member/shop'], function () {
+    Route::group(['prefix' => '/shop'], function () {
         Route::get('/', [ShopController::class, 'index'])->name('user.shop');
         Route::post('/store', [ShopController::class, 'store'])->name('user.shop.store');
         Route::post('/store/{slug}', [ShopController::class, 'update'])->name('user.shop.update');
+
+        Route::group(['prefix' => '/product'], function () {
+            Route::post('/store', [ShopController::class, 'storeProduct'])->name('user.product.store');
+        });
 
     });
 

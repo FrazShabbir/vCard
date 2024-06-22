@@ -1,10 +1,12 @@
 <?php
 
 use App\Models\GeneralSetting;
+use App\Models\Shop;
 use App\Models\Slide;
 use App\Models\User;
-use App\Models\Shop;
+use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
+
 
 if (!function_exists('fromSettings')) {
     function fromSettings(string $key, $alternative = null)
@@ -165,13 +167,26 @@ if (!function_exists('getShopCode')) {
     function getShopCode($name)
     {
 
-        $name = str_replace(' ', '-', $name);
+        $name = strtolower(str_replace(' ', '-', $name));
 
         $shop = Shop::where('slug', $name)->first();
         if ($shop) {
             $name = $name . '-' . generateAlphaNumeric();
         }
-        return $name.'-' . generateAlphaNumeric();
+        return $name . '-' . generateAlphaNumeric();
+    }
+
+}
+
+if (!function_exists('getProductCode')) {
+    function getProductCode($name)
+    {
+
+        $name = strtolower(str_replace(' ', '-', $name));
+
+        $name = $name . '-' . date('Ymdhis');
+        return $name;
+
     }
 
 }

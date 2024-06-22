@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Member;
 
 use App\Http\Controllers\Controller;
 use App\Models\Shop;
+use App\Models\Product;
 use Illuminate\Http\Request;
+
 
 class ShopController extends Controller
 {
@@ -55,5 +57,24 @@ class ShopController extends Controller
         $shop->website = $request->website;
         $shop->save();
         return redirect()->back()->with('success', 'Shop created successfully');
+    }
+    public function storeProduct(Request $request){
+        $request->validate([
+            'name' => 'required',
+            'original_price' => 'required',
+            'sale_price' => 'nullable',
+            'description' => 'required',
+            'image' => 'nullable',
+        ]);
+        $product = new Product();
+        $product->name = $request->name;
+        $product->slug = getProductCode($request->name);
+        $product->shop_id = auth()->user()->shop->id;
+        $product->original_price = $request->original_price;
+        $product->sale_price = $request->sale_price;
+        $product->description = $request->description;
+        // $product->image = $request->image;
+        $product->save();
+        return redirect()->back()->with('success', 'Product created successfully');
     }
 }
