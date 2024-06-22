@@ -20,7 +20,6 @@ class HomeController extends Controller
 {
     public function index()
     {
-
         return view('frontend.pages.index');
     }
     public function contact()

@@ -22,7 +22,7 @@
 
                @include('user.partials._logo')
 
-                
+
                 <div class="iq-menu-bt align-self-center">
                     <div class="wrapper-menu">
                         <div class="main-circle"><i class="ri-menu-line"></i></div>

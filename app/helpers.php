@@ -1,20 +1,19 @@
 <?php
 
-
-use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\Auth;
-use App\Models\User;
 use App\Models\GeneralSetting;
 use App\Models\Slide;
+use App\Models\User;
+use App\Models\Shop;
+use Illuminate\Support\Facades\Auth;
 
-if (! function_exists('fromSettings')) {
+if (!function_exists('fromSettings')) {
     function fromSettings(string $key, $alternative = null)
     {
         return GeneralSetting::where('key', $key)->first()->value ?? $alternative;
     }
 }
 
-if (! function_exists('setSettings')) {
+if (!function_exists('setSettings')) {
     function setSettings(string $key, string $value)
     {
         GeneralSetting::updateOrCreate(
@@ -25,40 +24,40 @@ if (! function_exists('setSettings')) {
     }
 }
 
-if (! function_exists('getuser')) {
+if (!function_exists('getuser')) {
     function getuser()
     {
         return Auth::user();
     }
 }
 
-if (! function_exists('getFullName')) {
+if (!function_exists('getFullName')) {
     function getFullName()
     {
         $user = Auth::user();
-        return $user->first_name.' '.$user->last_name;
+        return $user->first_name . ' ' . $user->last_name;
     }
 }
-if (! function_exists('getFullNameById')) {
+if (!function_exists('getFullNameById')) {
     function getFullNameById($id)
     {
         $user = User::find($id);
-        return $user->first_name.' '.$user->last_name;
+        return $user->first_name . ' ' . $user->last_name;
     }
 }
-if (! function_exists('getUserStatus')) {
+if (!function_exists('getUserStatus')) {
     function getUserStatus($id)
     {
         $user = User::find($id);
-        if ($user->status==1) {
+        if ($user->status == 1) {
             return 'Active';
         } else {
             return 'In Active';
         }
     }
 }
-// make a function that will print 15 char random string 
-if (! function_exists('getRandomString')) {
+// make a function that will print 15 char random string
+if (!function_exists('getRandomString')) {
     function getRandomString($length = 15)
     {
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -71,7 +70,7 @@ if (! function_exists('getRandomString')) {
     }
 }
 
-if (! function_exists('generateAlphaNumeric')) {
+if (!function_exists('generateAlphaNumeric')) {
     function generateAlphaNumeric($length = 3)
     {
         $characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -83,11 +82,11 @@ if (! function_exists('generateAlphaNumeric')) {
         $random1 = rand(100, 999);
         $random2 = rand(100, 999);
 
-        $alphanumeric = $randomString.$random1.$random2;
+        $alphanumeric = $randomString . $random1 . $random2;
         return $alphanumeric;
     }
 }
-if (! function_exists('generateAlpha')) {
+if (!function_exists('generateAlpha')) {
     function generateAlpha($length = 5)
     {
         $characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -103,37 +102,35 @@ if (! function_exists('generateAlpha')) {
         return $alphanumeric;
     }
 }
-if (! function_exists('generateNumeric')) {
+if (!function_exists('generateNumeric')) {
     function generateNumeric()
     {
         $random1 = rand(100, 999);
         $random2 = rand(100, 999);
         $random3 = rand(100, 999);
- 
 
-        $alphanumeric = $random1.$random2.$random3;
+        $alphanumeric = $random1 . $random2 . $random3;
         return $alphanumeric;
     }
 }
-if (! function_exists('generateNumericSix')) {
+if (!function_exists('generateNumericSix')) {
     function generateNumericSix()
     {
         $random1 = rand(10, 99);
         $random2 = rand(10, 99);
         $random3 = rand(10, 99);
 
-
-        $alphanumeric = $random1.$random2.$random3;
+        $alphanumeric = $random1 . $random2 . $random3;
         return $alphanumeric;
     }
 }
 
-if (! function_exists('getStatus')) {
+if (!function_exists('getStatus')) {
     function getStatus($num)
     {
-        if ($num==1) {
+        if ($num == 1) {
             return 'Active';
-        } elseif ($num==0) {
+        } elseif ($num == 0) {
             return 'In Active';
         } else {
             return 'Contact Support';
@@ -141,7 +138,7 @@ if (! function_exists('getStatus')) {
     }
 }
 
-if (! function_exists('getSlider')) {
+if (!function_exists('getSlider')) {
     function getSlider()
     {
         $slides = Slide::all();
@@ -150,17 +147,31 @@ if (! function_exists('getSlider')) {
 
 }
 
-if (! function_exists('checkSocials')) {
+if (!function_exists('checkSocials')) {
     function checkSocials($id)
     {
-        $user  = User::find($id);
-        if($user->youtube or $user->instagram or $user->facebook or $user->twitter or $user->tiktok or $user->google or $user->linkedin or $user->pinterest ){
+        $user = User::find($id);
+        if ($user->youtube or $user->instagram or $user->facebook or $user->twitter or $user->tiktok or $user->google or $user->linkedin or $user->pinterest) {
             return true;
-        }else{
+        } else {
             return false;
         }
 
-       
     }
-    
+
+}
+
+if (!function_exists('getShopCode')) {
+    function getShopCode($name)
+    {
+
+        $name = str_replace(' ', '-', $name);
+
+        $shop = Shop::where('slug', $name)->first();
+        if ($shop) {
+            $name = $name . '-' . generateAlphaNumeric();
+        }
+        return $name.'-' . generateAlphaNumeric();
+    }
+
 }

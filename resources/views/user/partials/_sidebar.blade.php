@@ -5,12 +5,12 @@
                     class="las la-home iq-arrow-left"></i><span>Dashboard</span></a>
         </li>
 
-     
 
 
- 
 
- 
+
+
+
 
 
 
@@ -19,8 +19,8 @@
                     class="las la-id-card iq-arrow-left"></i><span>My vCard</span></a>
         </li>
 
-  
-       
+
+
             <li class="{{ request()->route()->getName() == 'member.stats'? 'active': '' }}">
                 <a href="{{ route('member.stats') }}" class="iq-waves-effect"><i
                         class="las la-chart-bar iq-arrow-left"></i><span>Stats</span></a>
@@ -31,9 +31,12 @@
                 <a href="{{route('user.profile')}}" class="iq-waves-effect"><i
                         class="las la-user iq-arrow-left"></i><span>My Profile</span></a>
             </li>
-            
-  
-        
+
+            <li class="{{ request()->route()->getName() == 'user.shop'? 'active': '' }}">
+                <a href="{{route('user.shop')}}" class="iq-waves-effect"><i
+                        class="las la-user iq-arrow-left"></i><span>My Shop</span></a>
+            </li>
+
 
     </ul>
 </nav>

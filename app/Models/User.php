@@ -11,7 +11,7 @@ use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class User extends Authenticatable
-{   
+{
     use HasRoles;
     use SoftDeletes;
 
@@ -71,5 +71,9 @@ class User extends Authenticatable
     }
     public function vcard(){
         return $this->hasMany(Card::class)->where('status', 'Approved');
+    }
+
+    public function shop(){
+        return $this->hasOne(Shop::class);
     }
 }
