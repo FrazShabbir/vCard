@@ -11,6 +11,7 @@
 
 @section('content')
     <div id="content-page" class="content-page">
+
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-12">
@@ -85,8 +86,6 @@
                                             data-target=".bd-inventory-upload">Add Inventory</button>
                                     </div>
                                 </div>
-
-
                             @endif
 
 
@@ -101,63 +100,62 @@
 
 
             </div>
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="iq-card">
-                        <div class="iq-card-header d-flex justify-content-between">
-                            <div class="iq-header-title">
-                                <h4 class="card-title">My Inventory @if ($shop)
-                                        <span class="badge badge-primary">#{{ $shop->slug }}
-                                        </span>
-                                    @endif
-                                </h4>
+            @if ($shop != null && $shop->products->count() > 0)
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="iq-card">
+                            <div class="iq-card-header d-flex justify-content-between">
+                                <div class="iq-header-title">
+                                    <h4 class="card-title">My Inventory @if ($shop)
+                                            <span class="badge badge-primary">#{{ $shop->slug }}
+                                            </span>
+                                        @endif
+                                    </h4>
+                                </div>
                             </div>
-                        </div>
-                        <div class="iq-card-body px-4">
-                            @if ($shop!=null &&  $shop->products->count() > 0)
-                            <div class="table-responsive">
-                                <table id="user-list-table" class="table table-striped table-bordered mt-4"
-                                    role="grid" aria-describedby="user-list-page-info">
-                                    <thead>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Price</th>
-                                            <th>Description</th>
+                            <div class="iq-card-body px-4">
+                                @if ($shop != null && $shop->products->count() > 0)
+                                    <div class="table-responsive">
+                                        <table id="user-list-table" class="table table-striped table-bordered mt-4"
+                                            role="grid" aria-describedby="user-list-page-info">
+                                            <thead>
+                                                <tr>
+                                                    <th>Name</th>
+                                                    <th>Price</th>
+                                                    <th>Description</th>
+                                                    <th>Action</th>
 
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($shop->products as $p )
-
-
-                                        <tr>
-                                            <td>{{ $p->name }}</td>
-                                            <td><del>{{ $p->original_price }}</del> {{ $p->sale_price }}</td>
-                                            <td>{{ $p->description }}</td>
-                                        </tr>
-                                        @endforeach
-
-
-
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($shop->products as $p)
+                                                    <tr>
+                                                        <td>{{ $p->name }}</td>
+                                                        <td><del>{{ $p->original_price }}</del> {{ $p->sale_price }}</td>
+                                                        <td>{{ $p->description }}</td>
+                                                        <td><button class="btn btn-primary btn-sm edit-product"
+                                                                onclick="viewData('{{ $p->slug }}')">Edit</button>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
 
 
-                                    </tbody>
-                                </table>
+
+
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                @endif
+
+
+
+
                             </div>
-                            @endif
-
-
-
-
                         </div>
                     </div>
                 </div>
-
-
-
-
-
-            </div>
+            @endif
         </div>
     </div>
 
@@ -199,9 +197,18 @@
                                 <div class="col-md-6 col-sm-12 mb-3">
                                     <label for="website" class="required">Shop Website</label>
                                     <input type="url" required class="form-control required" id="website"
-                                        name="website" placeholder="http://" value="{{ auth()->user()->profile->website }}">
+                                        name="website" placeholder="http://"
+                                        value="{{ auth()->user()->profile->website }}">
                                 </div>
-
+                                <div class="col-md-6 col-sm-12 mb-3">
+                                    <label for="currency" class="required">Shop Currency</label>
+                                    <select name="currency" id="currency" class="form-control">
+                                        <option value="PKR">PKR</option>
+                                        <option value="USD">USD</option>
+                                        <option value="GBP">GBP</option>
+                                        <option value="EUR">EUR</option>
+                                    </select>
+                                </div>
 
                             </div>
                             <div class="row">
@@ -258,6 +265,19 @@
                                     <input type="url" required class="form-control required" id="website"
                                         name="website" placeholder="http://" value="{{ $shop->website }}">
                                 </div>
+                                <div class="col-md-6 col-sm-12 mb-3">
+                                    <label for="currency" class="required">Shop Currency</label>
+                                    <select name="currency" id="currency" class="form-control">
+                                        <option value="PKR" {{ $shop->currency == 'PKR' ? 'selected' : '' }}>PKR
+                                        </option>
+                                        <option value="USD" {{ $shop->currency == 'USD' ? 'selected' : '' }}>USD
+                                        </option>
+                                        <option value="GBP" {{ $shop->currency == 'GBP' ? 'selected' : '' }}>GBP
+                                        </option>
+                                        <option value="EUR" {{ $shop->currency == 'EUR' ? 'selected' : '' }}>EUR
+                                        </option>
+                                    </select>
+                                </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-12 col-sm-12 mb-3">
@@ -275,6 +295,7 @@
 
             </div>
         </div>
+
         <div class="modal fade bd-inventory-upload" tabindex="-1" role="dialog" style="display: none;"
             aria-hidden="true">
             <div class="modal-dialog modal-lg">
@@ -317,10 +338,10 @@
                                 <div class="col-md-12 col-sm-12 mb-3">
                                     <div class="form-group">
                                         <div class="custom-file">
-                                           <input type="file" class="custom-file-input" id="image">
-                                           <label class="custom-file-label" for="image">Choose Product Image</label>
+                                            <input type="file" class="custom-file-input" id="image">
+                                            <label class="custom-file-label" for="image">Choose Product Image</label>
                                         </div>
-                                     </div>
+                                    </div>
                                 </div>
 
                             </div>
@@ -334,11 +355,37 @@
 
             </div>
         </div>
+
+        <div class="modal fade bd-inventory-edit" id="bd-inventory-edit" tabindex="-1" role="dialog"
+            style="display: none;" aria-hidden="true">
+            <div class="modal-dialog modal-lg" id="paste-product">
+
+            </div>
+        </div>
     @endif
 @endsection
 
 
 @section('scripts')
+
+    <script>
+        function viewData(id) {
+            $.ajax({
+                type: "GET",
+                url: "{{ route('user.product.edit') }}",
+                data: {
+                    id: id
+                },
+                success: function(response) {
+                    $('#paste-product').html(response);
+                    $('#bd-inventory-edit').modal('show');
+                },
+                error: function(xhr, status, error) {
+                    console.error(error);
+                }
+            });
+        }
+    </script>
 
 @endsection
 

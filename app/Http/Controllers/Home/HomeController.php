@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Home;
 
 use App\Http\Controllers\Controller;
 use App\Models\Device;
+use App\Models\ShortLink;
 use App\Models\Geolocation;
 use App\Models\User;
 use App\Models\Profile;
@@ -314,4 +315,14 @@ class HomeController extends Controller
 
     }
 
+
+    public function shortlinkOpener($slug)
+    {
+        $shortlink = ShortLink::where('slug', $slug)->first();
+        if ($shortlink) {
+            return redirect($shortlink->link);
+        } else {
+            return redirect()->route('home');
+        }
+    }
 }

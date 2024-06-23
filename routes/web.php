@@ -72,6 +72,7 @@ Route::get('register', function(){
     }
 })->name('check.register');
 
+Route::get('sl/{slug}', [HomeController::class, 'shortlinkOpener'])->name('shortlink');
 
 Route::get('/{slug}', [HomeController::class, 'slug'])->name('slug');
 

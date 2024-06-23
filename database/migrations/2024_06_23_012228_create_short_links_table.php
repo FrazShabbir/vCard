@@ -13,18 +13,17 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('shops', function (Blueprint $table) {
+        Schema::create('short_links', function (Blueprint $table) {
             $table->id();
-            $table->string('slug')->unique();
             $table->integer('user_id')->unsigned()->nullable();
-            $table->string('name')->nullable();
-            $table->string('address')->nullable();
-            $table->string('phone')->nullable();
-            $table->string('email')->nullable();
-            $table->string('website')->nullable();
-            $table->string('currency')->nullable();
-            $table->boolean('status')->default(1);
+            $table->integer('shop_id')->unsigned()->nullable();
+            $table->integer('product_id')->unsigned()->nullable();
+            $table->string('slug')->nullable();
+            $table->string('link', 500)->nullable();
+            $table->string('shortlink')->nullable();
+            $table->integer('count')->unsigned()->default(0);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -35,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('shops');
+        Schema::dropIfExists('short_links');
     }
 };

@@ -39,6 +39,8 @@ Route::group(['middleware' => ['role:Member', 'auth'], 'prefix' => 'auth/member'
 
         Route::group(['prefix' => '/product'], function () {
             Route::post('/store', [ShopController::class, 'storeProduct'])->name('user.product.store');
+            Route::get('/edit', [ShopController::class, 'editProduct'])->name('user.product.edit');
+            Route::post('/update/{slug}', [ShopController::class, 'updateProduct'])->name('user.product.update');
         });
 
     });
