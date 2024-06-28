@@ -2,9 +2,10 @@
 
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Member\CardController;
-use App\Http\Controllers\Member\ShopController;
 use App\Http\Controllers\Member\ProfileController;
+use App\Http\Controllers\Member\ShopController;
 use App\Http\Controllers\Member\StatsController;
+use App\Http\Controllers\Member\SocialLinkController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,7 +32,6 @@ Route::group(['middleware' => ['role:Member', 'auth'], 'prefix' => 'auth/member'
     Route::post('get-address', [ProfileController::class, 'getAddress'])->name('address.get');
     Route::post('update-address', [ProfileController::class, 'updateMyAddress'])->name('address.update');
 
-
     Route::get('my-card', [CardController::class, 'index'])->name('user.card');
     Route::put('my-card/save', [CardController::class, 'update'])->name('user.card.save');
     Route::post('place-order', [CardController::class, 'placeOrder'])->name('order.place');
@@ -47,6 +47,10 @@ Route::group(['middleware' => ['role:Member', 'auth'], 'prefix' => 'auth/member'
             Route::post('/update/{slug}', [ShopController::class, 'updateProduct'])->name('user.product.update');
         });
 
+    });
+    Route::group(['prefix' => '/social'], function () {
+        Route::get('/', [SocialLinkController::class, 'index'])->name('user.socials');
+        Route::POST('/store', [SocialLinkController::class, 'store'])->name('user.social.store');
     });
 
 });

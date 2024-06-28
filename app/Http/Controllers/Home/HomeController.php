@@ -147,19 +147,10 @@ class HomeController extends Controller
 
     public function profileEdit($slug)
     {
-        $user = User::where('username', $slug)->first();
-        $profile = Profile::where('user_id', $user->id)->first();
-        if ($user) {
-            if ($profile->username == auth()->user()->username) {
-                return view('frontend.pages.edit_info')
-                ->with('user', $user)
-                ->with('profile', $profile)
-                ->with('extra_class', 'd-none');
-            } else {
-                return abort(403);
-            }
-        } else {
-            return redirect()->route('slug', $slug);
+        if (!auth()->user()) {
+            return redirect()->route('login.user');
+        }else{
+            return redirect()->route('user.profile');
         }
     }
 

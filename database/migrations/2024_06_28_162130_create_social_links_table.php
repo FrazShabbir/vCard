@@ -13,12 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('sociallinks', function (Blueprint $table) {
+        Schema::create('social_links', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id')->unsigned()->nullable();
+            $table->integer('profile_id')->unsigned()->nullable();
+            $table->integer('social_platform_id')->unsigned()->nullable();
             $table->string('name');
             $table->string('link');
-            $table->string('icon');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -31,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sociallinks');
+        Schema::dropIfExists('social_links');
     }
 };

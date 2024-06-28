@@ -31,7 +31,10 @@
                 <a href="{{route('user.profile')}}" class="iq-waves-effect"><i
                         class="las la-user iq-arrow-left"></i><span>My Profile</span></a>
             </li>
-
+            <li class="{{ request()->route()->getName() == 'user.socials'? 'active': '' }}">
+                <a href="{{route('user.socials')}}" class="iq-waves-effect"><i
+                        class="las la-user iq-arrow-left"></i><span>My Social</span></a>
+            </li>
             <li class="{{ request()->route()->getName() == 'user.shop'? 'active': '' }}">
                 <a href="{{route('user.shop')}}" class="iq-waves-effect"><i
                         class="las la-user iq-arrow-left"></i><span>My Shop</span></a>
