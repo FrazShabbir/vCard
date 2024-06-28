@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Member;
 
 use App\Http\Controllers\Controller;
+use App\Models\Address;
 use App\Models\Profile;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -12,7 +13,9 @@ class ProfileController extends Controller
 {
     public function myProfile()
     {
-        return view('user.profile.index');
+        $addresses = Address::where('profile_id', auth()->user()->profile->id)->get();
+        return view('user.profile.index')
+            ->with('addresses', $addresses);
     }
     public function myProfileSave(Request $request)
     {
@@ -85,11 +88,139 @@ class ProfileController extends Controller
             alert()->success('Profile Updated Successfully', 'Success');
             return redirect()->back();
 
-        } catch (\Throwable$th) {
+        } catch (\Throwable $th) {
             db::rollback();
             throw $th;
 
         }
 
+    }
+
+    public function saveMyAddress(Request $request)
+    {
+        $request->validate([
+            'street_one' => 'required',
+            'street_two' => 'nullable',
+            'additional_info' => 'nullable',
+            'postal_code' => 'required',
+            'phone' => 'required',
+            'city_id' => 'required|exists:cities,id',
+            'state_id' => 'required|exists:states,id',
+            'country_id' => 'required|exists:countries,id',
+            'address_type' => 'required',
+        ]);
+
+        try {
+            db::beginTransaction();
+            $address = new Address();
+            $address->profile_id = auth()->user()->profile->id;
+            $address->street_one = $request->street_one;
+            $address->street_two = $request->street_two;
+            $address->flat_no = $request->flat_no;
+            $address->postal_code = $request->postal_code;
+            $address->phone = $request->phone;
+            $address->city_id = $request->city_id;
+            $address->state_id = $request->state_id;
+            $address->country_id = $request->country_id;
+            $address->additional_info = $request->additional_info;
+            $address->address_type = $request->address_type;
+
+            if ($request->is_primary == '1') {
+                $find = Address::where('profile_id', auth()->user()->profile->id)->where('is_primary', 1)->first();
+                if ($find) {
+                    $find->is_primary = 0;
+                    $find->save();
+                }
+                $address->is_primary = 1;
+            } else {
+                $address->is_primary = 0;
+            }
+
+            // if only one address, make it primary
+            $count = Address::where('profile_id', auth()->user()->profile->id)->count();
+            if ($count == 0) {
+                $address->is_primary = 1;
+            }
+
+            $address->save();
+            db::commit();
+            alert()->success('Address Updated Successfully', 'Success');
+            return redirect()->back();
+        } catch (\Throwable $th) {
+            db::rollback();
+            throw $th;
+        }
+    }
+
+    public function updateMyAddress(Request $request)
+    {
+        $request->validate([
+            'street_one' => 'required',
+            'street_two' => 'nullable',
+            'additional_info' => 'nullable',
+            'postal_code' => 'required',
+            'phone' => 'required',
+            'city_id' => 'required|exists:cities,id',
+            'state_id' => 'required|exists:states,id',
+            'country_id' => 'required|exists:countries,id',
+            'address_type' => 'required',
+        ]);
+        $address = Address::find($request->address_id);
+        if ($address && $address->profile_id != auth()->user()->profile->id) {
+            alert()->success('You are not authorized to update this address', 'error');
+            return redirect()->back();
+        }
+
+        try {
+            db::beginTransaction();
+
+            $address->street_one = $request->street_one;
+            $address->street_two = $request->street_two;
+            $address->flat_no = $request->flat_no;
+            $address->postal_code = $request->postal_code;
+            $address->phone = $request->phone;
+            $address->city_id = $request->city_id;
+            $address->state_id = $request->state_id;
+            $address->country_id = $request->country_id;
+            $address->additional_info = $request->additional_info;
+            $address->address_type = $request->address_type;
+
+            if ($request->is_primary == '1') {
+                $find = Address::where('profile_id', auth()->user()->profile->id)->where('is_primary', 1)->first();
+                if ($find) {
+                    $find->is_primary = 0;
+                    $find->save();
+                }
+                $address->is_primary = 1;
+            } else {
+                $address->is_primary = 0;
+            }
+
+            $count = Address::where('profile_id', auth()->user()->profile->id)->count();
+            if ($count < 2) {
+
+                $address->is_primary = 1;
+            }
+            $address->save();
+            db::commit();
+            alert()->success('Address Updated Successfully', 'Success');
+            return redirect()->back();
+        } catch (\Throwable $th) {
+            db::rollback();
+            throw $th;
+        }
+    }
+
+    public function getAddress(Request $request)
+    {
+        $address = Address::find($request->id);
+        if ($address && $address->profile_id == auth()->user()->profile->id) {
+            return view('user.profile.address._edit')
+                ->with('address', $address);
+        } else {
+            return response()->json(['error' => 'Unauthorized'], 401);
+        }
+
+        return response()->json($address);
     }
 }

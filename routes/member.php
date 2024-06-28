@@ -27,6 +27,10 @@ Route::group(['middleware' => ['role:Member', 'auth'], 'prefix' => 'auth/member'
 
     Route::get('my-profile', [ProfileController::class, 'myProfile'])->name('user.profile');
     Route::put('my-profile/save', [ProfileController::class, 'myProfileSave'])->name('user.profile.save');
+    Route::post('add-address', [ProfileController::class, 'saveMyAddress'])->name('address.new');
+    Route::post('get-address', [ProfileController::class, 'getAddress'])->name('address.get');
+    Route::post('update-address', [ProfileController::class, 'updateMyAddress'])->name('address.update');
+
 
     Route::get('my-card', [CardController::class, 'index'])->name('user.card');
     Route::put('my-card/save', [CardController::class, 'update'])->name('user.card.save');

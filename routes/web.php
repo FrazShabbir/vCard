@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Home\HomeController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PublicImport\PublicImportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -71,6 +72,19 @@ Route::get('register', function(){
         return redirect()->route('login');
     }
 })->name('check.register');
+
+Route::get('/import-world-data', [PublicImportController::class, 'importWorldData'])->name('import.world.data');
+
+
+Route::group(["prefix" => "dashboard/ajax"], function () {
+    Route::get('/get-regions', [App\Http\Controllers\Ajax\AjaxController::class, 'getRegions'])->name('get.regions');
+    Route::get('/get-sub-regions', [App\Http\Controllers\Ajax\AjaxController::class, 'getSubRegions'])->name('get.sub.regions');
+    Route::get('/get-countries', [App\Http\Controllers\Ajax\AjaxController::class, 'getCountries'])->name('get.countries');
+    Route::get('/get-states', [App\Http\Controllers\Ajax\AjaxController::class, 'getStates'])->name('get.states');
+    Route::get('/get-cities', [App\Http\Controllers\Ajax\AjaxController::class, 'getCities'])->name('get.cities');
+
+});
+
 
 Route::get('sl/{slug}', [HomeController::class, 'shortlinkOpener'])->name('shortlink');
 

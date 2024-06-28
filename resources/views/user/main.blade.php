@@ -5,6 +5,8 @@
     <meta name="google-site-verification" content="WBSd4LpQFX9YmRxiWHxCQb1BxEhO2qzVENpG_eZCQs4" />
     @include('user.partials._header')
 
+    
+
 </head>
 
 <body>

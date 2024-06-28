@@ -47,19 +47,30 @@
                     </p>
                 </div>
             </div>
-            <a href="" class="user-address-box">
-                <img src="{{ asset('templates/template1/assets/images/Location.png')}}" alt="">
-                <p class="text">
-                    New York
-                </p>
-                <i class="fal fa-circle"></i>
-                <p class="text">
-                    New York
-                </p>
-            </a>
+            @if ($profile->primaryaddress)
+                <a href="" class="user-address-box">
+
+                    {{-- <img src="{{ asset('templates/template1/assets/images/Location.png') }}" alt=""> --}}
+                    <p class="text">
+                        {{ $profile->primaryaddress->city->name ?? '' }}
+                    </p>
+
+                    <i class="fal fa-circle"></i>
+
+                    <p class="text">
+                        {{ $profile->primaryaddress->state->name ?? '' }}
+                    </p>
+                    <i class="fal fa-circle"></i>
+                    <p class="text">
+                        {{ $profile->primaryaddress->country->name ?? '' }}
+                    </p>
+                </a>
+            @endif
+
+
             <div class="save-contact-btn-box">
                 <a href="">
-                    <img src="{{ asset('templates/template1/assets/images/download-icon.svg')}}" alt="">
+                    <img src="{{ asset('templates/template1/assets/images/download-icon.svg') }}" alt="">
                     Save Contact
                 </a>
             </div>
@@ -75,7 +86,7 @@
                         </div>
                         <div class="about-content">
                             <p class="text">
-                                {{ $profile->bio ?? "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin a erat imperdiet, sodales lectus pellentesque, pretium odio. Phasellus luctus purus in turpis condimentum sollicitudin."}}
+                                {{ $profile->bio ?? 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin a erat imperdiet, sodales lectus pellentesque, pretium odio. Phasellus luctus purus in turpis condimentum sollicitudin.' }}
                             </p>
                         </div>
                     </div>
@@ -94,13 +105,13 @@
                     </div>
                     <div class="col-12">
                         <a class="check-me-link-box mb-3" href="">
-                            <img src="{{ asset('templates/template1/assets/images/world.svg')}}" alt="">
+                            <img src="{{ asset('templates/template1/assets/images/world.svg') }}" alt="">
                             <span>
                                 MaxHalery.com
                             </span>
                         </a>
                         <a class="check-me-link-box" href="">
-                            <img src="{{ asset('templates/template1/assets/images/world.svg')}}" alt="">
+                            <img src="{{ asset('templates/template1/assets/images/world.svg') }}" alt="">
                             <span>
                                 abccomapny.com
                             </span>
@@ -120,19 +131,19 @@
                         </div>
                         <div class="social-box">
                             <a href="">
-                                <img src="{{ asset('templates/template1/assets/images/image-1.svg')}}" alt="">
+                                <img src="{{ asset('templates/template1/assets/images/image-1.svg') }}" alt="">
                             </a>
                             <a href="">
-                                <img src="{{ asset('templates/template1/assets/images/image-2.svg')}}" alt="">
+                                <img src="{{ asset('templates/template1/assets/images/image-2.svg') }}" alt="">
                             </a>
                             <a href="">
-                                <img src="{{ asset('templates/template1/assets/images/image-3.svg')}}" alt="">
+                                <img src="{{ asset('templates/template1/assets/images/image-3.svg') }}" alt="">
                             </a>
                             <a href="">
-                                <img src="{{ asset('templates/template1/assets/images/image-4.svg')}}" alt="">
+                                <img src="{{ asset('templates/template1/assets/images/image-4.svg') }}" alt="">
                             </a>
                             <a href="">
-                                <img src="{{ asset('templates/template1/assets/images/image-5.svg')}}" alt="">
+                                <img src="{{ asset('templates/template1/assets/images/image-5.svg') }}" alt="">
                             </a>
                         </div>
                     </div>
@@ -150,13 +161,13 @@
     </footer>
 
     <!-- Jquery CDN -->
-    <script src="{{ asset('templates/template1/assets/js/jquery-3.7.1.min.js')}}"></script>
+    <script src="{{ asset('templates/template1/assets/js/jquery-3.7.1.min.js') }}"></script>
     <!-- Bootstrap CDN -->
-    <script src="{{ asset('templates/template1/assets/js/bootstrap.bundle.min.js')}}"></script>
+    <script src="{{ asset('templates/template1/assets/js/bootstrap.bundle.min.js') }}"></script>
     <!-- Owl Carsoul -->
-    <script src="{{ asset('templates/template1/assets/js/owl.carousel.min.js')}}"></script>
+    <script src="{{ asset('templates/template1/assets/js/owl.carousel.min.js') }}"></script>
     <!-- Cusotm Code -->
-    <script src="{{ asset('templates/template1/assets/js/script.js')}}"></script>
+    <script src="{{ asset('templates/template1/assets/js/script.js') }}"></script>
 </body>
 
 </html>
