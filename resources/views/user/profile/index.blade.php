@@ -428,6 +428,7 @@
 
 
         $(document).ready(function() {
+            // Initialize the country select2
             $('#country_id').select2({
                 placeholder: 'Select Country',
                 allowClear: true,
@@ -439,25 +440,30 @@
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
+                    data: function(params) {
+                        return {
+                            q: params.term
+                        };
+                    },
                     processResults: function(data) {
                         return {
                             results: $.map(data, function(item) {
                                 return {
                                     id: `${item.id}`,
-                                    text: `${item.name}`,
-                                }
+                                    text: `${item.name}`
+                                };
                             })
-
                         };
-                    },
-
+                    }
                 }
             });
 
+            // Country change event
             $('#country_id').on('change', function() {
                 let country_id = $(this).val();
                 $('#state_id').val(null).trigger('change');
                 $('#state_id').prop('disabled', true);
+
                 $('#state_id').select2({
                     placeholder: 'Select State',
                     allowClear: true,
@@ -471,30 +477,32 @@
                         },
                         data: function(params) {
                             return {
-                                country_id: country_id
-                            }
+                                country_id: country_id,
+                                q: params.term
+                            };
                         },
                         processResults: function(data) {
                             return {
                                 results: $.map(data, function(item) {
                                     return {
                                         id: `${item.id}`,
-                                        text: `${item.name}`,
-                                    }
+                                        text: `${item.name}`
+                                    };
                                 })
-
                             };
-                        },
-
+                        }
                     }
                 });
+
                 $('#state_id').prop('disabled', false);
             });
 
+            // State change event
             $('#state_id').on('change', function() {
                 let state_id = $(this).val();
                 $('#city_id').val(null).trigger('change');
                 $('#city_id').prop('disabled', true);
+
                 $('#city_id').select2({
                     placeholder: 'Select City',
                     allowClear: true,
@@ -508,23 +516,23 @@
                         },
                         data: function(params) {
                             return {
-                                state_id: state_id
-                            }
+                                state_id: state_id,
+                                q: params.term
+                            };
                         },
                         processResults: function(data) {
                             return {
                                 results: $.map(data, function(item) {
                                     return {
                                         id: `${item.id}`,
-                                        text: `${item.name}`,
-                                    }
+                                        text: `${item.name}`
+                                    };
                                 })
-
                             };
-                        },
-
+                        }
                     }
                 });
+
                 $('#city_id').prop('disabled', false);
             });
         });

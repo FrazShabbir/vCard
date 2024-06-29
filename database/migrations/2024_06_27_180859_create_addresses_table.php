@@ -27,7 +27,14 @@ return new class extends Migration
             $table->string('phone')->nullable();
             $table->string('additional_info')->nullable();
             $table->boolean('is_primary')->default(false); // Flag for primary address
+
+            $table->unsignedInteger('created_by_id')->nullable();
+            $table->unsignedInteger('updated_by_id')->nullable();
+            $table->unsignedInteger('deleted_by_id')->nullable();
+
             $table->timestamps();
+            $table->softDeletes();
+
         });
     }
 

@@ -32,7 +32,6 @@
                                             <thead class="table-striped">
                                                 <tr>
                                                     <th scope="col">Platform</th>
-                                                    <th scope="col">Name</th>
                                                     <th scope="col">link</th>
                                                     <th scope="col">Action</th>
 
@@ -42,11 +41,9 @@
                                                 @foreach ($links as $link)
                                                     <tr>
                                                         <td>{{ $link->platform->name }}</td>
-                                                        <td>{{ $link->name }}</td>
                                                         <td>{{ $link->link }}</td>
                                                         <td>
-                                                            <a href="" class="btn btn-primary">Edit</a>
-                                                            <a href="" class="btn btn-danger">Delete</a>
+                                                            <a href="{{ route('user.social.destroy',$link->id) }}" class="btn btn-danger">Delete</a>
                                                         </td>
                                                     </tr>
                                                 @endforeach

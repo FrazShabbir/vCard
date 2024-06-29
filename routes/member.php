@@ -50,7 +50,8 @@ Route::group(['middleware' => ['role:Member', 'auth'], 'prefix' => 'auth/member'
     });
     Route::group(['prefix' => '/social'], function () {
         Route::get('/', [SocialLinkController::class, 'index'])->name('user.socials');
-        Route::POST('/store', [SocialLinkController::class, 'store'])->name('user.social.store');
+        Route::post('/store', [SocialLinkController::class, 'store'])->name('user.social.store');
+        Route::get('/delete/{id}', [SocialLinkController::class, 'destroy'])->name('user.social.destroy');
     });
 
 });

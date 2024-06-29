@@ -124,7 +124,7 @@ class ProfileController extends Controller
             $address->country_id = $request->country_id;
             $address->additional_info = $request->additional_info;
             $address->address_type = $request->address_type;
-
+            $address->created_by_id = auth()->user()->id;
             if ($request->is_primary == '1') {
                 $find = Address::where('profile_id', auth()->user()->profile->id)->where('is_primary', 1)->first();
                 if ($find) {
@@ -184,7 +184,7 @@ class ProfileController extends Controller
             $address->country_id = $request->country_id;
             $address->additional_info = $request->additional_info;
             $address->address_type = $request->address_type;
-
+            $address->updated_by_id = auth()->user()->id;
             if ($request->is_primary == '1') {
                 $find = Address::where('profile_id', auth()->user()->profile->id)->where('is_primary', 1)->first();
                 if ($find) {

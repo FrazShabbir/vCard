@@ -22,15 +22,25 @@ class SocialLinkController extends Controller
         $request->validate([
             'social_platform_id' => 'required',
             'link' => 'required',
-            'name' => 'nullable',
         ]);
-        $platform = SocialPlatform::find($request->social_platform_id);
         $link = new SocialLink();
         $link->profile_id = auth()->user()->profile->id;
         $link->social_platform_id = $request->social_platform_id;
-        $link->name = $platform->name;
         $link->link = $request->link;
         $link->save();
         return back()->with('success', 'Link added successfully');
+    }
+
+
+    public function destroy(Request $request,$id)
+    {
+        $link = SocialLink::find($id);
+
+        $profile = auth()->user()->profile;
+        if($profile->id != $link->profile_id){
+            return back()->with('error', 'You are not authorized to delete this link');
+        }
+        $link->delete();
+        return back()->with('success', 'Link deleted successfully');
     }
 }

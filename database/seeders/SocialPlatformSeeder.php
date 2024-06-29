@@ -17,44 +17,44 @@ class SocialPlatformSeeder extends Seeder
         SocialPlatform::updateOrCreate([
             'name' => 'Facebook',
             'link' => 'https://facebook.com',
-            'icon' => 'fab fa-facebook',
+            'image' => 'fab fa-facebook',
         ]);
         SocialPlatform::updateOrCreate([
             'name' => 'Twitter',
             'link' => 'https://twitter.com',
-            'icon' => 'fab fa-twitter',
+            'image' => 'fab fa-twitter',
         ]);
         SocialPlatform::updateOrCreate([
             'name' => 'Instagram',
             'link' => 'https://instagram.com',
-            'icon' => 'fab fa-instagram',
+            'image' => 'fab fa-instagram',
         ]);
         SocialPlatform::updateOrCreate([
             'name' => 'LinkedIn',
             'link' => 'https://linkedin.com',
-            'icon' => 'fab fa-linkedin',
+            'image' => 'fab fa-linkedin',
         ]);
 
         SocialPlatform::updateOrCreate([
             'name' => 'YouTube',
             'link' => 'https://youtube.com',
-            'icon' => 'fab fa-youtube',
+            'image' => 'fab fa-youtube',
         ]);
 
         SocialPlatform::updateOrCreate([
             'name' => 'WhatsApp',
             'link' => 'https://whatsapp.com',
-            'icon' => 'fab fa-whatsapp',
+            'image' => 'fab fa-whatsapp',
         ]);
         SocialPlatform::updateOrCreate([
             'name' => 'Messenger',
             'link' => 'https://messenger.com',
-            'icon' => 'fab fa-facebook-messenger',
+            'image' => 'fab fa-facebook-messenger',
         ]);
         SocialPlatform::updateOrCreate([
             'name' => 'Custom',
             'link' => 'https://messenger.com',
-            'icon' => 'fab fa-facebook-messenger',
+            'image' => 'fab fa-facebook-messenger',
         ]);
     }
 }

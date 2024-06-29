@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Username - vCard</title>
+    <title>{{ $user->full_name }} - vCard</title>
     <!-- Fav Icon -->
     <link rel="shortcut icon" href="" type="image/x-icon">
     <!-- Bootstrap CDN -->
@@ -69,7 +69,7 @@
 
 
             <div class="save-contact-btn-box">
-                <a href="">
+                <a href="{{ route('downloadVCard', $user->username) }}">
                     <img src="{{ asset('templates/template1/assets/images/download-icon.svg') }}" alt="">
                     Save Contact
                 </a>
@@ -86,40 +86,43 @@
                         </div>
                         <div class="about-content">
                             <p class="text">
-                                {{ $profile->bio ?? 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin a erat imperdiet, sodales lectus pellentesque, pretium odio. Phasellus luctus purus in turpis condimentum sollicitudin.' }}
+                                {{ $profile->bio ?? '' }}
                             </p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-        <section class="user-checkme-out-sec">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="section-heading">
-                            <h2>
-                                Check Me Out
-                            </h2>
+        @if ($profile->customlinks->count() > 0)
+
+
+            <section class="user-checkme-out-sec">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="section-heading">
+                                <h2>
+                                    Check Me Out
+                                </h2>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            @foreach ($profile->customlinks as $link)
+                                <a class="check-me-link-box mb-3" href="{{ $link->link }}">
+                                    <img src="{{ asset('templates/template1/assets/images/world.svg') }}"
+                                        alt="">
+                                    <span>
+                                        {{ $link->platform->name ?? '' }}
+                                    </span>
+                                </a>
+                            @endforeach
+
+
                         </div>
                     </div>
-                    <div class="col-12">
-                        <a class="check-me-link-box mb-3" href="">
-                            <img src="{{ asset('templates/template1/assets/images/world.svg') }}" alt="">
-                            <span>
-                                MaxHalery.com
-                            </span>
-                        </a>
-                        <a class="check-me-link-box" href="">
-                            <img src="{{ asset('templates/template1/assets/images/world.svg') }}" alt="">
-                            <span>
-                                abccomapny.com
-                            </span>
-                        </a>
-                    </div>
                 </div>
-            </div>
-        </section>
+            </section>
+        @endif
         <section class="user-let-connect-sec">
             <div class="container">
                 <div class="row">

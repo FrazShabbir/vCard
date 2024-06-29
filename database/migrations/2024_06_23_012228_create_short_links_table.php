@@ -24,6 +24,7 @@ return new class extends Migration
             $table->integer('count')->unsigned()->default(0);
             $table->timestamps();
             $table->softDeletes();
+            
         });
     }
 

@@ -37,6 +37,9 @@ class PublicImportController extends Controller
         $file = json_decode($file);
         $count = 0;
         foreach ($file as $countries) {
+            if($countries->name!='Pakistan'){
+                continue;
+            }
             $findCountry = \App\Models\Country::where('file_id', $countries->id)->first();
             if ($findCountry) {
                 $country = $findCountry;
@@ -97,9 +100,9 @@ class PublicImportController extends Controller
                 }
             }
             $count++;
-            if ($count == 10) {
-                break;
-            }
+            // if ($count == 10) {
+            //     break;
+            // }
         }
 
         return 'Data seeded successfully!';
