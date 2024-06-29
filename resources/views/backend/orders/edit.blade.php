@@ -1,5 +1,5 @@
 @extends('backend.main')
-@section('title', 'Edit User - CyberTag')
+@section('title', 'Edit User - vCards')
 
 @section('styles')
 @endsection
@@ -56,7 +56,7 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                               
+
                                     <div class="col-md-6 col-sm-12 mb-3">
                                         <label class="required" for="email">Email address:</label>
                                         <input type="email" required class="form-control" id="email" name="email"

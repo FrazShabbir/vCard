@@ -1,5 +1,5 @@
 @extends('backend.main')
-@section('title', 'Create Slide - CyberTag')
+@section('title', 'Create Slide - vCards')
 
 @section('styles')
 @endsection

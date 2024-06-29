@@ -34,6 +34,9 @@ Route::group(['middleware' => ['role:SuperAdmin','auth'], 'prefix' => 'admin/das
     Route::put('user/{id}/update', [UserController::class, 'update'])->name('users.update')->middleware(['can:Update Users']);
     Route::delete('user/{id}', [UserController::class, 'destroy'])->name('users.destroy')->middleware(['can:Delete Users']);
 
+    Route::post('user/update/password', [UserController::class, 'updatePassword'])->name('users.update.password')->middleware(['can:Create Users']);
+
+
     // Route::resource('roles', RoleController::class);
     Route::get('roles', [RoleController::class, 'index'])->name('roles.index')->middleware(['can:Read Roles']);
     Route::get('role/create', [RoleController::class, 'create'])->name('roles.create')->middleware(['can:Create Roles']);
@@ -49,7 +52,7 @@ Route::group(['middleware' => ['role:SuperAdmin','auth'], 'prefix' => 'admin/das
 
 
     Route::get('orders', [OrderController::class, 'index'])->name('order.index');
-  
+
     Route::get('order/{id}/show', [OrderController::class, 'show'])->name('order.show');
     Route::get('order/{id}/edit', [OrderController::class, 'edit'])->name('order.edit');
     Route::put('order/{id}/update', [OrderController::class, 'update'])->name('order.update');
@@ -58,5 +61,5 @@ Route::group(['middleware' => ['role:SuperAdmin','auth'], 'prefix' => 'admin/das
     Route::get('reset-password/{user}', [UserController::class, 'reset_password'])->name('users.reset_password');
     Route::get('my-profile', [GeneralController::class, 'myProfile'])->name('site.myProfile');
     Route::get('site-settings', [GeneralController::class, 'siteSettings'])->name('site.siteSettings');
-    Route::post('/site-settings-save', [GeneralController::class, 'save_general_settings'])->name('site_settings_save');    
+    Route::post('/site-settings-save', [GeneralController::class, 'save_general_settings'])->name('site_settings_save');
 });

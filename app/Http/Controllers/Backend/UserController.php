@@ -3,17 +3,14 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
-use Spatie\Permission\Models\Role;
-
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Auth\Events\Registered;
-use App\Models\User;
-
-use Illuminate\Validation\Rules;
 use Illuminate\Support\Facades\Password;
-use Illuminate\Support\Str;
+use Illuminate\Validation\Rules;
+use Spatie\Permission\Models\Role;
+
 class UserController extends Controller
 {
     /**
@@ -23,12 +20,12 @@ class UserController extends Controller
      */
     public function index()
     {
-        if (! auth()->user()->hasPermissionTo('Read Users')) {
+        if (!auth()->user()->hasPermissionTo('Read Users')) {
             abort(403);
         }
-        $users= User::all();
+        $users = User::all();
         return view('backend.users.index')
-        ->withUsers($users);
+            ->withUsers($users);
     }
 
     /**
@@ -37,13 +34,13 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    { 
-        if (! auth()->user()->hasPermissionTo('Create Users')) {
+    {
+        if (!auth()->user()->hasPermissionTo('Create Users')) {
             abort(403);
         }
-        $roles = Role::where('role_for','Admin')->get();
+        $roles = Role::where('role_for', 'Admin')->get();
         return view('backend.users.create')
-        ->withRoles($roles);
+            ->withRoles($roles);
 
     }
 
@@ -55,7 +52,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        if (! auth()->user()->hasPermissionTo('Create Users')) {
+        if (!auth()->user()->hasPermissionTo('Create Users')) {
             abort(403);
         }
 
@@ -71,7 +68,7 @@ class UserController extends Controller
         // check username exist
         $usernamefind = User::where('username', $username)->first();
         if ($usernamefind) {
-            $username = $username.'-'.str_random(2);
+            $username = $username . '-' . str_random(2);
         }
         $user = User::create([
             'first_name' => $request->first_name,
@@ -82,7 +79,7 @@ class UserController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        if(isset($request->roles)){
+        if (isset($request->roles)) {
             foreach ($request->roles as $assignRole) {
                 $user->assignRole($assignRole);
             }
@@ -102,19 +99,18 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        if (! auth()->user()->hasPermissionTo('Read Users')) {
+        if (!auth()->user()->hasPermissionTo('Read Users')) {
             abort(403);
         }
 
         return redirect()->route('users.edit', $id);
 
         $user = User::findOrFail($id);
-        $roles = Role::where('role_for','ar')->get();
+        $roles = Role::where('role_for', 'ar')->get();
 
         return view('backend.users.show')
-        ->withUser($user)
-        ->withRoles($roles);
-
+            ->withUser($user)
+            ->withRoles($roles);
 
     }
 
@@ -126,15 +122,15 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        if (! auth()->user()->hasPermissionTo('Update Users')) {
+        if (!auth()->user()->hasPermissionTo('Update Users')) {
             abort(403);
         }
 
         $user = User::findOrFail($id);
-        $roles = Role::where('role_for','Admin')->get();
+        $roles = Role::where('role_for', 'Admin')->get();
         return view('backend.users.edit')
-        ->withUser($user)
-        ->withRoles($roles);
+            ->withUser($user)
+            ->withRoles($roles);
     }
 
     /**
@@ -146,7 +142,7 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        if (! auth()->user()->hasPermissionTo('Update Users')) {
+        if (!auth()->user()->hasPermissionTo('Update Users')) {
             abort(403);
         }
         $user = User::findOrFail($id);
@@ -156,20 +152,20 @@ class UserController extends Controller
             'last_name' => 'required|string|max:255',
             'avatar' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
             'cover_image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
-            'email' => 'required|string|email|max:255|unique:users,email,'.$user->id,
-            'username' => 'required|string|max:255|unique:users,username,'.$user->id,
+            'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
+            'username' => 'required|string|max:255|unique:users,username,' . $user->id,
             'password' => 'nullable|confirmed', Rules\Password::defaults(),
             'address' => 'required',
-            'instagram'=>'nullable|string|max:255',
-            'twitter'=>'nullable|string|max:255',
-            'facebook'=>'nullable|string|max:255',
-            'google'=>'nullable|string|max:255',
-            'linkedin'=>'nullable|string|max:255',
-            'youtube'=>'nullable|string|max:255',
-            'tiktok'=>'nullable|string|max:255',
-            'pinterest'=>'nullable|string|max:255',
-            'bio'=>'required|string|max:255',
-       
+            'instagram' => 'nullable|string|max:255',
+            'twitter' => 'nullable|string|max:255',
+            'facebook' => 'nullable|string|max:255',
+            'google' => 'nullable|string|max:255',
+            'linkedin' => 'nullable|string|max:255',
+            'youtube' => 'nullable|string|max:255',
+            'tiktok' => 'nullable|string|max:255',
+            'pinterest' => 'nullable|string|max:255',
+            'bio' => 'required|string|max:255',
+
         ]);
 
         $user->first_name = $request->first_name;
@@ -182,7 +178,7 @@ class UserController extends Controller
         $user->designation = $request->designation;
 
         $user->address = $request->address;
-        $user->phone=$request->phone;
+        $user->phone = $request->phone;
         $user->instagram = $request->instagram;
         $user->twitter = $request->twitter;
         $user->facebook = $request->facebook;
@@ -193,7 +189,7 @@ class UserController extends Controller
         $user->pinterest = $request->pinterest;
 
         // $user->password = Hash::make($request->password);
-        if(isset($request->roles)){
+        if (isset($request->roles)) {
             $user->roles()->detach();
             foreach ($request->roles as $assignRole) {
                 $user->assignRole($assignRole);
@@ -205,9 +201,9 @@ class UserController extends Controller
             ]);
             $file = $request->file('avatar');
             $extension = $file->getClientOriginalExtension();
-            $filename = getRandomString().'-'.time() . '.' . $extension;
+            $filename = getRandomString() . '-' . time() . '.' . $extension;
             $file->move('uploads/avatars', $filename);
-            $path = 'uploads/avatars/'.$filename;
+            $path = 'uploads/avatars/' . $filename;
             $user->avatar = $path;
         }
         if ($request->cover_image) {
@@ -216,9 +212,9 @@ class UserController extends Controller
             ]);
             $file = $request->file('cover_image');
             $extension = $file->getClientOriginalExtension();
-            $filename = getRandomString().'-'.time() . '.' . $extension;
+            $filename = getRandomString() . '-' . time() . '.' . $extension;
             $file->move('uploads/cover_images', $filename);
-            $background = 'uploads/cover_images/'.$filename;
+            $background = 'uploads/cover_images/' . $filename;
             $user->cover_image = $background;
         }
 
@@ -236,27 +232,38 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {if (! auth()->user()->hasPermissionTo('Delete Users')) {
+    {if (!auth()->user()->hasPermissionTo('Delete Users')) {
         abort(403);
     }
 
         $user = User::findOrFail($id);
-        if($user->id==Auth::user()->id){
+        if ($user->id == Auth::user()->id) {
             Alert::error('Sorry', 'You Cannot Delete Yourself');
             alert()->error('Cannot Delete this user');
 
-
-        }else{
+        } else {
             $user->delete();
         }
         alert()->info('User Deleted');
-        return redirect()->back();
-
-    }
-    function reset_password(User $user){
+        return redirect()->back();}
+    public function reset_password(User $user)
+    {
         Password::sendResetLink(['email' => $user->email]);
         alert()->info('Password Reset Link Sent', ['email' => $user->email]);
         return redirect()->route('users.index');
     }
-    
+
+    public function updatePassword(Request $request)
+    {
+        // password, confirm_password, user_id
+
+        $request->validate([
+            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+        ]);
+        $user = User::findOrFail($request->user_id);
+        $user->password = Hash::make($request->password);
+        $user->save();
+        alert()->success('Password Updated');
+        return redirect()->back();
+    }
 }

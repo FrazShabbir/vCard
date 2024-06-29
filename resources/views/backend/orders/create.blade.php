@@ -1,5 +1,5 @@
 @extends('backend.main')
-@section('title', 'Create User - CyberTag')
+@section('title', 'Create User - vCards')
 
 @section('styles')
 @endsection

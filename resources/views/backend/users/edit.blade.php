@@ -1,5 +1,5 @@
 @extends('backend.main')
-@section('title', 'Edit User - CyberTag')
+@section('title', 'Edit User - vCards')
 
 @section('styles')
 @endsection
@@ -185,9 +185,9 @@
                                 </div>
                                 <button type="submit" class="btn btn-primary mr-3">Update Data</button>
                                 <a href="{{ route('users.index') }}" class="btn iq-bg-danger mr-3">Cancel</a>
-                                <a href="{{ route('users.reset_password', $user->id) }}" class="btn iq-bg-info">Reset
-                                    Password</a>
-
+                                <a href="{{ route('users.reset_password', $user->id) }}" class="btn iq-bg-info">Send Reset
+                                    Password Mail</a>
+                                <button type="button" class="btn btn-info" data-toggle="modal"data-target=".bd-example-modal-sm">Reset Password</button>
                             </div>
                         </div>
                     </div>
@@ -223,17 +223,17 @@
                                     </div>
                                 </div>
 
-                                
+
                                 <div id="websites">
 
                                 </div>
 
                                 <div class="row">
-                                  <div class="col-12 text-right">
-                                    <button class="btn btn-primary " onclick="add_website()" type="button">+
-                                        Website
-                                    </button>
-                                  </div>
+                                    <div class="col-12 text-right">
+                                        <button class="btn btn-primary " onclick="add_website()" type="button">+
+                                            Website
+                                        </button>
+                                    </div>
                                 </div>
 
 
@@ -247,6 +247,40 @@
             </form>
         </div>
     </div>
+
+    <div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" style="display: none;"
+        aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <form action="{{ route('users.update.password') }}" method="POST">
+                    <input type="hidden" name="user_id" value="{{ $user->id }}">
+                    <div class="modal-body">
+                        @csrf
+                        <div class="form-group">
+                            <label for="pwd">Password:</label>
+                            <input type="text" class="form-control" id="password" name="password">
+                        </div>
+                        <div class="form-group">
+                            <label for="pwd">C.Password:</label>
+                            <input type="text" class="form-control" id="password_confirmation" name="password_confirmation">
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
 @endsection
 
 
@@ -258,7 +292,7 @@
         function add_website() {
             id = "w" + (Math.random() + 1).toString(36).substring(7);
             template = `
-            <div class="row"  id="${id}">      
+            <div class="row"  id="${id}">
             <div class="col-md-4 col-sm-12 mb-3">
                                         <label for="name" class="required">Name/Type</label>
                                         <input type="text" class="form-control" name="name"

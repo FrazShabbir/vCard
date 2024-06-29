@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Title -->
-    <title>FSF - Reset Password</title>
+    <title>vCards - Reset Password</title>
 
     <!-- Favicon Icon -->
     <link rel="shortcut icon" href="{{ asset('frontend/assets/images/favicon.png') }}" />
@@ -125,13 +125,13 @@
                                         id="">
 
                                     <div class="messages"></div>
-                                   
+
 
                                     <div class="row">
                                       <div class="col-md-12">
                                           <div class="form-group">
                                               <input id="form_name" type="text" name="email" class="form-control"
-                                                  placeholder="email@mail.com" required="required"  value="{{ old('email', $request->email) }}" 
+                                                  placeholder="email@mail.com" required="required"  value="{{ old('email', $request->email) }}"
                                                   data-error="Email is required.">
                                               <div class="help-block with-errors"></div>
                                           </div>

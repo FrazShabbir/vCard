@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Title -->
-    <title>FSF - Sign in</title>
+    <title>vCards - Sign in</title>
 
     <!-- Favicon Icon -->
     <link rel="shortcut icon" href="{{asset('frontend/assets/favicon.png')}}" />
@@ -106,7 +106,7 @@
                                 <h2 class="mb-3">Sign In</h2>
                                 @if (count($errors) > 0)
                                 @foreach ($errors->all() as $error)
-  
+
                                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
                                     {{ $error }}
                                 </div>
