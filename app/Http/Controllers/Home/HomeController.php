@@ -40,7 +40,7 @@ class HomeController extends Controller
 
     public function slug(Request $request, $slug)
     {
-        dd(request->ip());
+        dd($request->ip());
         $user = User::where('username', $slug)->first();
 
         if ($user) {
