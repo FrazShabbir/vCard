@@ -1,13 +1,13 @@
 <!-- meta tags -->
 <meta charset="utf-8">
-<meta name="keywords" content="Funeral Services and Funds" />
-<meta name="description" content="Funeral Services and Funds" />
+<meta name="keywords" content="vcards business website contact card nfc card" />
+<meta name="description" content="Empowering Your Business Digitally" />
 <meta name="author" content="www.vCardseu.org" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <!-- Title -->
 
-<title>@yield('title','vCards - Funeral Services and Funds') | {{fromSettings('site_title')}}</title>
+<title>@yield('title','vCards - Empowering Your Business Digitally') | {{fromSettings('site_title')}}</title>
 
 <!-- Favicon Icon -->
 <link rel="shortcut icon" href="{{asset('frontend/assets/favicon.png')}}" />
