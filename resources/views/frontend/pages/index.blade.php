@@ -16,7 +16,7 @@ justify-content-start
 @endsection
 
 @section('banner')
-  
+
 @include('frontend.partial._navbar')
     <!--header end-->
 
@@ -121,6 +121,14 @@ justify-content-start
                         </div>
                         <h5 class="mt-4 mb-3">User Friendly</h5>
                         <p class="mb-0">Taking design from vCards design and typography, contemporary page layouts.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mt-4  md-0 mt-2">
+                    <div class="p-5" data-bg-color="#ffeff8">
+                        <div class="f-icon"> <i class="flaticon-shop"></i>
+                        </div>
+                        <h5 class="mt-4 mb-3">Shop</h5>
+                        <p class="mb-0">Create your eShop and showcase your products to the world</p>
                     </div>
                 </div>
             </div>
