@@ -43,6 +43,7 @@ class ShopController extends Controller
             $shortlink->slug = $slug;
             $shortlink->shop_id = $shop->id;
             $shortlink->link = $request->website;
+            $shortlink->user_id = auth()->user()->id;
             $shortlink->shortlink = route('shortlink', $slug);
             $shortlink->save();
             $shop->website = $shortlink->shortlink;
@@ -80,6 +81,7 @@ class ShopController extends Controller
             }
             $shortlink->slug = $slug;
             $shortlink->link = $request->website;
+            $shortlink->user_id = auth()->user()->id;
             $shortlink->shortlink = route('shortlink', $slug);
             $shortlink->save();
             $shop->website = $shortlink->shortlink;

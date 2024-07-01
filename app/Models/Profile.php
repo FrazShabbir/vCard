@@ -28,4 +28,8 @@ class Profile extends Model
     {
         return $this->hasMany(SocialLink::class)->where('social_platform_id',8);
     }
+    public function socials()
+    {
+        return $this->hasMany(SocialLink::class)->where('social_platform_id','!=',8);
+    }
 }

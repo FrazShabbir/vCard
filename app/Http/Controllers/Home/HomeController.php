@@ -311,6 +311,8 @@ class HomeController extends Controller
     {
         $shortlink = ShortLink::where('slug', $slug)->first();
         if ($shortlink) {
+            $shortlink->count = $shortlink->count + 1;
+            $shortlink->save();
             return redirect($shortlink->link);
         } else {
             return redirect()->route('home');

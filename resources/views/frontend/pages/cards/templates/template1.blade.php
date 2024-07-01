@@ -27,10 +27,13 @@
 
     <main>
         <section class="user-display-picture-sec">
+            {{-- https://ui-avatars.com/api/?name=John+Doe --}}
             <div class="dp-box">
-                <div class="backgound-box">
+                <div class="backgound-box"
+                    style="background-image: url({{ asset($profile->cover_image ?? 'uploads/cover_images/placeholder.png') }})">
                     <div class="dp-img-box">
-                        <img src="{{ asset('templates/template1/assets/images/user-image.png') }}" alt="">
+                        <img src="{{ asset($profile->avatar ?? 'https://ui-avatars.com/api/?name=' . $user->full_name) }}"
+                            alt="" style="max-width:200px">
                     </div>
                 </div>
             </div>
@@ -133,10 +136,14 @@
                             </h2>
                         </div>
                         <div class="social-box">
-                            <a href="">
-                                <img src="{{ asset('templates/template1/assets/images/image-1.svg') }}" alt="">
-                            </a>
-                            <a href="">
+                            @foreach ($profile->socials as $social)
+                                <a href="{{ $social->shortlink?->shortlink }}" target="_blank">
+                                    <img src="{{ asset('templates/template1/assets/images/image-1.svg') }}"
+                                        alt="Social Link">
+                                </a>
+                            @endforeach
+
+                            {{-- <a href="">
                                 <img src="{{ asset('templates/template1/assets/images/image-2.svg') }}" alt="">
                             </a>
                             <a href="">
@@ -147,7 +154,7 @@
                             </a>
                             <a href="">
                                 <img src="{{ asset('templates/template1/assets/images/image-5.svg') }}" alt="">
-                            </a>
+                            </a> --}}
                         </div>
                     </div>
                 </div>

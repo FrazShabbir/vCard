@@ -14,4 +14,8 @@ class SocialLink extends Model
     {
         return $this->belongsTo(SocialPlatform::class, 'social_platform_id');
     }
+    public function shortlink()
+    {
+        return $this->belongsTo(ShortLink::class, 'short_link_id');
+    }
 }
