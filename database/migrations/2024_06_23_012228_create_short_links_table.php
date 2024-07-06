@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->integer('user_id')->unsigned()->nullable();
             $table->integer('shop_id')->unsigned()->nullable();
+            $table->integer('social_link_id')->unsigned()->nullable();
             $table->integer('product_id')->unsigned()->nullable();
             $table->string('slug')->nullable();
             $table->string('link', 500)->nullable();
@@ -24,7 +25,7 @@ return new class extends Migration
             $table->integer('count')->unsigned()->default(0);
             $table->timestamps();
             $table->softDeletes();
-            
+
         });
     }
 

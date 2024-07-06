@@ -19,6 +19,7 @@ return new class extends Migration
             $table->integer('social_platform_id')->unsigned()->nullable();
             $table->integer('short_link_id')->unsigned()->nullable();
             $table->string('link');
+            $table->string('name');
             $table->unsignedInteger('created_by_id')->nullable();
             $table->unsignedInteger('updated_by_id')->nullable();
             $table->unsignedInteger('deleted_by_id')->nullable();

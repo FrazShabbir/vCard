@@ -306,7 +306,7 @@
                                         {{-- <img src="{{asset(auth()->user()->avatar)}}" alt="Avatar" class="img-fluid" style="max-width: 200px"> --}}
 
                                         <img id="uploadedImage_data_image_1"
-                                            class="img-preview img_modal width_400 img-fluid"
+                                            class="img-preview img_modal width_400 img-fluid" style="max-height: 200px"
                                             src="{{ asset(auth()->user()->profile->avatar) }}" alt=""
                                             accept="image/png, image/jpeg">
 
@@ -330,7 +330,7 @@
                                     </div>
                                     <div class="col-md-6 col-sm-12 mb-3">
 
-                                        <img id="uploadedImage_data_image"
+                                        <img id="uploadedImage_data_image" style="max-height: 200px"
                                             class="img-preview img_modal width_400 img-fluid"
                                             src="{{ asset(auth()->user()->profile->cover_image) }}" alt=""
                                             accept="image/png, image/jpeg">

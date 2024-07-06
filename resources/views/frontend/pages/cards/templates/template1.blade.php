@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="{{ asset('templates/template1/assets/css/bootstrap.min.css') }}">
     <!-- Font Awesome Style-Sheet -->
     <link rel="stylesheet" href="{{ asset('templates/template1/assets/css/all.css') }}">
+    <script src="https://kit.fontawesome.com/2883165f21.js" crossorigin="anonymous"></script>
     <!-- Owl Carsoule -->
     <link rel="stylesheet" href="{{ asset('templates/template1/assets/css/owl.carousel.min.css') }}">
     <link rel="stylesheet" href="{{ asset('templates/template1/assets/css/owl.theme.default.min.css') }}">
@@ -89,7 +90,7 @@
                         </div>
                         <div class="about-content">
                             <p class="text">
-                                {{ $profile->bio ?? '' }}
+                                {{ $profile->bio ?? 'Hello' }}
                             </p>
                         </div>
                     </div>
@@ -111,11 +112,12 @@
                         </div>
                         <div class="col-12">
                             @foreach ($profile->customlinks as $link)
-                                <a class="check-me-link-box mb-3" href="{{ $link->link }}">
+                                <a class="check-me-link-box mb-3" href="{{ $link->shortlink->shortlink }}"
+                                    target="_blank">
                                     <img src="{{ asset('templates/template1/assets/images/world.svg') }}"
                                         alt="">
                                     <span>
-                                        {{ $link->platform->name ?? '' }}
+                                        {{ $link->name ?? '' }}
                                     </span>
                                 </a>
                             @endforeach
@@ -126,6 +128,9 @@
                 </div>
             </section>
         @endif
+        @if ($profile->socials->count()>0)
+
+
         <section class="user-let-connect-sec">
             <div class="container">
                 <div class="row">
@@ -138,8 +143,9 @@
                         <div class="social-box">
                             @foreach ($profile->socials as $social)
                                 <a href="{{ $social->shortlink?->shortlink }}" target="_blank">
-                                    <img src="{{ asset('templates/template1/assets/images/image-1.svg') }}"
-                                        alt="Social Link">
+                                    <i class="{{ $social->platform->icon }}"></i>
+                                    {{-- <img src="{{ asset('templates/template1/assets/images/image-1.svg') }}"
+                                        alt="Social Link"> --}}
                                 </a>
                             @endforeach
 
@@ -160,13 +166,15 @@
                 </div>
             </div>
         </section>
+        @endif
     </main>
 
     <footer>
         <div class="footer-box">
             <p class="text">
-                Powered by <a href="">vCard</a>
+                Powered by <a href="">vCards</a>
             </p>
+            <p>For custom website building or customization, contact us. <a href="https://wa.me/447561498786">Whatsapp</a></p>
         </div>
     </footer>
 

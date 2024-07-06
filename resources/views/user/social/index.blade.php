@@ -2,6 +2,7 @@
 @section('title', 'My Profile - vCards.pk')
 
 @section('styles')
+<script src="https://kit.fontawesome.com/2883165f21.js" crossorigin="anonymous"></script>
 
 @endsection
 
@@ -21,7 +22,7 @@
                         <div class="iq-card">
                             <div class="iq-card-header d-flex justify-content-between">
                                 <div class="iq-header-title">
-                                    <h4 class="card-title">My Address Book</h4>
+                                    <h4 class="card-title">My Social Links</h4>
                                 </div>
                             </div>
                             <div class="iq-card-body px-4">
@@ -33,6 +34,8 @@
                                                 <tr>
                                                     <th scope="col">Platform</th>
                                                     <th scope="col">link</th>
+                                                    <th scope="col">Visits</th>
+                                                    <th scope="col">Tracker link</th>
                                                     <th scope="col">Action</th>
 
                                                 </tr>
@@ -40,8 +43,10 @@
                                             <tbody>
                                                 @foreach ($links as $link)
                                                     <tr>
-                                                        <td>{{ $link->platform->name }}</td>
+                                                        <td>  <i class="{{ $link->platform->icon }} mr-2"></i> {{ $link->platform->name }}</td>
                                                         <td>{{ $link->link }}</td>
+                                                        <td>{{ $link->shortlink->count }}</td>
+                                                        <td>{{ $link->shortlink->shortlink }}</td>
                                                         <td>
                                                             <a href="{{ route('user.social.destroy',$link->id) }}" class="btn btn-danger">Delete</a>
                                                         </td>
@@ -81,8 +86,14 @@
 
                                     <div class="col-md-6 col-sm-12 mb-3">
                                         <label for="link">Link*</label>
-                                        <input type="text" class="form-control" name="link" placeholder="e.g. Google"
+                                        <input type="url" class="form-control" name="link" placeholder="e.g. https://google.com"
                                             value="{{ old('link') }}" required>
+                                    </div>
+
+                                    <div class="col-md-6 col-sm-12 mb-3">
+                                        <label for="name">Name*</label>
+                                        <input type="text" class="form-control" name="name" placeholder="e.g. Google"
+                                            value="{{ old('name') }}" required>
                                     </div>
 
 

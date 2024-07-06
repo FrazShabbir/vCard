@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('link');
-            $table->string('image');
+            $table->string('icon');
             $table->unsignedInteger('created_by_id')->default(1);
             $table->unsignedInteger('updated_by_id')->nullable();
             $table->unsignedInteger('deleted_by_id')->nullable();

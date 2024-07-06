@@ -38,6 +38,7 @@ class SocialLinkController extends Controller
         $link->profile_id = auth()->user()->profile->id;
         $link->social_platform_id = $request->social_platform_id;
         $link->link = $request->link;
+        $link->name = $request->name;
         $link->short_link_id = $shortlink->id;
         $link->created_by_id = auth()->user()->id;
         $link->save();
