@@ -56,6 +56,9 @@ class ProfileController extends Controller
             if ($request->address) {
                 $profile->address = $request->address;
             }
+            if ($request->template_id) {
+                $profile->template_id = $request->template_id;
+            }
 
             if ($request->avatar) {
                 $request->validate([

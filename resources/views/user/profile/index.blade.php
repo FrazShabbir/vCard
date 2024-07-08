@@ -119,6 +119,15 @@
                                             value="{{ Auth::user()->profile->website }}">
                                     </div>
 
+                                    <div class="col-md-6 col-sm-12 mb-3">
+                                        <label for="website">Template</label>
+                                        <select name="template_id" id="template_id" class="form-control">
+                                            <option value="1" {{ Auth::user()->profile->template_id == 1 ? 'selected' : '' }}>
+                                                Template 1</option>
+                                            <option value="2" {{ Auth::user()->profile->template_id == 2 ? 'selected' : '' }}>
+                                                Template 2</option>
+                                        </select>
+                                    </div>
 
 
                                 </div>

@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('cover_image')->default('default/cover/placeholder.png');
             $table->string('website')->nullable();
             $table->text('address')->nullable();
+            $table->string('template_id')->nullable()->default('1');
             $table->timestamps();
             $table->softDeletes();
 

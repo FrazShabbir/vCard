@@ -4,10 +4,10 @@ namespace App\Http\Controllers\Home;
 
 use App\Http\Controllers\Controller;
 use App\Models\Device;
-use App\Models\ShortLink;
 use App\Models\Geolocation;
-use App\Models\User;
 use App\Models\Profile;
+use App\Models\ShortLink;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -99,7 +99,6 @@ class HomeController extends Controller
                         $deviceType = 'Other';
                     }
 
-
                     $device = Device::create([
                         'user_id' => $user->id,
                         'geolocation_id' => $location_id,
@@ -119,16 +118,23 @@ class HomeController extends Controller
                 $user->count = $user->count + 1;
                 $user->save();
                 DB::commit();
-                return view('frontend.pages.cards.templates.template1')
-                ->with('user', $user)
-                ->with('profile', $profile)
-                ->with('extra_class', 'd-none');
+                if ($profile->template_id == 1) {
+                    return view('frontend.pages.cards.templates.template1')
+                        ->with('user', $user)
+                        ->with('profile', $profile)
+                        ->with('extra_class', 'd-none');
+                } else {
+                    return view('frontend.pages.cards.templates.template2')
+                        ->with('user', $user)
+                        ->with('profile', $profile)
+                        ->with('extra_class', 'd-none');
+                }
 
                 return view('frontend.pages.cards.index')
-                ->with('user', $user)
-                ->with('profile', $profile)
-                ->with('extra_class', 'd-none');
-            } catch (\Throwable$th) {
+                    ->with('user', $user)
+                    ->with('profile', $profile)
+                    ->with('extra_class', 'd-none');
+            } catch (\Throwable $th) {
                 DB::rollback();
                 throw $th;
             }
@@ -149,7 +155,7 @@ class HomeController extends Controller
     {
         if (!auth()->user()) {
             return redirect()->route('login.user');
-        }else{
+        } else {
             return redirect()->route('user.profile');
         }
     }
@@ -297,7 +303,7 @@ class HomeController extends Controller
             }
 
             return $vcard->download();
-        } catch (\Throwable$th) {
+        } catch (\Throwable $th) {
 
             alert()->error('Error', 'Something went wrong!');
             return redirect()->back();
@@ -305,7 +311,6 @@ class HomeController extends Controller
         }
 
     }
-
 
     public function shortlinkOpener($slug)
     {
