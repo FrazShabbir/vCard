@@ -135,9 +135,6 @@
 
         /* Add styles for the shop section */
         .shop {
-            background-color: #f7f7f7;
-            padding: 40px;
-            margin-top: 40px;
             border-radius: 20px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
@@ -202,7 +199,7 @@
 </head>
 
 <body>
-    <div class="container">
+    <div class="container mt-2">
         <div class="row">
             <div class="col-md-6 offset-md-3">
                 <div class="banner">
@@ -228,59 +225,78 @@
                             Contact</a>
                     </div>
                 </div>
-                <div class="social-media">
+                @if ($profile->socials->count()>0)
+                <div class="social-media my-3">
                     @foreach ($profile->socials as $social)
                         <a href="{{ $social->shortlink?->shortlink }}" target="_blank">
                             <i class="{{ $social->platform->icon }}"></i>
                         </a>
                     @endforeach
                 </div>
+                @endif
+
             </div>
         </div>
-        <div class="row shop">
-            <div class="col-md-12 text-center">
-                <h2 class="shop-title">Our Shop</h2>
-                <p class="shop-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet nulla
-                    auctor, vestibulum magna sed, convallis ex.</p>
-            </div>
-            <div class="col-md-3">
-                <div class="product">
-                    <img src="https://via.placeholder.com/250x350" alt="Product 1">
-                    <div class="product-info">
-                        <h3>Product 1</h3>
-                        <p>$100</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="product">
-                    <img src="https://via.placeholder.com/250x350" alt="Product 2">
-                    <div class="product-info">
-                        <h3>Product 2</h3>
-                        <p>$200</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="product">
-                    <img src="https://via.placeholder.com/250x350" alt="Product 3">
-                    <div class="product-info">
-                        <h3>Product 3</h3>
-                        <p>$300</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="product">
-                    <img src="https://via.placeholder.com/250x350" alt="Product 4">
-                    <div class="product-info">
-                        <h3>Product 4</h3>
-                        <p>$400</p>
-                    </div>
-                </div>
-            </div>
-        </div>
+
     </div>
+    <div class="container ">
+        <div class="row ">
+            <div class="col-12">
+                <div class="card shop">
+                    <div class="card-body ">
+                        <div class="row text-center">
+                            <div class="col-md-12 text-center">
+                                <h2 class="shop-title">Our Shop</h2>
+                                <p class="shop-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+                                    sit amet nulla
+                                    auctor, vestibulum magna sed, convallis ex.</p>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="product">
+                                    <img src="https://via.placeholder.com/250x350" alt="Product 1">
+                                    <div class="product-info">
+                                        <h3>Product 1</h3>
+                                        <p>$100</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="product">
+                                    <img src="https://via.placeholder.com/250x350" alt="Product 2">
+                                    <div class="product-info">
+                                        <h3>Product 2</h3>
+                                        <p>$200</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="product">
+                                    <img src="https://via.placeholder.com/250x350" alt="Product 3">
+                                    <div class="product-info">
+                                        <h3>Product 3</h3>
+                                        <p>$300</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="product">
+                                    <img src="https://via.placeholder.com/250x350" alt="Product 4">
+                                    <div class="product-info">
+                                        <h3>Product 4</h3>
+                                        <p>$400</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+
     <footer>
         <div class="footer-box m-2">
             <p class="text">
