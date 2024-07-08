@@ -225,15 +225,17 @@
                             Contact</a>
                     </div>
                 </div>
-                @if ($profile->socials->count()>0)
                 <div class="social-media my-3">
+                    @if ($profile->socials->count()>0)
+
                     @foreach ($profile->socials as $social)
                         <a href="{{ $social->shortlink?->shortlink }}" target="_blank">
                             <i class="{{ $social->platform->icon }}"></i>
                         </a>
                     @endforeach
+                    @endif
                 </div>
-                @endif
+
 
             </div>
         </div>
