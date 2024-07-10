@@ -82,7 +82,7 @@ class RegisteredUserController extends Controller
                 $image->move($destinationPath, $imageName);
 
             }
-            $background = 'uploads/cover_images/placeholder.png';
+            $background = 'default/cover/placeholder.png';
 
             if ($request->cover_image) {
                 $request->validate([
@@ -120,7 +120,6 @@ class RegisteredUserController extends Controller
                 'bio' => $request->bio,
                 'organization' => $request->organization,
                 'designation' => $request->designation,
-
                 'cover_image' => $background,
                 'website' => $request->website,
                 'address' => $request->address,

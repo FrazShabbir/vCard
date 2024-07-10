@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
-use App\Models\Profile;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
+use Symfony\Component\HttpFoundation\StreamedResponse;
+
 class DashboardController extends Controller
 {
     public function dashboard()
@@ -20,10 +22,7 @@ class DashboardController extends Controller
     public function memberDashboard()
     {
         $user = Auth::user();
-        // $profile = Profile::where('user_id', $user->id)->first();
-        // if (!$profile->bio or !$profile->organization and !$profile->address) {
-        //     return redirect()->route('user.profile');
-        // }
+
         return view('user.dashboard.dashboard')
             ->with('user', $user);
     }
@@ -34,6 +33,25 @@ class DashboardController extends Controller
         return view('backend.dashboard.dashboard')
             ->with('user', $user);
 
+    }
+
+    public function downloadQRCode()
+    {
+        $username = auth()->user()->username;
+        $url = route('home') . '/' . $username;
+        $imageName = $username . '-qrcode.png';
+
+        $headers = [
+            'Content-Type' => 'image/png',
+            'Content-Disposition' => 'attachment; filename="' . $imageName . '"',
+        ];
+
+        $callback = function () use ($url) {
+            $qrCode = QrCode::eye('circle')->size(200)->generate($url);
+            echo $qrCode;
+        };
+
+        return new StreamedResponse($callback, 200, $headers);
     }
 
 }

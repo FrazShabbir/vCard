@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('platform_version')->nullable();
             $table->string('browser')->nullable();
             $table->string('browser_version')->nullable();
+            // $table->boolean('is_unique')->nullable()->default(true);
             $table->timestamps();
             $table->softDeletes();
         });

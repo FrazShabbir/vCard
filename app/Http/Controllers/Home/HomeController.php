@@ -56,6 +56,7 @@ class HomeController extends Controller
 
                     if ($findIP) {
                         $location_id = $findIP->id;
+                        $is_unique_location = false;
                     }
                     if (!$findIP) {
 
@@ -82,6 +83,7 @@ class HomeController extends Controller
                             'browser_version' => Agent::version(Agent::browser()),
                         ]);
                         $location_id = $location->id;
+                        $is_unique_location = true;
                     }
 
                 }
@@ -110,14 +112,26 @@ class HomeController extends Controller
                         'browser' => Agent::browser(),
                         'browser_version' => Agent::version(Agent::browser()),
                     ]);
-
+                    $is_unique_device = true;
                     $user->reach = $user->reach + 1;
                     $user->save();
+                } else {
+                    $device = $findDevice;
+                    $is_unique_device = false;
                 }
 
                 $user->count = $user->count + 1;
                 $user->save();
                 DB::commit();
+
+                $engagement = new \App\Models\Engagement();
+                $engagement->user_id = $user->id;
+                $engagement->geolocation_id = $location_id;
+                $engagement->device_id = $device->id;
+                $engagement->is_unique_location = $is_unique_location;
+                $engagement->is_unique_device = $is_unique_device;
+                $engagement->save();
+
                 if ($profile->template_id == 1) {
                     return view('frontend.pages.cards.templates.template1')
                         ->with('user', $user)

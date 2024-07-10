@@ -21,6 +21,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['middleware' => ['role:Member', 'auth'], 'prefix' => 'auth/member'], function () {
     Route::get('/', [DashboardController::class, 'memberDashboard'])->name('member.dashboard');
+    Route::get('/download-qr-code', [DashboardController::class, 'downloadQRCode'])->name('downloadQRCode');
+
 
     // Route::group(['middleware' => ['CheckProfile']],function () {
 
