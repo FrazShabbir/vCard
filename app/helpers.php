@@ -88,6 +88,22 @@ if (!function_exists('generateAlphaNumeric')) {
         return $alphanumeric;
     }
 }
+
+if (!function_exists('showGreetings')) {
+
+    function showGreetings()
+    {
+        $hour = date('H');
+        if ($hour < 12) {
+            return 'Good Morning';
+        } else if ($hour < 17) {
+            return 'Good Afternoon';
+        } else {
+            return 'Good Evening';
+        }
+
+    }
+}
 if (!function_exists('generateAlpha')) {
     function generateAlpha($length = 5)
     {
