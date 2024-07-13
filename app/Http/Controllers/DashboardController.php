@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
@@ -23,8 +25,98 @@ class DashboardController extends Controller
     {
         $user = Auth::user();
 
+        // get all engagements of this user as by months
+        // $engagements = $user->engagements()
+        //     ->selectRaw('count(*) as count, monthname(created_at) as month')
+        //     ->groupBy('month')
+        //     ->get();
+
+        // Get the current date and start date for the past 12 months
+        $end = Carbon::now();
+        $start = $end->copy()->subMonths(11);
+
+// Create an array for the last 12 months with zero counts
+        $engagements = [];
+        $locations = [];
+        $devices = [];
+        for ($i = 0; $i < 12; $i++) {
+            $month = $start->copy()->addMonths($i)->format('F');
+            $engagements[$month] = 0;
+            $locations[$month] = 0;
+            $devices[$month] = 0;
+        }
+
+        $userengagements = $user->engagements()
+            ->selectRaw('count(*) as count, monthname(created_at) as month')
+            ->whereBetween('created_at', [$start->startOfMonth(), $end->endOfMonth()])
+            ->groupBy(DB::raw('monthname(created_at)'))
+            ->pluck('count', 'month');
+
+        foreach ($userengagements as $month => $count) {
+            $engagements[$month] = $count;
+        }
+
+        // get user geolocation with same format as above
+        $locationsdata = $user->locations()
+            ->selectRaw('count(*) as count, monthname(created_at) as month')
+            ->whereBetween('created_at', [$start->startOfMonth(), $end->endOfMonth()])
+            ->groupBy(DB::raw('monthname(created_at)'))
+            ->pluck('count', 'month');
+
+        foreach ($locationsdata as $month => $count) {
+            $locations[$month] = $count;
+        }
+
+        $devicesData = $user->devices()
+            ->selectRaw('count(*) as count, monthname(created_at) as month')
+            ->whereBetween('created_at', [$start->startOfMonth(), $end->endOfMonth()])
+            ->groupBy(DB::raw('monthname(created_at)'))
+            ->pluck('count', 'month');
+
+        foreach ($devicesData as $month => $count) {
+            $devices[$month] = $count;
+        }
+
+        // from devices get count of each platform
+        $platforms = $user->devices()
+            ->selectRaw('platform, count(*) as count')
+            ->groupBy('platform')
+            ->pluck('count', 'platform');
+
+        $total = $platforms->sum();
+
+        $platforms_percentages = $platforms->map(function ($count) use ($total) {
+            return ($count / $total) * 100;
+        });
+
+        $devices_count = $user->devices()
+            ->selectRaw('device, count(*) as count')
+            ->groupBy('device')
+            ->pluck('count', 'device');
+        $total = $devices_count->sum();
+        $devices_percentages = $devices_count->map(function ($count) use ($total) {
+            return ($count / $total) * 100;
+        });
+        $clients = $user->devices()
+            ->selectRaw('device_type, count(*) as count')
+            ->groupBy('device_type')
+            ->pluck('count', 'device_type');
+        $total = $clients->sum();
+        $clients_percentages = $clients->map(function ($count) use ($total) {
+            return ($count / $total) * 100;
+        });
         return view('user.dashboard.dashboard')
-            ->with('user', $user);
+            ->with('user', $user)
+            ->with('engagements', $engagements)
+            ->with('locations', $locations)
+            ->with('devices', $devices)
+            ->with('platforms', $platforms)
+            ->with('platforms_percentages', $platforms_percentages)
+            ->with('clients', $clients)
+            ->with('clients_percentages', $clients_percentages)
+            ->with('devices_count', $devices_count)
+            ->with('devices_percentages', $devices_percentages);
+
     }
 
     public function adminDashboard()

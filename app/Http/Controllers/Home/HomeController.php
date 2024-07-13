@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Password;
 use Jenssegers\Agent\Facades\Agent;
 use JeroenDesloovere\VCard\VCard;
 use Stevebauman\Location\Facades\Location;
+use App\Models\Engagement;
 
 class HomeController extends Controller
 {
@@ -124,7 +125,7 @@ class HomeController extends Controller
                 $user->save();
                 DB::commit();
 
-                $engagement = new \App\Models\Engagement();
+                $engagement = new Engagement();
                 $engagement->user_id = $user->id;
                 $engagement->geolocation_id = $location_id;
                 $engagement->device_id = $device->id;

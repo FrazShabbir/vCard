@@ -91,4 +91,9 @@ class User extends Authenticatable
     {
         return $this->locations()->where('is_unique', true)->count();
     }
+
+    public function engagements()
+    {
+        return $this->hasMany(Engagement::class);
+    }
 }

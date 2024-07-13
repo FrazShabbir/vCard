@@ -44,7 +44,7 @@
             <ul class="navbar-list">
                 <li class="line-height">
                     <a href="#" class="search-toggle iq-waves-effect d-flex align-items-center">
-                        <img src="{{ asset('backend/images/user/01.jpg') }}" class="img-fluid rounded mr-3"
+                        <img src="https://ui-avatars.com/api/?name={{ getFullName() }}" class="img-fluid rounded mr-3"
                             alt="user">
                         <div class="caption">
                             <h6 class="mb-0 line-height">{{ getFullName() }}</h6>
