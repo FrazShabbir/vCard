@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Title -->
-    <title>vCards - Sign in</title>
+    <title>{{ config('app.name') }} - Sign in</title>
 
     <!-- Favicon Icon -->
     <link rel="shortcut icon" href="{{asset('frontend/assets/favicon.png')}}" />

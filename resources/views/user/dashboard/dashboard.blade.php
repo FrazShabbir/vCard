@@ -160,6 +160,71 @@
                         <div class="iq-card">
                             <div class="iq-card-header d-flex justify-content-between">
                                 <div class="iq-header-title">
+                                    <h4 class="card-title">Countries Statistics</h4>
+                                </div>
+                            </div>
+                            <div class="iq-card-body">
+                                <div class="progress">
+                                    @foreach ($locations_percentages as $country => $percentage)
+                                        @php
+                                            // Dynamically generate color classes
+                                            $colorClasses = [
+                                                'bg-warning',
+                                                'bg-success',
+                                                'bg-dark',
+                                                'bg-secondary',
+                                                'bg-info',
+                                                'bg-danger',
+                                            ];
+                                            $colorClass = $colorClasses[$loop->index % count($colorClasses)];
+                                        @endphp
+                                        <div class="progress-bar {{ $colorClass }}" role="progressbar"
+                                            style="width: {{ $percentage }}%" aria-valuenow="{{ $percentage }}"
+                                            aria-valuemin="0" aria-valuemax="100">
+                                            {{ $country }} ({{ round($percentage, 2) }}%)
+                                        </div>
+                                    @endforeach
+                                </div>
+
+                                {{-- @foreach ($platforms as $item)
+                                    <div class="progress mb-3">
+                                        <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25"
+                                            aria-valuemin="0" aria-valuemax="100">25%</div>
+                                    </div>
+                                @endforeach --}}
+                                <p class="mt-2">
+                                    Total number of records: {{ $locations_total }}
+                                </p>
+                                @foreach ($locationsNames as $location => $count)
+                                    @php
+                                        $percentage = ($count / $locations_total) * 100;
+                                    @endphp
+
+                                    <div class="row">
+                                        <div class="col-2">
+                                            {{ $location }}
+                                        </div>
+                                        <div class="col-10">
+                                            <div class="progress mb-3">
+                                                <div class="progress-bar bg-primary" role="progressbar"
+                                                    style="width: {{ $percentage }}%;"
+                                                    aria-valuenow="{{ $percentage }}" aria-valuemin="0"
+                                                    aria-valuemax="100">
+                                                    {{ $count }} records -
+                                                    {{ round($percentage, 2) }}%
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-6">
+                        <div class="iq-card">
+                            <div class="iq-card-header d-flex justify-content-between">
+                                <div class="iq-header-title">
                                     <h4 class="card-title">Platform Statistics</h4>
                                 </div>
                             </div>
@@ -170,7 +235,6 @@
                                             // Dynamically generate color classes
                                             $colorClasses = [
                                                 'bg-warning',
-                                                'bg-primary',
                                                 'bg-success',
                                                 'bg-dark',
                                                 'bg-secondary',
@@ -200,12 +264,21 @@
                                     @php
                                         $percentage = ($count / $platform_total) * 100;
                                     @endphp
-                                    <div class="progress mb-3">
-                                        <div class="progress-bar bg-primary" role="progressbar"
-                                            style="width: {{ $percentage }}%;" aria-valuenow="{{ $percentage }}"
-                                            aria-valuemin="0" aria-valuemax="100">
-                                            {{ $platform }} ({{ $count }} records -
-                                            {{ round($percentage, 2) }}%)
+
+                                    <div class="row">
+                                        <div class="col-2">
+                                            {{ $platform }}
+                                        </div>
+                                        <div class="col-10">
+                                            <div class="progress mb-3">
+                                                <div class="progress-bar bg-primary" role="progressbar"
+                                                    style="width: {{ $percentage }}%;"
+                                                    aria-valuenow="{{ $percentage }}" aria-valuemin="0"
+                                                    aria-valuemax="100">
+                                                    {{ $count }} records -
+                                                    {{ round($percentage, 2) }}%
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 @endforeach
@@ -249,15 +322,25 @@
                                     @php
                                         $percentage = ($count / $client_total) * 100;
                                     @endphp
-                                    <div class="progress mb-3">
-                                        <div class="progress-bar bg-primary" role="progressbar"
-                                            style="width: {{ $percentage }}%;" aria-valuenow="{{ $percentage }}"
-                                            aria-valuemin="0" aria-valuemax="100">
-                                            {{ $client }} ({{ $count }} records -
-                                            {{ round($percentage, 2) }}%)
+                                    <div class="row">
+                                        <div class="col-2">
+                                            {{ $client }}
+                                        </div>
+                                        <div class="col-10">
+
+                                            <div class="progress mb-3">
+                                                <div class="progress-bar bg-primary" role="progressbar"
+                                                    style="width: {{ $percentage }}%;"
+                                                    aria-valuenow="{{ $percentage }}" aria-valuemin="0"
+                                                    aria-valuemax="100">
+                                                    {{ $count }} records -
+                                                    {{ round($percentage, 2) }}%
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 @endforeach
+
                             </div>
                         </div>
                     </div>
@@ -275,7 +358,6 @@
                                         @php
                                             // Dynamically generate color classes
                                             $colorClasses = [
-                                                'bg-primary',
                                                 'bg-success',
                                                 'bg-info',
                                                 'bg-warning',
@@ -288,11 +370,10 @@
                                         <div class="progress-bar {{ $colorClass }}" role="progressbar"
                                             style="width: {{ $percentage }}%" aria-valuenow="{{ $percentage }}"
                                             aria-valuemin="0" aria-valuemax="100">
-                                            {{ $device }} ({{ round($percentage, 2) }}%)
+                                            ({{ round($percentage, 2) }}%)
                                         </div>
                                     @endforeach
                                 </div>
-
                                 <p class="mt-2">
                                     Total number of records: {{ $platform_total }}
                                 </p>
@@ -300,18 +381,129 @@
                                     @php
                                         $percentage = ($count / $device_total) * 100;
                                     @endphp
-                                    <div class="progress mb-3">
-                                        <div class="progress-bar bg-primary" role="progressbar"
-                                            style="width: {{ $percentage }}%;" aria-valuenow="{{ $percentage }}"
-                                            aria-valuemin="0" aria-valuemax="100">
-                                            {{ $device }} ({{ $count }} records -
-                                            {{ round($percentage, 2) }}%)
+                                    <d class="row">
+                                        <div class="col-2">
+                                            {{ $device }}
                                         </div>
-                                    </div>
+                                        <div class="col-10">
+                                            <div class="progress mb-3">
+                                                <div class="progress-bar bg-primary" role="progressbar"
+                                                    style="width: {{ $percentage }}%;"
+                                                    aria-valuenow="{{ $percentage }}" aria-valuemin="0"
+                                                    aria-valuemax="100">
+                                                    {{ $count }} records -
+                                                    {{ round($percentage, 2) }}%
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </d iv>
                                 @endforeach
                             </div>
                         </div>
                     </div>
+
+                    <div class="col-6">
+                        <div class="iq-card">
+                            <div class="iq-card-header d-flex justify-content-between">
+                                <div class="iq-header-title">
+                                    <h4 class="card-title">Devices Statistics</h4>
+                                </div>
+                            </div>
+                            <div class="iq-card-body">
+
+                                <div class="progress">
+                                    @foreach ($devices_percentages as $device => $percentage)
+                                        @php
+                                            // Dynamically generate color classes
+                                            $colorClasses = [
+                                                'bg-success',
+                                                'bg-info',
+                                                'bg-warning',
+                                                'bg-danger',
+                                                'bg-secondary',
+                                                'bg-dark',
+                                            ];
+                                            $colorClass = $colorClasses[$loop->index % count($colorClasses)];
+                                        @endphp
+                                        <div class="progress-bar {{ $colorClass }}" role="progressbar"
+                                            style="width: {{ $percentage }}%" aria-valuenow="{{ $percentage }}"
+                                            aria-valuemin="0" aria-valuemax="100">
+                                            ({{ round($percentage, 2) }}%)
+                                        </div>
+                                    @endforeach
+                                </div>
+                                <p class="mt-2">
+                                    Total number of records: {{ $platform_total }}
+                                </p>
+                                @foreach ($devices_count as $device => $count)
+                                    @php
+                                        $percentage = ($count / $device_total) * 100;
+                                    @endphp
+                                    <d class="row">
+                                        <div class="col-2">
+                                            {{ $device }}
+                                        </div>
+                                        <div class="col-10">
+                                            <div class="progress mb-3">
+                                                <div class="progress-bar bg-primary" role="progressbar"
+                                                    style="width: {{ $percentage }}%;"
+                                                    aria-valuenow="{{ $percentage }}" aria-valuemin="0"
+                                                    aria-valuemax="100">
+                                                    {{ $count }} records -
+                                                    {{ round($percentage, 2) }}%
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </d iv>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-6">
+                        <div class="iq-card">
+                            <div class="iq-card-header d-flex justify-content-between">
+                                <div class="iq-header-title">
+                                    <h4 class="card-title">Links Statistics</h4>
+                                </div>
+                            </div>
+                            <div class="iq-card-body">
+
+                                <p class="mt-2">
+                                    {{-- Total number of records: {{ $totalLinks }} --}}
+                                </p>
+
+                                @foreach ($socialLinks as $socialLink)
+                                    @if ($socialLink->shortlink)
+                                        @php
+                                        // dd($linksCount);
+                                            $count = $socialLink->shortlink->count;
+                                            $percentage = ($count / $linksCount) * 100;
+                                            // dd($percentage);
+                                        @endphp
+                                        <div class="row mb-3">
+                                            <div class="col-2">
+                                                {{ $socialLink->name }}
+                                            </div>
+                                            <div class="col-10">
+                                                <div class="progress">
+                                                    <div class="progress-bar bg-primary" role="progressbar"
+                                                        style="width: {{ $percentage }}%;"
+                                                        aria-valuenow="{{ $percentage }}" aria-valuemin="0"
+                                                        aria-valuemax="100">
+                                                        {{ $count }} visits -
+                                                        {{ round($percentage, 2) }}%
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endif
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
 
@@ -370,6 +562,7 @@
                     </div>
                 </div>
             </div>
+
 
         </div>
     @endsection

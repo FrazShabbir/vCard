@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<!-- Mirrored from themeht.com/template/vCards/ltr/index-4.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 25 Jan 2023 17:25:34 GMT -->
 
 <head>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3329597755027709"
@@ -18,7 +17,7 @@
 
         gtag('config', 'G-VHCMR9NB1F');
     </script>
-    
+
     @include('frontend.partial._header')
 </head>
 
@@ -68,6 +67,5 @@
 </body>
 
 
-<!-- Mirrored from themeht.com/template/vCards/ltr/index-4.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 25 Jan 2023 17:30:09 GMT -->
 
 </html>

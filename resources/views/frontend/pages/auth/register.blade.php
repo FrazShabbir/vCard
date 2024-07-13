@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Title -->
-    <title>vCards - Create New Account</title>
+    <title>{{ config('app.name') }} - Create New Account</title>
 
     <!-- Favicon Icon -->
     <link rel="shortcut icon" href="{{asset('frontend/assets/favicon.png')}}" />

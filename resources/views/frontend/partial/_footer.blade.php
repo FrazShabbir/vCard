@@ -5,7 +5,7 @@
                 <a class="footer-logo h2 text-primary mb-0 font-w-7" href="index.html">
                     v<span class="text-white font-w-4">Cards.</span>
                 </a>
-                <p class="my-3 text-light">vCards - vCards.</p>
+                <p class="my-3 text-light">{{ config('app.name') }} - {{ config('app.name') }}.</p>
                 <ul class="list-inline">
                     <li class="list-inline-item"><a class="border rounded px-2 py-1 text-light" href="#"><i
                                 class="la la-facebook"></i></a>
@@ -49,7 +49,7 @@
                         <ul class="list-unstyled mb-0">
                           <li class="mb-3"><a class="list-group-item-action text-light" href="{{route('login')}}">Login</a></li>
                           <li class="mb-3"><a class="list-group-item-action text-light" href="{{route('register')}}">Register</a></li>
-                          
+
                         </ul>
                     </div>
                     <div class="col-12 col-sm-4 mt-6 mt-sm-0">
@@ -74,7 +74,7 @@
         </div>
         <div class="row align-items-center">
             <div class="col-md-6 text-light">
-                Copyright ©<span id="year"></span> All rights reserved by vCards | developed by <u><a
+                Copyright ©<span id="year"></span> All rights reserved by {{ config('app.name') }} | developed by <u><a
                         class="text-primary" href="https://essentialsofts.com/">EssentialSofts</a></u></div>
             <div class="col-md-6 text-md-end mt-3 mt-md-0">
                 <ul class="list-inline mb-0">
@@ -82,8 +82,8 @@
                             Privacy Policies
                         </a>
                     </li>
-                  
-                 
+
+
                 </ul>
             </div>
         </div>

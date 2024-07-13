@@ -1,5 +1,5 @@
 @extends('user.main')
-@section('title', 'My Profile - vCards.pk')
+@section('title', 'Social - ' . config('app.name'))
 
 @section('styles')
 <script src="https://kit.fontawesome.com/2883165f21.js" crossorigin="anonymous"></script>

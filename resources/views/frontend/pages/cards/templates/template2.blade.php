@@ -302,7 +302,7 @@
     <footer>
         <div class="footer-box m-2">
             <p class="text">
-                Powered by <a href="">vCards</a>
+                Powered by <a href="">{{ config('app.name') }}</a>
             </p>
             <p>For custom website building or customization, contact us. <a
                     href="https://wa.me/447561498786">Whatsapp</a></p>

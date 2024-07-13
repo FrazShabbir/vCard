@@ -56,7 +56,7 @@
                         </div>
                         <div>
                             <h5 class="mb-2">Dashboard</h5>
-                            <p class="mb-0">Taking design from vCards design and typography layouts.</p>
+                            <p class="mb-0">Taking design from {{ config('app.name') }} design and typography layouts.</p>
                         </div>
                     </div>
                 </div>
@@ -68,7 +68,7 @@
                         </div>
                         <div>
                             <h5 class="mb-2">Management</h5>
-                            <p class="mb-0">Taking design from vCards design and typography layouts.</p>
+                            <p class="mb-0">Taking design from {{ config('app.name') }} design and typography layouts.</p>
                         </div>
                     </div>
                 </div>
@@ -80,7 +80,7 @@
                         </div>
                         <div>
                             <h5 class="mb-2">Platform</h5>
-                            <p class="mb-0">Taking design from vCards design and typography layouts.</p>
+                            <p class="mb-0">Taking design from {{ config('app.name') }} design and typography layouts.</p>
                         </div>
                     </div>
                 </div>
@@ -92,7 +92,7 @@
                         </div>
                         <div>
                             <h5 class="mb-2">Integrations</h5>
-                            <p class="mb-0">Taking design from vCards design and typography layouts.</p>
+                            <p class="mb-0">Taking design from {{ config('app.name') }} design and typography layouts.</p>
                         </div>
                     </div>
                 </div>
@@ -104,7 +104,7 @@
                         </div>
                         <div>
                             <h5 class="mb-2">User Friendly</h5>
-                            <p class="mb-0">Taking design from vCards design and typography layouts.</p>
+                            <p class="mb-0">Taking design from {{ config('app.name') }} design and typography layouts.</p>
                         </div>
                     </div>
                 </div>
@@ -117,7 +117,7 @@
                         </div>
                         <div>
                             <h5 class="mb-2">Quick Support</h5>
-                            <p class="mb-0">Taking design from vCards design and typography layouts.</p>
+                            <p class="mb-0">Taking design from {{ config('app.name') }} design and typography layouts.</p>
                         </div>
                     </div>
                 </div>
@@ -228,7 +228,7 @@
                                                     class="shadow-primary img-fluid rounded-circle d-inline">
                                             </div>
                                             <div class="card-body p-0">
-                                                <p class="lead font-w-5">vCards Amazing Landing Page All-in-one, clean code,
+                                                <p class="lead font-w-5">{{ config('app.name') }} Amazing Landing Page All-in-one, clean code,
                                                     Crative &amp; Modern design Professional Recommended crofessional and
                                                     great experience, Nam pulvinar vitae neque et porttitor, Praesent sed
                                                     nisi eleifend, adipisicing elit.</p>
@@ -247,7 +247,7 @@
                                                     class="shadow-primary img-fluid rounded-circle d-inline">
                                             </div>
                                             <div class="card-body p-0">
-                                                <p class="lead font-w-5">vCards Amazing Landing Page All-in-one, clean code,
+                                                <p class="lead font-w-5">{{ config('app.name') }} Amazing Landing Page All-in-one, clean code,
                                                     Crative &amp; Modern design Professional Recommended crofessional and
                                                     great experience, Nam pulvinar vitae neque et porttitor, Praesent sed
                                                     nisi eleifend, adipisicing elit.</p>
@@ -269,7 +269,7 @@
                                                     class="shadow-primary img-fluid rounded-circle d-inline">
                                             </div>
                                             <div class="card-body p-0">
-                                                <p class="lead font-w-5">vCards Amazing Landing Page All-in-one, clean code,
+                                                <p class="lead font-w-5">{{ config('app.name') }} Amazing Landing Page All-in-one, clean code,
                                                     Crative &amp; Modern design Professional Recommended crofessional and
                                                     great experience, Nam pulvinar vitae neque et porttitor, Praesent sed
                                                     nisi eleifend, adipisicing elit.</p>
@@ -288,7 +288,7 @@
                                                     class="shadow-primary img-fluid rounded-circle d-inline">
                                             </div>
                                             <div class="card-body p-0">
-                                                <p class="lead font-w-5">vCards Amazing Landing Page All-in-one, clean code,
+                                                <p class="lead font-w-5">{{ config('app.name') }} Amazing Landing Page All-in-one, clean code,
                                                     Crative &amp; Modern design Professional Recommended crofessional and
                                                     great experience, Nam pulvinar vitae neque et porttitor, Praesent sed
                                                     nisi eleifend, adipisicing elit.</p>
@@ -307,7 +307,7 @@
                                                     class="shadow-primary img-fluid rounded-circle d-inline">
                                             </div>
                                             <div class="card-body p-0">
-                                                <p class="lead font-w-5">vCards Amazing Landing Page All-in-one, clean code,
+                                                <p class="lead font-w-5">vC{{ config('app.name') }}ards Amazing Landing Page All-in-one, clean code,
                                                     Crative &amp; Modern design Professional Recommended crofessional and
                                                     great experience, Nam pulvinar vitae neque et porttitor, Praesent sed
                                                     nisi eleifend, adipisicing elit.</p>
@@ -326,7 +326,7 @@
                                                     class="shadow-primary img-fluid rounded-circle d-inline">
                                             </div>
                                             <div class="card-body p-0">
-                                                <p class="lead font-w-5">vCards Amazing Landing Page All-in-one, clean code,
+                                                <p class="lead font-w-5">{{ config('app.name') }} Amazing Landing Page All-in-one, clean code,
                                                     Crative &amp; Modern design Professional Recommended crofessional and
                                                     great experience, Nam pulvinar vitae neque et porttitor, Praesent sed
                                                     nisi eleifend, adipisicing elit.</p>
@@ -345,7 +345,7 @@
                                                     class="shadow-primary img-fluid rounded-circle d-inline">
                                             </div>
                                             <div class="card-body p-0">
-                                                <p class="lead font-w-5">vCards Amazing Landing Page All-in-one, clean code,
+                                                <p class="lead font-w-5">{{ config('app.name') }} Amazing Landing Page All-in-one, clean code,
                                                     Crative &amp; Modern design Professional Recommended crofessional and
                                                     great experience, Nam pulvinar vitae neque et porttitor, Praesent sed
                                                     nisi eleifend, adipisicing elit.</p>
@@ -364,7 +364,7 @@
                                                     class="shadow-primary img-fluid rounded-circle d-inline">
                                             </div>
                                             <div class="card-body p-0">
-                                                <p class="lead font-w-5">vCards Amazing Landing Page All-in-one, clean code,
+                                                <p class="lead font-w-5">{{ config('app.name') }} Amazing Landing Page All-in-one, clean code,
                                                     Crative &amp; Modern design Professional Recommended crofessional and
                                                     great experience, Nam pulvinar vitae neque et porttitor, Praesent sed
                                                     nisi eleifend, adipisicing elit.</p>

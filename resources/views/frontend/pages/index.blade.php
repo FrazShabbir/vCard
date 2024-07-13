@@ -1,5 +1,5 @@
 ﻿@extends('frontend.main')
-@section('title', 'Index Page')
+@section('title', 'Home'. ' | '.config('app.name'))
 
 @section('styles')
 @endsection
@@ -8,16 +8,16 @@
 @endpush
 
 @section('extra_class_2')
-position-absolute w-100 z-index-1
+    position-absolute w-100 z-index-1
 @endsection
 
 @section('extra_class')
-justify-content-start
+    justify-content-start
 @endsection
 
 @section('banner')
 
-@include('frontend.partial._navbar')
+    @include('frontend.partial._navbar')
     <!--header end-->
 
 
@@ -32,10 +32,12 @@ justify-content-start
                 </div>
                 <div class="col-12 col-lg-7 col-xl-6 order-lg-1">
                     <h1 class="display-4 mb-3">
-                        vCard <span class="font-w-7">Better & Faster</span>
+                        {{ config('app.name') }} <span class="font-w-7">Better & Faster</span>
                     </h1>
                     <!-- Text -->
-                    <p class="lead text-muted mb-4">In today's digital age, it's essential to have a professional online presence that stands out. A vCard is a convenient and effective way to showcase your contact information, work experience, and professional achievements to potential clients or employers.</p>
+                    <p class="lead text-muted mb-4">In today's digital age, it's essential to have a professional online
+                        presence that stands out. A config('app.name') is a convenient and effective way to showcase your contact
+                        information, work experience, and professional achievements to potential clients or employers.</p>
                     <!-- Buttons -->
                     <a href="#" class="btn btn-sm btn-primary text-start me-1"> <i
                             class="la la-apple me-2 ic-2x d-inline-block"></i>
@@ -63,7 +65,8 @@ justify-content-start
             <div class="row align-items-center">
                 <div class="col-lg-4">
                     <div>
-                        <h2 class="mb-0"><span class="font-w-4 d-block">Trusted people </span> with vCards</h2>
+                        <h2 class="mb-0"><span class="font-w-4 d-block">Trusted people </span> with
+                            {{ config('app.name') }}</h2>
                     </div>
                 </div>
                 <div class="col-lg-8 mt-3 mt-lg-0">
@@ -104,7 +107,8 @@ justify-content-start
                         <div class="f-icon"> <i class="flaticon-prototype-1"></i>
                         </div>
                         <h5 class="mt-4 mb-3">Awesome Design</h5>
-                        <p class="mb-0">Taking design from vCards design and typography, contemporary page layouts.</p>
+                        <p class="mb-0">Taking design from {{ config('app.name') }} design and typography, contemporary
+                            page layouts.</p>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 mt-4 mt-md-0">
@@ -112,7 +116,8 @@ justify-content-start
                         <div class="f-icon"> <i class="flaticon-lightbulb"></i>
                         </div>
                         <h5 class="mt-4 mb-3">Easy to Use</h5>
-                        <p class="mb-0">Taking design from vCards design and typography, contemporary page layouts.</p>
+                        <p class="mb-0">Taking design from {{ config('app.name') }} design and typography, contemporary
+                            page layouts.</p>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 mt-4 mt-lg-0">
@@ -120,7 +125,8 @@ justify-content-start
                         <div class="f-icon"> <i class="flaticon-friendship"></i>
                         </div>
                         <h5 class="mt-4 mb-3">User Friendly</h5>
-                        <p class="mb-0">Taking design from vCards design and typography, contemporary page layouts.</p>
+                        <p class="mb-0">Taking design from {{ config('app.name') }} design and typography, contemporary
+                            page layouts.</p>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 mt-4  md-0 mt-2">
@@ -145,8 +151,7 @@ justify-content-start
             <div class="row align-items-center justify-content-between">
                 <div class="col-12 col-lg-6 mb-6 mb-lg-0">
                     <div class="text-center">
-                        <img src="{{ asset('frontend/assets/images/app/section.png') }}" alt="Image"
-                            class="img-fluid">
+                        <img src="{{ asset('frontend/assets/images/app/section.png') }}" alt="Image" class="img-fluid">
                     </div>
                 </div>
                 <div class="col-12 col-lg-6 col-xl-5">
@@ -161,7 +166,9 @@ justify-content-start
                                 <div class="me-3"> <span class="list-dot" data-bg-color="#7550E5"
                                         style="background-color: rgb(1, 164, 121);"></span>
                                 </div>
-                                <p class="mb-0"><span class="text-primary">NFC-powered:</span> <small>With an NFC-enabled vCard, you can instantly share your contact information with others simply by tapping your smartphone or device against theirs.</small></p>
+                                <p class="mb-0"><span class="text-primary">NFC-powered:</span> <small>With an NFC-enabled
+                                    {{ config('app.name') }}, you can instantly share your contact information with others simply by
+                                        tapping your smartphone or device against theirs.</small></p>
                             </div>
                         </div>
                         <div class="mb-3">
@@ -169,7 +176,9 @@ justify-content-start
                                 <div class="me-3"> <span class="list-dot" data-bg-color="#7550E5"
                                         style="background-color: rgb(1, 164, 121);"></span>
                                 </div>
-                                <p class="mb-0"> <span class="text-primary">Customizable:</span> <small>You can personalize your vCard by adding your photo, job title, social media links, and other relevant information.</small></p>
+                                <p class="mb-0"> <span class="text-primary">Customizable:</span> <small>You can
+                                        personalize your {{ config('app.name') }} by adding your photo, job title, social media links, and
+                                        other relevant information.</small></p>
                             </div>
                         </div>
                         <div class="mb-3">
@@ -177,7 +186,9 @@ justify-content-start
                                 <div class="me-3"> <span class="list-dot" data-bg-color="#7550E5"
                                         style="background-color: rgb(1, 164, 121);"></span>
                                 </div>
-                                <p class="mb-0"> <span class="text-primary">Easy to update:</span> <small>If your contact information changes, you can quickly update your vCard without having to reprint physical business cards.</small></p>
+                                <p class="mb-0"> <span class="text-primary">Easy to update:</span> <small>If your
+                                        contact information changes, you can quickly update your {{ config('app.name') }} without having to
+                                        reprint physical business cards.</small></p>
                             </div>
                         </div>
                         <div>
@@ -185,7 +196,9 @@ justify-content-start
                                 <div class="me-3"> <span class="list-dot" data-bg-color="#7550E5"
                                         style="background-color: rgb(1, 164, 121);"></span>
                                 </div>
-                                <p class="mb-0"><span class="text-primary">Eco-friendly:</span> <small>By using a digital vCard with NFC, you're reducing waste and helping the environment.</small></p>
+                                <p class="mb-0"><span class="text-primary">Eco-friendly:</span> <small>By using a
+                                        digital {{ config('app.name') }} with NFC, you're reducing waste and helping the environment.</small>
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -211,7 +224,10 @@ justify-content-start
                     <div class="card border-0 bg-transparent">
                         <div class="card-body p-0"> <i
                                 class="las la-quote-left ic-2x text-white bg-primary rounded-circle p-1"></i>
-                            <p class="font-w-5 lead my-3 text-light">I was blown away by vCards's NFC-enabled vCard. Not only was it incredibly easy to share my contact information with others, but it also made me stand out in a sea of traditional business cards. Highly recommend!</p>
+                            <p class="font-w-5 lead my-3 text-light">I was blown away by {{ config('app.name') }}'s
+                                NFC-enabled {{ config('app.name') }}. Not only was it incredibly easy to share my contact information with
+                                others, but it also made me stand out in a sea of traditional business cards. Highly
+                                recommend!</p>
                             <div class="d-flex align-items-center">
                                 <div>
                                     <img alt="Image" src="{{ asset('frontend/assets/images/testimonial/01.jpg') }}"
@@ -229,7 +245,10 @@ justify-content-start
                     <div class="card border-0 bg-transparent">
                         <div class="card-body p-0"> <i
                                 class="las la-quote-left ic-2x text-white bg-primary rounded-circle p-1"></i>
-                            <p class="font-w-5 lead my-3 text-light">As someone who attends a lot of networking events, I've seen my fair share of business cards. But vCards's NFC-enabled vCard is truly next-level. It's convenient, eco-friendly, and professional. I won't be going back to traditional business cards anytime soon!</p>
+                            <p class="font-w-5 lead my-3 text-light">As someone who attends a lot of networking events,
+                                I've seen my fair share of business cards. But {{ config('app.name') }}'s NFC-enabled {{ config('app.name') }}
+                                is truly next-level. It's convenient, eco-friendly, and professional. I won't be going back
+                                to traditional business cards anytime soon!</p>
                             <div class="d-flex align-items-center">
                                 <div>
                                     <img alt="Image" src="{{ asset('frontend/assets/images/testimonial/02.jpg') }}"
@@ -245,7 +264,10 @@ justify-content-start
                     <div class="card border-0 bg-transparent mt-5">
                         <div class="card-body p-0"> <i
                                 class="las la-quote-left ic-2x text-white bg-primary rounded-circle p-1"></i>
-                            <p class="font-w-5 lead my-3 text-light">I'm so glad I decided to go with vCard's NFC-enabled vCard. It's not only a convenient way to share my contact information, but it also aligns with my values of sustainability and reducing waste. The fact that it's customizable is just icing on the cake. Highly recommend!</p>
+                            <p class="font-w-5 lead my-3 text-light">I'm so glad I decided to go with {{ config('app.name') }}'s NFC-enabled
+                                {{ config('app.name') }}. It's not only a convenient way to share my contact information, but it also aligns
+                                with my values of sustainability and reducing waste. The fact that it's customizable is just
+                                icing on the cake. Highly recommend!</p>
                             <div class="d-flex align-items-center">
                                 <div>
                                     <img alt="Image" src="{{ asset('frontend/assets/images/testimonial/03.jpg') }}"
@@ -303,7 +325,8 @@ justify-content-start
                 </div>
                 <div class="col-lg-8 col-12">
                     <div class="mb-5">
-                        <h2 class="mb-0"><span class="font-w-4 d-block">vCards provide Unique</span> smart features</h2>
+                        <h2 class="mb-0"><span class="font-w-4 d-block">{{ config('app.name') }} provide Unique</span>
+                            smart features</h2>
                     </div>
                     <div class="row">
                         <div class="col-md-6">
@@ -315,7 +338,8 @@ justify-content-start
                                 </div>
                                 <div>
                                     <h5 class="mb-2">Online Application</h5>
-                                    <p class="mb-0">Taking design from vCards design and typography layouts.</p>
+                                    <p class="mb-0">Taking design from {{ config('app.name') }} design and typography
+                                        layouts.</p>
                                 </div>
                             </div>
                         </div>
@@ -328,7 +352,8 @@ justify-content-start
                                 </div>
                                 <div>
                                     <h5 class="mb-2">User Friendly</h5>
-                                    <p class="mb-0">Taking design from vCards design and typography layouts.</p>
+                                    <p class="mb-0">Taking design from {{ config('app.name') }} design and typography
+                                        layouts.</p>
                                 </div>
                             </div>
                         </div>
@@ -341,7 +366,8 @@ justify-content-start
                                 </div>
                                 <div>
                                     <h5 class="mb-2">Online Donation</h5>
-                                    <p class="mb-0">Taking design from vCards design and typography layouts.</p>
+                                    <p class="mb-0">Taking design from {{ config('app.name') }} design and typography
+                                        layouts.</p>
                                 </div>
                             </div>
                         </div>
@@ -354,7 +380,8 @@ justify-content-start
                                 </div>
                                 <div>
                                     <h5 class="mb-2">24/7 Support</h5>
-                                    <p class="mb-0">Taking design from vCards design and typography layouts.</p>
+                                    <p class="mb-0">Taking design from {{ config('app.name') }} design and typography
+                                        layouts.</p>
                                 </div>
                             </div>
                         </div>
@@ -369,7 +396,7 @@ justify-content-start
 
     <!--newsletter start-->
 
-   @include('frontend.partial.newsletter')
+    @include('frontend.partial.newsletter')
 
     <!--newsletter end-->
 @endsection

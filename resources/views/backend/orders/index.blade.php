@@ -1,5 +1,5 @@
 @extends('backend.main')
-@section('title', 'vCards.pk - Orders')
+@section('title', 'Orders - ' . config('app.name'))
 
 @section('styles')
 @endsection

@@ -4,188 +4,782 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ $user->full_name }} - vCard</title>
-    <!-- Fav Icon -->
-    <link rel="shortcut icon" href="" type="image/x-icon">
-    <!-- Bootstrap CDN -->
-    <link rel="stylesheet" href="{{ asset('templates/template1/assets/css/bootstrap.min.css') }}">
-    <!-- Font Awesome Style-Sheet -->
-    <link rel="stylesheet" href="{{ asset('templates/template1/assets/css/all.css') }}">
+    <title>Vcard Template</title>
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- Fontawesome -->
     <script src="https://kit.fontawesome.com/2883165f21.js" crossorigin="anonymous"></script>
-    <!-- Owl Carsoule -->
-    <link rel="stylesheet" href="{{ asset('templates/template1/assets/css/owl.carousel.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('templates/template1/assets/css/owl.theme.default.min.css') }}">
-    <!-- Custom Style-Sheet -->
-    <link rel="stylesheet" href="{{ asset('templates/template1/assets/css/style.css') }}">
-    <link rel="stylesheet" href="{{ asset('templates/template1/assets/css/responsive.css') }}">
+
+    <link rel="stylesheet" href="assets/css/all.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Poppins", sans-serif;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        p {
+            margin: 0;
+            padding: 0;
+        }
+
+        .design-for-desktop {
+            position: relative;
+            transition: 0.3s all ease;
+        }
+
+        .top-backgound-box {
+            background: #267871;
+            background: linear-gradient(180deg, rgba(38, 120, 113, 1) 0%, rgba(19, 106, 138, 1) 100%);
+            width: 100%;
+            height: 350px;
+        }
+
+        .top-backgound-box.for-shop {
+            background: rgb(75, 108, 183);
+            background: linear-gradient(180deg, rgba(75, 108, 183, 1) 0%, rgba(24, 40, 72, 1) 100%);
+        }
+
+        .user-top-details {
+            position: absolute;
+            top: 210px;
+            width: 100%;
+        }
+
+        .profile-img {
+            border-radius: 50rem;
+            width: 250px;
+            height: 250px;
+            border: 6px solid #fff;
+            margin: 0 auto;
+        }
+
+        .name {
+            font-size: 30px;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 0;
+        }
+
+        .position-tags {
+            display: flex;
+            align-items: center;
+            justify-content: start;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .position-tags p {
+            font-size: 14px;
+            font-weight: normal;
+            color: #fff;
+        }
+
+        .save-contact-btn-white {
+            background-color: #fff;
+            color: #1F8AFF;
+            border-radius: 50rem;
+            padding: 7px 60px;
+            font-size: 16px;
+            font-weight: 500;
+            border: 1px solid #fff;
+            transition: 0.3s all ease;
+        }
+
+        .save-contact-btn-white:hover {
+            background-color: #1F8AFF;
+            color: #fff;
+            border-color: #1F8AFF;
+        }
+
+        .social-box {
+            display: flex;
+            align-items: center;
+            justify-content: end;
+            gap: 15px;
+        }
+
+        .social-box a img {
+            height: 20px;
+        }
+
+        .location {
+            color: #858585;
+            font-size: 16px;
+        }
+
+        .location i {
+            color: #000;
+            ;
+        }
+
+
+        .user-about-detail {
+            margin-top: 150px;
+        }
+
+        .heading {
+            font-size: 30px;
+            font-weight: 600;
+            color: #000;
+            margin-bottom: 15px;
+        }
+
+        .user-about-detail .description {
+            color: #686868;
+            font-size: 14px;
+            margin-bottom: 30px;
+            line-height: 22px;
+        }
+
+        .check-me-out-box {
+            margin-bottom: 30px;
+        }
+
+        .check-me-out-link {
+            background-color: #F5F5F5;
+            border: 0.5px solid #F9F9F9;
+            padding: 10px 20px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50rem;
+            text-align: center;
+            font-size: 12px;
+            color: #000;
+            transition: 0.3s all ease;
+        }
+
+        .check-me-out-link i {
+            font-size: 20px;
+        }
+
+        .check-me-out-link:hover {
+            filter: brightness(0.9);
+        }
+
+        .design-for-desktop footer {
+            background-color: #F5F5F5;
+            border-top: 0.5px solid #F9F9F9;
+            padding: 7px 20px;
+            text-align: center;
+            width: 100%;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+        }
+
+        .design-for-desktop footer p {
+            color: #000;
+            font-weight: 500;
+            font-size: 12px;
+        }
+
+        .design-for-desktop footer p a {
+            color: #1F8AFF;
+        }
+
+
+
+
+        .google-rating-button {
+            background-color: #F5F5F5;
+            border: 0.5px solid #F9F9F9;
+            padding: 10px 60px;
+            width: fit-content;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50rem;
+            text-align: center;
+            font-size: 14px;
+            color: #000;
+            transition: 0.3s all ease;
+            margin-bottom: 30px;
+        }
+
+        .google-rating-button i {
+            color: #FED30A;
+        }
+
+        .google-rating-button img {
+            margin-left: 10px;
+        }
+
+        .google-rating-button:hover {
+            filter: brightness(0.9);
+        }
+
+
+
+        .ouer-team-section {
+            margin-bottom: 50px;
+        }
+
+        .team-box {
+            position: relative;
+            display: block;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 30px;
+            margin-bottom: 20px;
+        }
+
+        .team-box img {
+            height: 400px;
+            width: 100%;
+            object-fit: cover;
+            object-position: center top;
+            border-radius: 30px;
+        }
+
+        .team-box .team-detail-box {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            padding: 20px 20px 20px 20px;
+            background: rgb(0, 0, 0);
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 81%);
+            border-bottom-left-radius: 30px;
+            border-bottom-right-radius: 30px;
+        }
+
+        .team-box .team-detail-box .team-name {
+            font-size: 16px;
+            font-weight: 500;
+            color: #fff;
+        }
+
+        .team-box .team-detail-box .team-designation {
+            font-size: 11px;
+            font-weight: 300;
+            color: #fff;
+        }
+
+
+
+
+
+
+        .for-mobile {
+            display: none;
+        }
+
+        @media only screen and (max-width: 1200px) {
+            .profile-img {
+                width: 200px;
+                height: 200px;
+            }
+
+            .user-top-details {
+                top: 235px;
+            }
+        }
+
+        @media only screen and (max-width: 992px) {
+            .profile-img {
+                width: 170px;
+                height: 170px;
+            }
+
+            .user-top-details {
+                top: 250px;
+            }
+
+            .save-contact-btn-white {
+                padding: 7px 40px;
+            }
+
+            .user-about-detail {
+                margin-top: 100px;
+            }
+        }
+
+        @media only screen and (max-width: 768px) {
+            /* .design-for-desktop {
+        display: none;
+    } */
+
+
+
+            .profile-img {
+                width: 180px;
+                height: 180px;
+                margin-bottom: 20px;
+            }
+
+            .heading {
+                text-align: center;
+            }
+
+            .user-about-detail .description {
+                text-align: center;
+            }
+
+            .check-me-out-link {
+                margin-bottom: 20px;
+            }
+
+            .design-for-desktop footer {
+                background-color: transparent;
+                position: relative;
+            }
+
+            .user-top-details {
+                position: absolute;
+                top: 110px;
+            }
+
+            .user-about-detail {
+                margin-top: 330px;
+            }
+
+            .save-contact-btn-white {
+                background-color: #1F8AFF;
+                color: #fff;
+                width: 75%;
+            }
+
+            .name {
+                color: #000;
+                text-align: center;
+                margin-bottom: 3px;
+            }
+
+            .position-tags {
+                justify-content: center;
+                margin-bottom: 5px;
+            }
+
+            .position-tags p {
+                color: #B6B6B6;
+            }
+
+            .location {
+                text-align: center;
+                margin-bottom: 15px;
+            }
+
+
+            .check-me-out-box {
+                margin-bottom: 30px;
+            }
+
+            .social-box {
+                justify-content: center;
+                gap: 20px;
+            }
+
+            .social-box a img {
+                height: 35px;
+            }
+
+            .lets-connect-section {
+                margin-bottom: 50px;
+            }
+
+            .top-backgound-box {
+                height: 215px;
+            }
+
+
+
+
+
+
+
+            .ouer-team-section {
+                margin-bottom: 30px;
+            }
+
+            .google-rating-button {
+                text-align: center;
+                width: 75%;
+                padding: 10px 10px;
+                margin: 0 auto;
+            }
+
+            .team-box {
+                text-align: center;
+                box-shadow: none;
+                margin-bottom: 10px;
+            }
+
+            .team-box img {
+                width: 76px;
+                height: 76px;
+                border-radius: 50rem;
+                border: 3px solid #1F8AFF;
+            }
+
+            .team-box .team-detail-box {
+                position: relative;
+                background: none;
+                padding-top: 10px;
+            }
+
+            .team-box .team-detail-box .team-name {
+                font-size: 14px;
+                font-weight: 500;
+                color: #000;
+            }
+
+            .team-box .team-detail-box .team-designation {
+                font-size: 8px;
+                font-weight: 300;
+                color: #B9B9B9;
+            }
+
+            .catlog-box img {
+                width: 100%;
+                height: 100px;
+                margin-bottom: 15px;
+                border-radius: 20px;
+                border: none;
+            }
+
+            .catlog-box .big {
+                height: 215px;
+            }
+
+            .catlog-box .team-detail-box {
+                position: absolute;
+                left: 0;
+                bottom: 0;
+                width: 100%;
+                padding: 20px 20px 20px 20px;
+                background: rgb(0, 0, 0);
+                background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 81%);
+                border-bottom-left-radius: 20px;
+                border-bottom-right-radius: 20px;
+            }
+
+            .catlog-box .team-detail-box .team-name {
+                font-size: 12px;
+                font-weight: 500;
+                color: #fff;
+            }
+
+            .catlog-box .team-detail-box .team-designation {
+                font-size: 7px;
+                font-weight: 300;
+                color: #fff;
+            }
+
+            .for-desktop {
+                display: none;
+            }
+
+            .for-mobile {
+                display: block;
+            }
+        }
+    </style>
 </head>
 
 <body>
+    <div class="body-wrapper">
+        <div class="design-for-desktop">
+            <div class="top-backgound-box for-shop"></div>
+            <div class="user-top-details">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-lg-3 col-md-3 col-12">
+                            <div class="text-center">
+                                <img src="{{ asset($profile->avatar ?? 'https://ui-avatars.com/api/?name=' . $user->full_name) }}"
+                                    alt="Max Haley" class="profile-img">
+                            </div>
+                        </div>
+                        <div class="col-lg-9 col-md-9 col-12">
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-12">
+                                    <div>
+                                        <h1 class="name">
+                                            {{ getFullNameById($user->id) }}
+                                        </h1>
+                                        <div class="position-tags">
+                                            <p>
+                                                {{ $profile->organization ?? '-' }}
+                                            </p>
+                                            <p>
+                                                {{ $profile->designation ?? '-' }}
+                                            </p>
+                                        </div>
+                                        @if ($profile->primaryaddress)
+                                            <a class="location for-mobile" href="">
+                                                <i
+                                                    class="fal fa-map-marker-alt me-2"></i>{{ $profile->primaryaddress->city->name ?? '' }}
+                                                . {{ $profile->primaryaddress->state->name ?? '' }} .
+                                                {{ $profile->primaryaddress->country->name ?? '' }}.
+                                            </a>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-12">
+                                    <div class="text-center text-lg-end text-md-end">
+                                        <a href="{{ route('downloadVCard', $user->username) }}"
+                                            class="save-contact-btn-white" target="_blank">
+                                            <i class="fal fa-cloud-download-alt me-2"></i>Save Contact
+                                        </a>
+                                        <a href="" class="google-rating-button for-mobile mt-4">
+                                            <i class="fas fa-star me-2"></i>Review Us on <img
+                                                src="assets/images/image 8.svg" alt="">
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="">
+                                        @if ($profile->primaryaddress)
+                                            <a class="location for-desktop" href="">
+                                                <i
+                                                    class="fal fa-map-marker-alt me-2"></i>{{ $profile->primaryaddress->city->name ?? '' }}
+                                                . {{ $profile->primaryaddress->state->name ?? '' }} .
+                                                {{ $profile->primaryaddress->country->name ?? '' }}.
+                                            </a>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="col-6">
 
-    <header>
+                                    <div class="social-box for-desktop">
+                                        @if ($profile->socials->count() > 0)
+                                            @foreach ($profile->socials as $social)
+                                                <a href="{{ $social->shortlink?->shortlink }}" target="_blank">
+                                                    <i class="{{ $social->platform->icon }}"></i>
+                                                    {{-- <img src="assets/images/fa6-brands_square-x-twitter.svg" alt=""> --}}
+                                                </a>
+                                            @endforeach
+                                        @endif
+                                        {{-- <a href="">
+                                            <img src="assets/images/devicon_linkedin.svg" alt="">
+                                        </a>
+                                        <a href="">
+                                            <img src="assets/images/skill-icons_instagram.svg" alt="">
+                                        </a>
+                                        <a href="">
+                                            <img src="assets/images/logos_facebook.svg" alt="">
+                                        </a>
+                                        <a href="">
+                                            <img src="assets/images/logos_google-gmail.svg" alt="">
+                                        </a> --}}
+                                    </div>
 
-    </header>
-
-    <main>
-        <section class="user-display-picture-sec">
-            {{-- https://ui-avatars.com/api/?name=John+Doe --}}
-            <div class="dp-box">
-                <div class="backgound-box"
-                    style="background-image: url({{ asset($profile->cover_image ?? 'uploads/cover_images/placeholder.png') }})">
-                    <div class="dp-img-box">
-                        <img src="{{ asset($profile->avatar ?? 'https://ui-avatars.com/api/?name=' . $user->full_name) }}"
-                            alt="" style="max-width:200px">
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="user-name-box">
-                <h1>
-                    {{ getFullNameById($user->id) }}
-                </h1>
-                <div class="user-tag-box">
-                    <p class="tag">
-                        {{ $profile->organization }}
-                    </p>
-                    <p class="tag">
-                        {{ $profile->designation }}
-                    </p>
+            <div class="user-about-detail">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <h2 class="heading">
+                                About Me
+                            </h2>
+                            <p class="description">
+                                {{ $profile->bio ?? 'Hello' }}
+                            </p>
+                            <a href="" class="google-rating-button for-desktop">
+                                <i class="fas fa-star me-2"></i>Review Us on <img src="assets/images/image 8.svg"
+                                    alt="">
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
-            @if ($profile->primaryaddress)
-                <a href="" class="user-address-box">
+            @if ($profile->customlinks->count() > 0)
+                <div class="check-me-out-box">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12">
+                                <h2 class="heading">
+                                    Check Us Out
+                                </h2>
+                                <div class="link-box">
 
-                    {{-- <img src="{{ asset('templates/template1/assets/images/Location.png') }}" alt=""> --}}
-                    <p class="text">
-                        {{ $profile->primaryaddress->city->name ?? '' }}
-                    </p>
+                                    <div class="row">
+                                        <div class="col-lg-3 col-md-3 col-12">
+                                            <div>
+                                                <a href="{{ $link->shortlink->shortlink }}" class="check-me-out-link">
+                                                    <i class="fal fa-globe me-2"></i> {{ $link->name ?? '' }}
+                                                </a>
+                                            </div>
+                                        </div>
 
-                    <i class="fal fa-circle"></i>
+                                    </div>
 
-                    <p class="text">
-                        {{ $profile->primaryaddress->state->name ?? '' }}
-                    </p>
-                    <i class="fal fa-circle"></i>
-                    <p class="text">
-                        {{ $profile->primaryaddress->country->name ?? '' }}
-                    </p>
-                </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             @endif
 
 
-            <div class="save-contact-btn-box">
-                <a href="{{ route('downloadVCard', $user->username) }}">
-                    <img src="{{ asset('templates/template1/assets/images/download-icon.svg') }}" alt="">
-                    Save Contact
-                </a>
-            </div>
-        </section>
-        <section class="user-about-me-sec">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="section-heading">
-                            <h2>
-                                About Me
-                            </h2>
-                        </div>
-                        <div class="about-content">
-                            <p class="text">
-                                {{ $profile->bio ?? 'Hello' }}
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        @if ($profile->customlinks->count() > 0)
-
-
-            <section class="user-checkme-out-sec">
-                <div class="container-fluid">
+            {{-- <div class="ouer-team-section">
+                <div class="container">
                     <div class="row">
                         <div class="col-12">
-                            <div class="section-heading">
-                                <h2>
-                                    Check Me Out
-                                </h2>
-                            </div>
+                            <h2 class="heading">
+                                Our Team
+                            </h2>
                         </div>
-                        <div class="col-12">
-                            @foreach ($profile->customlinks as $link)
-                                <a class="check-me-link-box mb-3" href="{{ $link->shortlink->shortlink }}"
-                                    target="_blank">
-                                    <img src="{{ asset('templates/template1/assets/images/world.svg') }}"
-                                        alt="">
-                                    <span>
-                                        {{ $link->name ?? '' }}
-                                    </span>
-                                </a>
-                            @endforeach
-
-
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-3 col-md-6 col-4">
+                            <a href="" class="team-box">
+                                <img src="assets/images/unsplash_WMD64tMfc4k.png" alt="">
+                                <div class="team-detail-box">
+                                    <p class="team-name">
+                                        Jhon Ale.
+                                    </p>
+                                    <p class="team-designation">
+                                        CEO - Co Founder
+                                    </p>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-4">
+                            <a href="" class="team-box">
+                                <img src="assets/images/unsplash_WMD64tMfc4k.png" alt="">
+                                <div class="team-detail-box">
+                                    <p class="team-name">
+                                        Jhon Ale.
+                                    </p>
+                                    <p class="team-designation">
+                                        CEO - Co Founder
+                                    </p>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-4">
+                            <a href="" class="team-box">
+                                <img src="assets/images/unsplash_WMD64tMfc4k.png" alt="">
+                                <div class="team-detail-box">
+                                    <p class="team-name">
+                                        Jhon Ale.
+                                    </p>
+                                    <p class="team-designation">
+                                        CEO - Co Founder
+                                    </p>
+                                </div>
+                            </a>
                         </div>
                     </div>
                 </div>
-            </section>
-        @endif
-        @if ($profile->socials->count()>0)
+            </div> --}}
 
-
-        <section class="user-let-connect-sec">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="section-heading">
-                            <h2>
+            <div class="ouer-team-section d-none">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <h2 class="heading">
+                                Google’s Catalog
+                            </h2>
+                        </div>
+                    </div>
+                    <div class="row align-items-center justify-content-center">
+                        <div class="col-lg-3 col-md-6 col-6">
+                            <a href="" class="team-box catlog-box">
+                                <img class="big"
+                                    src="https://hips.hearstapps.com/vader-prod.s3.amazonaws.com/1605551269-chromecast-with-google-tv-1605551260.jpg"
+                                    alt="">
+                                <div class="team-detail-box">
+                                    <p class="team-name">
+                                        Product One
+                                    </p>
+                                    <p class="team-designation">
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing
+                                    </p>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-lg-9 col-md-6 col-6">
+                            <div class="row">
+                                <div class="col-lg-3 col-md-6 col-12">
+                                    <a href="" class="team-box catlog-box">
+                                        <img src="https://hips.hearstapps.com/vader-prod.s3.amazonaws.com/1605553347-google-nest-audio-1605553335.jpg"
+                                            alt="">
+                                        <div class="team-detail-box">
+                                            <p class="team-name">
+                                                Product One
+                                            </p>
+                                            <p class="team-designation">
+                                                Lorem ipsum dolor sit amet, consectetur adipiscing
+                                            </p>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="col-lg-3 col-md-6 col-12">
+                                    <a href="" class="team-box catlog-box">
+                                        <img src="https://hips.hearstapps.com/vader-prod.s3.amazonaws.com/1663873765-google-pixel-buds-pro-1663873758.jpg"
+                                            alt="">
+                                        <div class="team-detail-box">
+                                            <p class="team-name">
+                                                Product One
+                                            </p>
+                                            <p class="team-designation">
+                                                Lorem ipsum dolor sit amet, consectetur adipiscing
+                                            </p>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="lets-connect-section for-mobile">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <h2 class="heading">
                                 Let’s Connect
                             </h2>
                         </div>
-                        <div class="social-box">
-                            @foreach ($profile->socials as $social)
-                                <a href="{{ $social->shortlink?->shortlink }}" target="_blank">
-                                    <i class="{{ $social->platform->icon }}"></i>
-                                    {{-- <img src="{{ asset('templates/template1/assets/images/image-1.svg') }}"
-                                        alt="Social Link"> --}}
-                                </a>
-                            @endforeach
-
-                            {{-- <a href="">
-                                <img src="{{ asset('templates/template1/assets/images/image-2.svg') }}" alt="">
-                            </a>
-                            <a href="">
-                                <img src="{{ asset('templates/template1/assets/images/image-3.svg') }}" alt="">
-                            </a>
-                            <a href="">
-                                <img src="{{ asset('templates/template1/assets/images/image-4.svg') }}" alt="">
-                            </a>
-                            <a href="">
-                                <img src="{{ asset('templates/template1/assets/images/image-5.svg') }}" alt="">
-                            </a> --}}
+                        <div class="col-12">
+                            <div class="social-box">
+                                @if ($profile->socials->count() > 0)
+                                    @foreach ($profile->socials as $social)
+                                        <a href="{{ $social->shortlink?->shortlink }}" target="_blank">
+                                            <i class="{{ $social->platform->icon }}"></i>
+                                            {{-- <img src="assets/images/fa6-brands_square-x-twitter.svg" alt=""> --}}
+                                        </a>
+                                    @endforeach
+                                @endif
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
-        @endif
-    </main>
-
-    <footer>
-        <div class="footer-box">
-            <p class="text">
-                Powered by <a href="">vCards</a>
-            </p>
-            <p>For custom website building or customization, contact us. <a href="https://wa.me/447561498786">Whatsapp</a></p>
+            <footer>
+                <p>
+                    Powered by <a href="">{{config('app.name') }}</a>
+                </p>
+            </footer>
         </div>
-    </footer>
+    </div>
 
-    <!-- Jquery CDN -->
-    <script src="{{ asset('templates/template1/assets/js/jquery-3.7.1.min.js') }}"></script>
-    <!-- Bootstrap CDN -->
-    <script src="{{ asset('templates/template1/assets/js/bootstrap.bundle.min.js') }}"></script>
-    <!-- Owl Carsoul -->
-    <script src="{{ asset('templates/template1/assets/js/owl.carousel.min.js') }}"></script>
-    <!-- Cusotm Code -->
-    <script src="{{ asset('templates/template1/assets/js/script.js') }}"></script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+    </script>
 </body>
 
 </html>

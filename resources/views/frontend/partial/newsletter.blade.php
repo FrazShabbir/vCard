@@ -27,7 +27,7 @@
                                     </div>
                                 </form>
                                 <small class="text-dark">For better experience you should register yourself on
-                                    vCards.</small>
+                                    {{ config('app.name') }}.</small>
                             </div>
                         </div>
                     </div>

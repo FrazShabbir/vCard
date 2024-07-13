@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Title -->
-    <title>vCards - Forget Password</title>
+    <title>{{ config('app.name') }} - Forget Password</title>
 
     <!-- Favicon Icon -->
     <link rel="shortcut icon" href="{{ asset('frontend/assets/images/favicon.png') }}" />

@@ -1,4 +1,4 @@
 <a href="{{route('dashboard')}}" class="header-logo">
     <img src="{{asset(fromSettings('logo') ??'backend/images/fs_logo.png')}}" class="img-fluid rounded" alt="">
-    <span>{{fromSettings('short_title')??'vCards'}}</span>
+    <span>{{fromSettings('short_title')?? config('app.name')}}</span>
 </a>

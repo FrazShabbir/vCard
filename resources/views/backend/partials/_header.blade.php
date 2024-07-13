@@ -1,7 +1,8 @@
 <!-- Required meta tags -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>@yield('title','vCards') </title>
+<title>@yield('title',config('app.name')) </title>
+
 <!-- Favicon -->
 <link rel="shortcut icon" href="{{asset(fromSettings('favicon')??'frontend/assets/images/logo.png')}}" />
 <!-- Bootstrap CSS -->

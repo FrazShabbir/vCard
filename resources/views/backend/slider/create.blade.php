@@ -1,5 +1,6 @@
 @extends('backend.main')
-@section('title', 'vCards')
+@section('title', 'Slider - ' . config('app.name'))
+
 
 @section('styles')
 @endsection

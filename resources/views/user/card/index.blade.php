@@ -1,5 +1,5 @@
 @extends('user.main')
-@section('title', 'My vCard - vCards.pk')
+@section('title', 'My Card - ' . config('app.name'))
 
 @section('styles')
 @endsection
@@ -79,13 +79,17 @@
                                         @else
                                             <tr>
                                                 <td>Card</td>
-                                                <td><span class="badge badge-{{ auth()->user()->order ? 'Applied' : 'Not Applied' }}">{{ auth()->user()->order ? 'Applied' : 'Not Applied' }}</span></td>
+                                                <td><span
+                                                        class="badge badge-{{ auth()->user()->order ? 'Applied' : 'Not Applied' }}">{{ auth()->user()->order ? 'Applied' : 'Not Applied' }}</span>
+                                                </td>
 
                                             </tr>
 
                                             <tr>
                                                 <td>type</td>
-                                                <td><span class="badge badge-{{ auth()->user()->type }}">{{ ucfirst(auth()->user()->type) }}</span></td>
+                                                <td><span
+                                                        class="badge badge-{{ auth()->user()->type }}">{{ ucfirst(auth()->user()->type) }}</span>
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <td>Name</td>
@@ -111,8 +115,6 @@
                                                 <td>{{ auth()->user()->phone }}</td>
 
                                             </tr>
-
-
                                         @endif
 
 
@@ -141,53 +143,54 @@
 
 
                 @if (auth()->user()->order)
-                <div class="col-sm-12">
-                    <div class="iq-card">
-                        <div class="iq-card-header d-flex justify-content-between">
-                            <div class="iq-header-title">
-                                <h4 class="card-title">Order Status</h4>
+                    <div class="col-sm-12">
+                        <div class="iq-card">
+                            <div class="iq-card-header d-flex justify-content-between">
+                                <div class="iq-header-title">
+                                    <h4 class="card-title">Order Status</h4>
+                                </div>
                             </div>
-                        </div>
-                        <div class="iq-card-body px-4">
+                            <div class="iq-card-body px-4">
 
 
 
-                            <div class="table-responsive">
+                                <div class="table-responsive">
 
-                                <table id="user-list-table" class="table table-striped table-bordered mt-4" role="grid"
-                                    aria-describedby="user-list-page-info">
-                                    <thead>
-                                        <tr>
-                                            <th>Comment</th>
-                                            <th>Status</th>
-                                            <th>Date</th>
+                                    <table id="user-list-table" class="table table-striped table-bordered mt-4"
+                                        role="grid" aria-describedby="user-list-page-info">
+                                        <thead>
+                                            <tr>
+                                                <th>Comment</th>
+                                                <th>Status</th>
+                                                <th>Date</th>
 
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @if (auth()->user()->order)
-                                            @foreach (auth()->user()->order->comments as $comment)
-                                                <tr>
-                                                    <td>{{ $comment->comment }}</td>
-                                                    <td><span
-                                                            class="badge badge-{{ $comment->status }}">{{ $comment->status }}</span>
-                                                    </td>
-                                                    <td>{{ date('Y-m-d H:i:s', strtotime($comment->created_at)) }} </td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @if (auth()->user()->order)
+                                                @foreach (auth()->user()->order->comments as $comment)
+                                                    <tr>
+                                                        <td>{{ $comment->comment }}</td>
+                                                        <td><span
+                                                                class="badge badge-{{ $comment->status }}">{{ $comment->status }}</span>
+                                                        </td>
+                                                        <td>{{ date('Y-m-d H:i:s', strtotime($comment->created_at)) }}
+                                                        </td>
 
-                                                </tr>
-                                            @endforeach
-                                        @endif
+                                                    </tr>
+                                                @endforeach
+                                            @endif
 
 
 
-                                    </tbody>
-                                </table>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+
                             </div>
-
-
                         </div>
                     </div>
-                </div>
                 @endif
             </div>
         </div>

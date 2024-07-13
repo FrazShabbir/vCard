@@ -1,5 +1,5 @@
 @extends('backend.main')
-@section('title', 'Title - vCards')
+@section('title', 'Users - ' . config('app.name'))
 
 @section('styles')
 @endsection
@@ -73,14 +73,15 @@
                                                         <span class="badge badge-primary">{{ $role }}</span>
                                                     @endforeach
                                                 </td>
-                                                <td><a href="{{route('slug',$user->username)}}">View</a></td>
+                                                <td><a href="{{ route('slug', $user->username) }}">View</a></td>
 
                                                 <td>
                                                     <form action="{{ route('users.destroy', $user->id) }}" method="post">
                                                         <div class="flex align-items-center list-user-action">
                                                             <a class="iq-bg-primary" data-toggle="tooltip"
                                                                 data-placement="top" title=""
-                                                                data-original-title="Show" href="{{route('users.show', $user->id)}}"><i
+                                                                data-original-title="Show"
+                                                                href="{{ route('users.show', $user->id) }}"><i
                                                                     class="lar la-eye"></i></a>
                                                             <a class="iq-bg-primary" data-toggle="tooltip"
                                                                 data-placement="top" title=""

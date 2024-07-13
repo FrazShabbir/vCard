@@ -1,5 +1,5 @@
 @extends('user.main')
-@section('title', 'My Profile - vCards.pk')
+@section('title', 'My Profile - ' . config('app.name'))
 
 @section('styles')
 

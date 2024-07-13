@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\SocialLink;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -105,10 +106,47 @@ class DashboardController extends Controller
         $clients_percentages = $clients->map(function ($count) use ($client_total) {
             return ($count / $client_total) * 100;
         });
+
+        $locationsNames = $user->locations()
+            ->selectRaw('countryName, count(*) as count')
+            ->groupBy('countryName')
+            ->pluck('count', 'countryName');
+        // dd($locationsNames);
+        $locations_total = $locationsNames->sum();
+        $locations_percentages = $locationsNames->map(function ($count) use ($locations_total) {
+            return ($count / $locations_total) * 100;
+        });
+
+        // $socialLinks = SocialLink::where('profile_id', $user->profile->id)
+        // ->join('short_links', 'social_links.short_link_id', '=', 'short_links.id')
+        // ->select('social_links.name', 'short_links.link', 'short_links.count')
+        // ->get();
+
+        // $socialLinks = SocialLink::where('profile_id', $user->profile->id)
+        //     ->join('short_links', 'social_links.short_link_id', '=', 'short_links.id')
+        // // ->select('social_links.name', 'short_links.link', 'short_links.count')
+        //     ->get();
+        // $totalLinks = $socialLinks->count();
+        // $linksCount = $socialLinks->sum('count');
+
+        // $link_percentages = $socialLinks->mapWithKeys(function ($item) use ($linksCount) {
+        //     return [$item->name => ($item->count / $linksCount) * 100];
+        // });
+        $socialLinks = SocialLink::with(['shortlink'])->where('profile_id', $user->profile->id)->get();
+        // dd($socialLinks);
+        $linksCount = $socialLinks->sum(function ($socialLink) {
+            return $socialLink->shortlink ? $socialLink->shortlink->count : 0;
+        });
+
         return view('user.dashboard.dashboard')
             ->with('user', $user)
             ->with('engagements', $engagements)
             ->with('locations', $locations)
+            ->with('socialLinks', $socialLinks)
+            // ->with('link_percentages', $link_percentages)
+            // ->with('totalLinks', $totalLinks)
+            ->with('linksCount', $linksCount)
+
             ->with('devices', $devices)
             ->with('platforms', $platforms)
             ->with('platforms_percentages', $platforms_percentages)
@@ -120,7 +158,11 @@ class DashboardController extends Controller
 
             ->with('devices_count', $devices_count)
             ->with('devices_percentages', $devices_percentages)
-            ->with('device_total', $device_total);
+            ->with('device_total', $device_total)
+
+            ->with('locationsNames', $locationsNames)
+            ->with('locations_percentages', $locations_percentages)
+            ->with('locations_total', $locations_total);
 
     }
 

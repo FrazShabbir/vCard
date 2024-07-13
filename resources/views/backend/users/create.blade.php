@@ -1,5 +1,5 @@
 @extends('backend.main')
-@section('title', 'Create User - vCards')
+@section('title', 'Add User - ' . config('app.name'))
 
 @section('styles')
 @endsection
