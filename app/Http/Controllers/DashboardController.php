@@ -83,27 +83,27 @@ class DashboardController extends Controller
             ->groupBy('platform')
             ->pluck('count', 'platform');
 
-        $total = $platforms->sum();
+        $platform_total = $platforms->sum();
 
-        $platforms_percentages = $platforms->map(function ($count) use ($total) {
-            return ($count / $total) * 100;
+        $platforms_percentages = $platforms->map(function ($count) use ($platform_total) {
+            return ($count / $platform_total) * 100;
         });
 
         $devices_count = $user->devices()
             ->selectRaw('device, count(*) as count')
             ->groupBy('device')
             ->pluck('count', 'device');
-        $total = $devices_count->sum();
-        $devices_percentages = $devices_count->map(function ($count) use ($total) {
-            return ($count / $total) * 100;
+        $device_total = $devices_count->sum();
+        $devices_percentages = $devices_count->map(function ($count) use ($device_total) {
+            return ($count / $device_total) * 100;
         });
         $clients = $user->devices()
             ->selectRaw('device_type, count(*) as count')
             ->groupBy('device_type')
             ->pluck('count', 'device_type');
-        $total = $clients->sum();
-        $clients_percentages = $clients->map(function ($count) use ($total) {
-            return ($count / $total) * 100;
+        $client_total = $clients->sum();
+        $clients_percentages = $clients->map(function ($count) use ($client_total) {
+            return ($count / $client_total) * 100;
         });
         return view('user.dashboard.dashboard')
             ->with('user', $user)
@@ -112,10 +112,15 @@ class DashboardController extends Controller
             ->with('devices', $devices)
             ->with('platforms', $platforms)
             ->with('platforms_percentages', $platforms_percentages)
+            ->with('platform_total', $platform_total)
+
             ->with('clients', $clients)
             ->with('clients_percentages', $clients_percentages)
+            ->with('client_total', $client_total)
+
             ->with('devices_count', $devices_count)
-            ->with('devices_percentages', $devices_percentages);
+            ->with('devices_percentages', $devices_percentages)
+            ->with('device_total', $device_total);
 
     }
 
