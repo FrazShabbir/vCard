@@ -613,6 +613,8 @@
                                 <div class="link-box">
 
                                     <div class="row">
+                                        @foreach ($profile->customlinks as $link)
+
                                         <div class="col-lg-3 col-md-3 col-12">
                                             <div>
                                                 <a href="{{ $link->shortlink->shortlink }}" class="check-me-out-link">
@@ -620,6 +622,7 @@
                                                 </a>
                                             </div>
                                         </div>
+                                        @endforeach
 
                                     </div>
 
