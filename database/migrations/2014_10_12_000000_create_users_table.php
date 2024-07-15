@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('referral_code')->unique();
-            $table->string('referral_code_entered');
+            $table->string('referral_code_entered')->nullable();
             $table->unsignedBigInteger('refer_by_id')->nullable();
             $table->string('first_name');
             $table->string('last_name');
