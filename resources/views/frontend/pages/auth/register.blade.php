@@ -14,7 +14,7 @@
     <title>{{ config('app.name') }} - Create New Account</title>
 
     <!-- Favicon Icon -->
-    <link rel="shortcut icon" href="{{asset('frontend/assets/favicon.png')}}" />
+    <link rel="shortcut icon" href="{{ asset('frontend/assets/favicon.png') }}" />
 
     <!-- inject css start -->
 
@@ -106,6 +106,7 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="row">
                         @if (count($errors) > 0)
                             @foreach ($errors->all() as $error)
@@ -121,15 +122,16 @@
                         @endif
                         <div class="col-lg-8 col-md-10 ms-auto me-auto">
                             <div class="register-form text-center">
-                                <form id="" method="post" action="{{ route('register') }}" enctype="multipart/form-data">
+                                <form id="" method="post" action="{{ route('register') }}"
+                                    enctype="multipart/form-data">
                                     @csrf
-                                    <input type="hidden" name="slug" value="{{$slug}}">
+                                    <input type="hidden" name="slug" value="{{ $slug }}">
                                     <div class="messages"></div>
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <input id="form_name_fname" type="text" name="first_name"
-                                                    class="form-control" placeholder="First name" required="required"
+                                                    class="form-control" placeholder="First name*" required="required"
                                                     data-error="First Name is required.">
                                                 <div class="help-block with-errors"></div>
                                             </div>
@@ -137,7 +139,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <input id="form_name_lname" type="text" name="last_name"
-                                                    class="form-control" placeholder="Last name" required="required"
+                                                    class="form-control" placeholder="Last name*" required="required"
                                                     data-error="Last Name is required.">
                                                 <div class="help-block with-errors"></div>
                                             </div>
@@ -148,7 +150,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <input id="form_name_number" type="text" name="phone"
-                                                    class="form-control" placeholder="+92-------" required="required"
+                                                    class="form-control" placeholder="+92-------*" required="required"
                                                     data-error="Phone is required.">
                                                 <div class="help-block with-errors"></div>
                                             </div>
@@ -169,11 +171,20 @@
                                     </div>
 
                                     <div class="row">
-                                        <div class="col-md-12">
+                                        <div class="col-md-6">
                                             <div class="form-group">
-                                                <input id="form_name_email" type="text" name="email" class="form-control"
-                                                    placeholder="email@mail.com" required="required"
-                                                    data-error="Email is required.">
+                                                <input id="form_name_email" type="email" name="email"
+                                                    class="form-control" placeholder="email@mail.com*"
+                                                    required="required" data-error="Email is required.">
+                                                <div class="help-block with-errors"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <input id="referral_code" type="text" name="referral_code"
+                                                    class="form-control"
+                                                    placeholder="Referral code of who referred you."
+                                                    {{-- if in Url referral_code write here in value else null --}} value="{{ request('referral_code') }}">
                                                 <div class="help-block with-errors"></div>
                                             </div>
                                         </div>
@@ -182,7 +193,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <input id="form_password" type="password" name="password"
-                                                    class="form-control" placeholder="Password" required="required"
+                                                    class="form-control" placeholder="Password*" required="required"
                                                     data-error="password is required.">
                                                 <div class="help-block with-errors"></div>
                                             </div>
@@ -191,7 +202,7 @@
                                             <div class="form-group_password">
                                                 <input id="form_password1" type="password"
                                                     name="password_confirmation" class="form-control"
-                                                    placeholder="Confirm Password" required="required"
+                                                    placeholder="Confirm Password*" required="required"
                                                     data-error="Conform Password is required.">
                                                 <div class="help-block with-errors"></div>
                                             </div>
@@ -291,6 +302,31 @@
     <script src="{{ asset('frontend/assets/js/theme-script.js') }}"></script>
 
     <!-- inject js end -->
+
+    <script>
+        $(document).ready(function() {
+            // Function to update the URL with the referral_code parameter
+            function updateReferralCodeInUrl(value) {
+                const url = new URL(window.location.href);
+                if (value) {
+                    url.searchParams.set('referral_code', value);
+                } else {
+                    url.searchParams.delete('referral_code');
+                }
+                // Update the URL without reloading the page
+                window.history.pushState({}, '', url);
+            }
+
+            // Get the referral_code from the URL on page load
+            const initialReferralCode = "{{ old('referral_code', request('referral_code')) }}";
+            $('#referral_code').val(initialReferralCode);
+
+            // Add event listener to update the URL when the input changes
+            $('#referral_code').on('input', function() {
+                updateReferralCodeInUrl($(this).val());
+            });
+        });
+    </script>
 
 </body>
 

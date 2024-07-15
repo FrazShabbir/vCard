@@ -30,6 +30,20 @@ class User extends Authenticatable
         'phone',
         'password',
         'expiry',
+        'country_name',
+        'region_name',
+        'city_name',
+        'zip_code',
+        'device',
+        'platform',
+        'platform_version',
+        'browser',
+        'browser_version',
+        'terms',
+        'type',
+        'referral_code',
+        'refer_by_id',
+        'referral_code_entered'
 
     ];
 

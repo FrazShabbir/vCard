@@ -10,6 +10,14 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Validation\Rules;
 use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Auth\Events\Registered;
+use Carbon\Carbon;
+use Stevebauman\Location\Facades\Location;
+use Jenssegers\Agent\Facades\Agent;
+use App\Models\Profile;
+use Intervention\Image\Facades\Image;
+
 
 class UserController extends Controller
 {
@@ -51,44 +59,180 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        if (!auth()->user()->hasPermissionTo('Create Users')) {
-            abort(403);
-        }
+    // {
+    //     if (!auth()->user()->hasPermissionTo('Create Users')) {
+    //         abort(403);
+    //     }
 
+    //     // dd($request->all());
+    //     $request->validate([
+    //         'first_name' => ['required', 'string', 'max:255'],
+    //         'last_name' => ['required', 'string', 'max:255'],
+    //         'username' => ['required', 'string', 'max:255'],
+    //         'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+    //         // 'password' => ['required', 'confirmed', Rules\Password::defaults()],
+    //     ]);
+    //     $username = str_replace(' ', '-', $request->username);
+    //     // check username exist
+    //     $usernamefind = User::where('username', $username)->first();
+    //     if ($usernamefind) {
+    //         $username = $username . '-' . str_random(2);
+    //     }
+    //     $user = User::create([
+    //         'first_name' => $request->first_name,
+    //         'last_name' => $request->last_name,
+    //         'username' => $username,
+    //         'status' => $request->status,
+    //         'email' => $request->email,
+    //         'password' => Hash::make($request->password),
+    //     ]);
+
+    //     if (isset($request->roles)) {
+    //         foreach ($request->roles as $assignRole) {
+    //             $user->assignRole($assignRole);
+    //         }
+    //     }
+    //     $user->save();
+    //     Password::sendResetLink($request->only(['email']));
+    //     alert()->success('New User Added');
+
+    //     return redirect()->route('users.index');
+    // }
+    {
         // dd($request->all());
         $request->validate([
-            'first_name' => ['required', 'string', 'max:255'],
-            'last_name' => ['required', 'string', 'max:255'],
-            'username' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            // 'password' => ['required', 'confirmed', Rules\Password::defaults()],
-        ]);
-        $username = str_replace(' ', '-', $request->username);
-        // check username exist
-        $usernamefind = User::where('username', $username)->first();
-        if ($usernamefind) {
-            $username = $username . '-' . str_random(2);
-        }
-        $user = User::create([
-            'first_name' => $request->first_name,
-            'last_name' => $request->last_name,
-            'username' => $username,
-            'status' => $request->status,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'username' => 'required|string|max:255',
+            'phone' => 'required',
+            'avatar' => 'nullable|mimes:jpeg,png,jpg|max:2048',
+            'email' => 'required|string|email|max:255|unique:users',
+            'address' => 'nullable',
+            'referral_code' => 'nullable',
+            // 'terms' => 'required',
+
         ]);
 
-        if (isset($request->roles)) {
-            foreach ($request->roles as $assignRole) {
-                $user->assignRole($assignRole);
+        try {
+            DB::beginTransaction();
+
+            $username = str_replace(' ', '-', $request->username);
+
+            $usernamefind = User::where('username', $username)->first();
+            if ($usernamefind) {
+                $username = $username . '-' . str_random(2);
             }
-        }
-        $user->save();
-        Password::sendResetLink($request->only(['email']));
-        alert()->success('New User Added');
+            $imageName = 'placeholder.png';
+            if ($request->avatar) {
+                $request->validate([
+                    'avatar' => 'mimes:jpeg,png,jpg|max:2048',
+                ]);
+                $image = $request->file('avatar');
+                $imageName = getRandomString() . '-' . time() . '.' . $image->extension();
+                $destinationPath = public_path('/uploads/avatars');
+                $img = Image::make($image->path());
+                // $img->encode('png', 75)->save($destinationPath.'/'.$imageName);
 
-        return redirect()->route('users.index');
+                $img->resize(200, 200, function ($constraint) {
+                    $constraint->aspectRatio();
+                })->save($destinationPath . '/' . $imageName);
+
+                $destinationPath = public_path('/uploads/avatars/original');
+                $image->move($destinationPath, $imageName);
+
+            }
+            $background = 'default/cover/placeholder.png';
+
+            if ($request->cover_image) {
+                $request->validate([
+                    'cover_image' => 'mimes:jpeg,png,jpg|max:2048',
+                ]);
+                $image = $request->file('cover_image');
+                $imageName_background = getRandomString() . '-' . time() . '.' . $image->extension();
+                $destinationPath = public_path('/uploads/cover_images');
+                $img = Image::make($image->path());
+                // $img->encode('png', 75)->save($destinationPath.'/'.$imageName_background);
+                $img->resize(200, 200, function ($constraint) {
+                    $constraint->aspectRatio();
+                })->save($destinationPath . '/' . $imageName_background);
+
+                $destinationPath = public_path('/uploads/cover_images/original');
+                $image->move($destinationPath, $imageName_background);
+                $background = 'uploads/cover_images/' . $imageName_background;
+            }
+            $referral_code = generateAlpha(3) . generateAlpha(3);
+            if (User::where('referral_code', $referral_code)->exists()) {
+                $referral_code = generateAlpha(2) . generateAlpha(4);
+            }
+
+            $referral_code_find = User::where('referral_code', $request->referral_code)->first();
+            if (env('APP_ENV') == 'local') {
+                $location_info = Location::get('182.185.236.113');
+            } else {
+                $location_info = Location::get($request->ip());
+            }
+
+            $user = User::create([
+                'first_name' => $request->first_name,
+                'last_name' => $request->last_name,
+                'referral_code' => $referral_code,
+                'referral_code_entered' => $request->referral_code,
+                'refer_by_id' => $referral_code_find ? $referral_code_find->id : 1,
+                'username' => $username,
+                'phone' => $request->phone,
+                'email' => $request->email,
+                'terms' => $request->terms ? 1 : 1,
+                'password' => Hash::make(getRandomString()),
+                'status' => 1,
+                'type' => $request->account_type,
+                'expiry' => Carbon::now()->addDays(14)->format('Y-m-d'),
+                'country_name' => $location_info->countryName,
+                'city_name' => $location_info->cityName,
+                'zip_code' => $location_info->zipCode,
+                'region_name' => $location_info->regionName,
+                'device' => Agent::device(),
+                'platform' => Agent::platform(),
+                'platform_version' => Agent::version(Agent::platform()),
+                'browser' => Agent::browser(),
+                'browser_version' => Agent::version(Agent::browser()),
+            ]);
+
+            $profile = Profile::create([
+                'user_id' => $user->id,
+                'bio' => $request->bio,
+                'organization' => $request->organization,
+                'designation' => $request->designation,
+                'cover_image' => $background,
+                'website' => $request->website,
+                'address' => $request->address,
+            ]);
+
+            if (isset($request->roles)) {
+                foreach ($request->roles as $assignRole) {
+                    $user->assignRole($assignRole);
+                }
+            } else {
+                $user->assignRole('Member');
+            }
+
+            event(new Registered($user));
+            DB::commit();
+            info('User Registered', [
+                'user' => $user,
+                'profile' => $profile,
+            ]);
+            // Auth::login($user);
+            Password::sendResetLink($request->only(['email']));
+            alert()->success('New User Added');
+            return redirect()->route('users.index');
+            // return redirect(RouteServiceProvider::HOME);
+
+        } catch (\Throwable $th) {
+            DB::rollback();
+            info($th);
+            alert()->error('Error', $th->getMessage());
+            return redirect()->back();
+        }
     }
 
     /**

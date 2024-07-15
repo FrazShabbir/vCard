@@ -134,7 +134,7 @@
 
                     <div class="iq-card iq-card-block iq-card-stretch iq-card-height">
                         <div class="card-header">
-                            My QR Code
+                            My QR Code <small><b>(My Referral Code: {{ auth()->user()->referral_code }})</b></small>
                         </div>
 
                         <div class="iq-card-body iq-box-relative">
@@ -477,7 +477,7 @@
                                 @foreach ($socialLinks as $socialLink)
                                     @if ($socialLink->shortlink)
                                         @php
-                                        // dd($linksCount);
+                                            // dd($linksCount);
                                             $count = $socialLink->shortlink->count;
                                             $percentage = ($count / $linksCount) * 100;
                                             // dd($percentage);
@@ -565,7 +565,7 @@
 
 
         </div>
-    @endsection
+@endsection
 
     @section('scripts')
         <script>

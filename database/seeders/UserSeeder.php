@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\User;
-use App\Models\Company;
 use Illuminate\Database\Seeder;
 
 class UserSeeder extends Seeder
@@ -15,8 +14,9 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-     if(! User::find(1)){
+        if (!User::find(1)) {
             $user = new User();
+            $user->referral_code = 'FRAZSHABBIR';
             $user->first_name = 'Admin';
             $user->last_name = 'User';
             $user->username = 'admin';
@@ -27,7 +27,7 @@ class UserSeeder extends Seeder
             // $user->ar_user = true;
             $user->assignRole('SuperAdmin');
             $user->save();
-         }
+        }
 
     }
 

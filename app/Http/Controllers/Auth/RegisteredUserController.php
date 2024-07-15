@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rules;
+use Jenssegers\Agent\Facades\Agent;
+use Stevebauman\Location\Facades\Location;
 
 class RegisteredUserController extends Controller
 {
@@ -50,6 +52,7 @@ class RegisteredUserController extends Controller
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|confirmed', Rules\Password::defaults(),
             'address' => 'nullable',
+            'referral_code' => 'nullable',
             'terms' => 'required',
 
         ]);
@@ -101,18 +104,41 @@ class RegisteredUserController extends Controller
                 $image->move($destinationPath, $imageName_background);
                 $background = 'uploads/cover_images/' . $imageName_background;
             }
+            $referral_code = generateAlpha(3) . generateAlpha(3);
+            if (User::where('referral_code', $referral_code)->exists()) {
+                $referral_code = generateAlpha(2) . generateAlpha(4);
+            }
+
+            $referral_code_find = User::where('referral_code', $request->referral_code)->first();
+            if (env('APP_ENV') == 'local') {
+                $location_info = Location::get('182.185.236.113');
+            } else {
+                $location_info = Location::get($request->ip());
+            }
 
             $user = User::create([
                 'first_name' => $request->first_name,
                 'last_name' => $request->last_name,
+                'referral_code' => $referral_code,
+                'referral_code_entered' => $request->referral_code,
+                'refer_by_id' => $referral_code_find ? $referral_code_find->id : 1,
                 'username' => $username,
                 'phone' => $request->phone,
                 'email' => $request->email,
-                'terms' => $request->terms,
+                'terms' => $request->terms ? 1 : 0,
                 'password' => Hash::make($request->password),
                 'status' => 1,
                 'type' => $request->account_type,
                 'expiry' => Carbon::now()->addDays(14)->format('Y-m-d'),
+                'country_name' => $location_info->countryName,
+                'city_name' => $location_info->cityName,
+                'zip_code' => $location_info->zipCode,
+                'region_name' => $location_info->regionName,
+                'device' => Agent::device(),
+                'platform' => Agent::platform(),
+                'platform_version' => Agent::version(Agent::platform()),
+                'browser' => Agent::browser(),
+                'browser_version' => Agent::version(Agent::browser()),
             ]);
 
             $profile = Profile::create([
@@ -128,13 +154,17 @@ class RegisteredUserController extends Controller
             $user->assignRole('Member');
             event(new Registered($user));
             DB::commit();
+            info('User Registered', [
+                'user' => $user,
+                'profile' => $profile,
+            ]);
             Auth::login($user);
-            // dd('success');
+
             return redirect(RouteServiceProvider::HOME);
 
         } catch (\Throwable $th) {
             DB::rollback();
-            dd($th);
+            info($th);
             alert()->error('Error', $th->getMessage());
             return redirect()->back();
         }
