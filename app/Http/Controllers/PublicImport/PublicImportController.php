@@ -37,7 +37,7 @@ class PublicImportController extends Controller
         $file = json_decode($file);
         $count = 0;
         foreach ($file as $countries) {
-            if($countries->name!='Pakistan'){
+            if ($countries->name != 'Pakistan' || $countries->name != 'United Kingdom' || $countries->name != 'India' || $countries->name != 'United States') {
                 continue;
             }
             $findCountry = \App\Models\Country::where('file_id', $countries->id)->first();
