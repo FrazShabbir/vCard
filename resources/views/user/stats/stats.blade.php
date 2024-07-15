@@ -36,7 +36,7 @@
                                         value="{{ $user->reach }}" disabled>
                                 </div>
 
-                          
+
                                 <div class="col-md-6 col-sm-12 mb-3">
                                     <label for="description" class="">Total Visits</label>
                                     <input type="text" required class="form-control required" placeholder="School"
@@ -68,7 +68,7 @@
                             @endphp
                         </div>
                         <div class="iq-card-body px-4">
-                         
+
                                 {{-- <div class="row">
                                 <div class="col-md-6 col-sm-12 mb-3">
                                     <label for="name" class="">Link</label>
@@ -114,7 +114,7 @@
                                                     </p>
                                                 </div>
                                                 <div class="">
-                                                    <p>{{ $location->zipCode }}</p>
+                                                    <p>{{ $location->zip_code }}</p>
                                                 </div>
                                             </div>
                                             <div class="d-flex align-items-center justify-content-between">
@@ -124,7 +124,7 @@
                                                     </p>
                                                 </div>
                                                 <div class="">
-                                                    <p>{{ $location->cityName }}</p>
+                                                    <p>{{ $location->city_name }}</p>
                                                 </div>
                                             </div>
 
@@ -149,7 +149,7 @@
                                                     </p>
                                                 </div>
                                                 <div class="">
-                                                    <p>{{ $location->regionName }}</p>
+                                                    <p>{{ $location->region_name }}</p>
                                                 </div>
                                             </div>
                                             <div class="d-flex align-items-center justify-content-between">
@@ -159,7 +159,7 @@
                                                     </p>
                                                 </div>
                                                 <div class="">
-                                                    <p>{{ $location->countryName }}</p>
+                                                    <p>{{ $location->country_name }}</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -183,7 +183,7 @@
                                                     </p>
                                                 </div>
                                                 <div class="">
-                                                    <p>{{ $location->areaCode }}</p>
+                                                    <p>{{ $location->area_code }}</p>
                                                 </div>
                                             </div>
                                             <div class="d-flex align-items-center justify-content-between">
@@ -236,7 +236,7 @@
                                         </tbody>
                                     </table>
                                 </div>
-                           
+
                         </div>
                     </div>
                 </div>
