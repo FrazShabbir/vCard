@@ -55,6 +55,7 @@ class HomeController extends Controller
                 if ($location_info != null) {
                     $findIP = Geolocation::where('user_id', $user->id)->where('ip_address', $request->ip())->first();
 
+
                     if ($findIP) {
                         $location_id = $findIP->id;
                         $is_unique_location = false;
