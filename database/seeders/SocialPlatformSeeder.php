@@ -52,9 +52,16 @@ class SocialPlatformSeeder extends Seeder
             'icon' => 'fa-brands fa-facebook-messenger',
         ]);
         SocialPlatform::updateOrCreate([
+            'name' => 'Google Reviews',
+            'link' => 'https://google.com',
+            'icon' => 'fa-solid fa-link',
+        ]);
+
+        SocialPlatform::updateOrCreate([
             'name' => 'Custom',
             'link' => 'https://messenger.com',
             'icon' => 'fa-solid fa-link',
         ]);
+
     }
 }

@@ -533,10 +533,18 @@
                                             class="save-contact-btn-white" target="_blank">
                                             <i class="fal fa-cloud-download-alt me-2"></i>Save Contact
                                         </a>
-                                        <a href="" class="google-rating-button for-mobile mt-4">
-                                            <i class="fas fa-star me-2"></i>Review Us on <img
-                                                src="assets/images/image 8.svg" alt="">
-                                        </a>
+                                        @if ($profile->googlereview->count() > 0)
+                                            @foreach ($profile->googlereview as $link)
+                                                <a href="{{ $link->shortlink?->shortlink }}"
+                                                    class="google-rating-button for-mobile mt-4">
+                                                    <i class="fas fa-star me-2"></i>{{ $link->name }} <img
+                                                        src="assets/images/image 8.svg" alt="">
+                                                </a>
+                                            @endforeach
+
+                                        @endif
+
+
                                     </div>
                                 </div>
                             </div>
@@ -594,10 +602,14 @@
                             <p class="description">
                                 {{ $profile->bio ?? 'Hello' }}
                             </p>
-                            <a href="" class="google-rating-button for-desktop">
-                                <i class="fas fa-star me-2"></i>Review Us on <img src="assets/images/image 8.svg"
-                                    alt="">
-                            </a>
+                            @if ($profile->googlereview->count() > 0)
+                                @foreach ($profile->googlereview as $link)
+                                    <a href="" class="google-rating-button for-desktop">
+                                        <i class="fas fa-star me-2"></i>Review {{ $link->name }} <img
+                                            src="assets/images/image 8.svg" alt="">
+                                    </a>
+                                @endforeach
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -747,33 +759,39 @@
                     </div>
                 </div>
             </div>
-            <div class="lets-connect-section for-mobile">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-12">
-                            <h2 class="heading">
-                                Let’s Connect
-                            </h2>
-                        </div>
-                        <div class="col-12">
-                            <div class="social-box">
-                                @if ($profile->socials->count() > 0)
-                                    @foreach ($profile->socials as $social)
-                                        <a href="{{ $social->shortlink?->shortlink }}" target="_blank">
-                                            <i class="{{ $social->platform->icon }}"></i>
-                                            {{-- <img src="assets/images/fa6-brands_square-x-twitter.svg" alt=""> --}}
-                                        </a>
-                                    @endforeach
-                                @endif
+            @if ($profile->socials->count() > 0)
+                <div class="lets-connect-section for-mobile">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12">
+                                <h2 class="heading">
+                                    Let’s Connect
+                                </h2>
+                            </div>
+                            <div class="col-12">
+                                <div class="social-box">
+                                    @if ($profile->socials->count() > 0)
+                                        @foreach ($profile->socials as $social)
+                                            <a href="{{ $social->shortlink?->shortlink }}" target="_blank">
+                                                <i class="{{ $social->platform->icon }}"></i>
+                                                {{-- <img src="assets/images/fa6-brands_square-x-twitter.svg" alt=""> --}}
+                                            </a>
+                                        @endforeach
+                                    @endif
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <footer>
+            @endif
+
+            <footer class="p-3">
                 <p>
                     Powered by <a href="">{{ config('app.name') }}</a>
                 </p>
+                <p>For custom website building or customization, contact us. <a
+                        href="https://wa.me/447561498786">Whatsapp</a></p>
+
             </footer>
         </div>
     </div>

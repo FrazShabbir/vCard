@@ -26,10 +26,14 @@ class Profile extends Model
 
     public function customlinks()
     {
-        return $this->hasMany(SocialLink::class)->where('social_platform_id',8);
+        return $this->hasMany(SocialLink::class)->where('social_platform_id', 9);
     }
     public function socials()
     {
-        return $this->hasMany(SocialLink::class)->where('social_platform_id','!=',8);
+        return $this->hasMany(SocialLink::class)->whereNotIn('social_platform_id', [8, 9]);
+    }
+    public function googlereview()
+    {
+        return $this->hasMany(SocialLink::class)->where('social_platform_id', 8);
     }
 }
